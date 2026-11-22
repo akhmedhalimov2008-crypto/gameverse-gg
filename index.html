@@ -4,128 +4,247 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GAMEVERSE GG — PRO</title>
+<title>GAMEVERSE GG 6.0 — ULTRA</title>
 <style>
+:root{--bg:#080d16;--panel:#111c2b;--panel2:#18283b;--green:#20df91;--blue:#58a6ff;--muted:#9aabc0;--line:#293d54}
 *{box-sizing:border-box}
-body{margin:0;background:#090e17;color:#f4f6fa;font-family:Arial,sans-serif}
-header{padding:25px 7%;background:#111b2a;border-bottom:2px solid #20d889}
-header h1{margin:0;color:#20d889;font-size:32px}
-header p{color:#aab6c5}
-nav{padding:14px 7%;background:#0d1521;display:flex;gap:10px;flex-wrap:wrap}
-button{cursor:pointer;border:0;border-radius:8px;padding:11px 16px;background:#20d889;color:#06130d;font-weight:bold}
-button:hover{filter:brightness(1.15)}
-nav button{background:#203047;color:white}
-main{max-width:1250px;margin:auto;padding:25px 5%}
-.panel{background:#121d2c;border:1px solid #26384e;border-radius:14px;padding:20px;margin-bottom:20px}
-h2{color:#20d889}
-input,select{background:#0b1420;color:white;border:1px solid #354a63;border-radius:8px;padding:12px;margin:5px}
-input{min-width:220px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
-.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
-.game{background:#152337;border:1px solid #2a3b51;border-radius:12px;overflow:hidden}
-.cover{height:115px;background:linear-gradient(135deg,#173d39,#17233d);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.cover img{width:100%;height:100%;object-fit:cover}
-.cover span{position:absolute;font-size:38px;font-weight:bold;color:#ffffff55}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:#f4f7fc;font-family:Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 15% 0%,#123b3440,transparent 38%),radial-gradient(ellipse at 90% 30%,#123d7040,transparent 35%)}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:9px;padding:11px 16px;background:var(--green);color:#06140e;font-weight:bold;transition:.2s}
+button:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 5px 22px #20df9140}
+button:active{transform:scale(.97)}
+input,select{background:#0a1421;color:white;border:1px solid var(--line);border-radius:9px;padding:12px;max-width:100%}
+a{color:var(--green)}
+.topbar{height:5px;background:linear-gradient(90deg,#20df91,#4b8fff,#b45dff,#20df91);background-size:250%;animation:flow 6s linear infinite}
+@keyframes flow{to{background-position:250% 0}}
+header{position:sticky;top:0;z-index:20;background:#0b1422ed;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.head{max-width:1350px;margin:auto;padding:15px 4%;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:23px;font-weight:900;letter-spacing:1px;color:white}
+.logo span{color:var(--green)}
+.logo small{display:block;font-size:9px;color:var(--muted);letter-spacing:3px;margin-top:4px}
+.head-actions{display:flex;gap:8px;align-items:center}
+.sound{background:#20344a;color:white}
+nav{display:flex;gap:7px;flex-wrap:wrap;max-width:1350px;margin:auto;padding:0 4% 13px}
+nav button{background:transparent;color:#b9c8d9;border:1px solid transparent;padding:9px 13px}
+nav button.active,nav button:hover{background:#1b3042;color:var(--green);border-color:#31516a}
+main{max-width:1350px;margin:auto;padding:25px 4% 60px}
+.page{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hidden{display:none!important}
+.hero{position:relative;overflow:hidden;min-height:280px;padding:38px;border:1px solid #31516a;border-radius:18px;background:linear-gradient(110deg,#102a2b,#12223a 58%,#242044)}
+.hero:after{content:"GG";position:absolute;right:5%;top:0;font-size:190px;font-weight:900;color:#ffffff09;pointer-events:none}
+.hero h1{font-size:clamp(32px,5vw,55px);margin:0 0 12px;max-width:700px}
+.hero h1 span{color:var(--green)}
+.hero p{color:#c0ccda;max-width:580px;line-height:1.6}
+.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.secondary{background:#243a50;color:white;border:1px solid #3b5873}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:30px 0 15px}
+h2{font-size:22px;margin:0;color:#f1f6ff}
+h2 span{color:var(--green)}
+.panel{background:linear-gradient(145deg,#121f30,#101927);border:1px solid var(--line);border-radius:15px;padding:20px;margin-bottom:18px}
+.muted,.small{color:var(--muted);font-size:13px;line-height:1.5}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:15px}
+.game-card{overflow:hidden;background:#121f30;border:1px solid #263b52;border-radius:13px;transition:.25s;animation:fade .35s}
+.game-card:hover{transform:translateY(-5px);border-color:#20df91a0;box-shadow:0 12px 28px #0007}
+.cover{height:112px;position:relative;background:linear-gradient(135deg,#153d38,#1a2949);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cover img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.game-card:hover .cover img{transform:scale(1.06)}
+.cover .fallback{position:absolute;font-size:42px;color:#ffffff55;font-weight:900}
 .game-info{padding:13px}
 .game-info h3{font-size:15px;min-height:35px;margin:0 0 8px}
-.genre{color:#9eafc3;font-size:12px}
 .game-actions{display:flex;gap:7px;margin-top:12px}
 .game-actions button{padding:8px 10px;font-size:12px}
-.fav{background:#263b52;color:white}
-.hidden{display:none!important}
-.small{color:#9eafc3;font-size:13px}
-.avatar{font-size:42px}
-.avatars{display:flex;gap:12px;flex-wrap:wrap}
-.avatars button{font-size:25px;padding:10px;background:#263b52;color:white}
-.stat{background:#1a2b40;padding:15px;border-radius:10px;min-width:120px}
-.stats{display:flex;gap:12px;flex-wrap:wrap}
-.achievement{background:#1a2b40;border-radius:10px;padding:13px;margin:8px 0}
-footer{text-align:center;color:#8290a2;padding:30px}
+.favorite{background:#263b52;color:white}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:17px 0}
+.toolbar input{flex:1;min-width:190px}
+.count{color:var(--muted);font-size:13px;margin-bottom:12px}
+.skin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:15px}
+.skin-card{position:relative;overflow:hidden;border-radius:13px;border:1px solid var(--line);background:linear-gradient(145deg,#1b2d42,#101927);padding:14px;transition:.25s}
+.skin-card:hover{transform:translateY(-4px);border-color:var(--green)}
+.skin-art{height:125px;border-radius:9px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-size:58px;background:radial-gradient(circle,#436b7655,#142335)}
+.skin-card h3{margin:5px 0;font-size:16px}
+.rarity{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--green)}
+.profile-head{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.avatar{width:75px;height:75px;border-radius:18px;background:#20374a;display:grid;place-items:center;font-size:43px;border:1px solid #3a6072}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:20px}
+.stat{padding:15px;background:#1a2b40;border:1px solid #2b4057;border-radius:11px}
+.stat b{display:block;font-size:23px;color:var(--green);margin-top:7px}
+.avatars{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.avatars button{font-size:23px;padding:9px;background:#263b52;color:white}
+.achievement{padding:13px;border-radius:10px;background:#1a2b40;margin:9px 0;border:1px solid #2b4057}
+.achievement.unlocked{border-color:#20df91;color:#dfffee}
+footer{text-align:center;padding:30px;color:#75869b;border-top:1px solid var(--line)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#1a3440;border:1px solid var(--green);padding:12px 18px;border-radius:10px;z-index:40;transition:.25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.modal{position:fixed;inset:0;background:#000b;display:grid;place-items:center;padding:20px;z-index:30}
+.modal-box{max-width:480px;width:100%;background:#132237;border:1px solid #42617b;border-radius:15px;padding:23px}
+.modal-box h2{margin-bottom:12px}
+@media(max-width:650px){.head{align-items:flex-start}.logo{font-size:19px}.hero{padding:25px}.hero:after{font-size:110px;top:35px}.hero h1{font-size:34px}.head-actions button{padding:9px}.game-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.game-info{padding:10px}.game-actions{flex-wrap:wrap}.game-actions button{font-size:11px}}
 </style>
 </head>
 <body>
+<div class="topbar"></div>
 <header>
-<h1>🎮 GAMEVERSE GG</h1>
-<p>YOUR GAMING UNIVERSE — PRO EDITION</p>
+ <div class="head">
+  <div class="logo">GAMEVERSE <span>GG</span><small>YOUR GAMING UNIVERSE</small></div>
+  <div class="head-actions">
+   <button class="sound" id="soundBtn" onclick="toggleSound()">🔊 Звук: ВКЛ</button>
+  </div>
+ </div>
+ <nav>
+  <button class="active" data-page="home" onclick="page('home')">⌂ Главная</button>
+  <button data-page="catalog" onclick="page('catalog')">🎮 Игры</button>
+  <button data-page="skins" onclick="page('skins')">🎨 Скины CS2</button>
+  <button data-page="favorites" onclick="page('favorites')">⭐ Избранное</button>
+  <button data-page="profile" onclick="page('profile')">👤 Профиль</button>
+ </nav>
 </header>
-<nav>
-<button onclick="page('home')">Главная</button>
-<button onclick="page('catalog')">Каталог игр</button>
-<button onclick="page('favorites')">⭐ Избранное</button>
-<button onclick="page('profile')">👤 Профиль</button>
-</nav>
+
 <main>
-<section id="home">
-<div class="panel">
-<h2>Добро пожаловать в GAMEVERSE GG!</h2>
-<p>Твоя игровая вселенная. Выбирай игры, собирай избранное и открывай достижения.</p>
-<button onclick="page('catalog')">Открыть каталог</button>
-</div>
-<div class="panel">
-<h2>🔥 Популярные игры</h2>
-<div class="games" id="popular"></div>
-</div>
+<section id="home" class="page">
+ <div class="hero">
+  <div class="small">STEAM STYLE • SKINOZ VIBES • GAMEVERSE GG</div>
+  <h1>ТВОЯ ИГРОВАЯ <span>ВСЕЛЕННАЯ</span></h1>
+  <p>Открывай новые игры, собирай любимые проекты, изучай коллекцию скинов и создавай свой игровой профиль.</p>
+  <div class="hero-buttons">
+   <button onclick="page('catalog')">Открыть каталог</button>
+   <button class="secondary" onclick="page('skins')">Смотреть скины</button>
+  </div>
+ </div>
+ <div class="section-title"><h2>🔥 <span>Популярные игры</span></h2><button class="secondary" onclick="page('catalog')">Весь каталог →</button></div>
+ <div class="game-grid" id="popular"></div>
+ <div class="section-title"><h2>✨ <span>Возможности портала</span></h2></div>
+ <div class="game-grid">
+  <div class="panel"><h3>🎮 Каталог</h3><p class="muted">Ищи игры, фильтруй по жанрам и открывай карточки.</p></div>
+  <div class="panel"><h3>🎨 Галерея скинов</h3><p class="muted">Смотри демонстрационные дизайны оружия CS2.</p></div>
+  <div class="panel"><h3>🏆 Профиль</h3><p class="muted">Выбирай аватар и собирай достижения.</p></div>
+ </div>
 </section>
 
-<section id="catalog" class="hidden">
-<h2>🎮 КАТАЛОГ ИГР</h2>
-<div class="toolbar">
-<input id="search" placeholder="🔍 Поиск игры..." oninput="renderGames()">
-<select id="genre" onchange="renderGames()">
-<option value="Все">Все жанры</option>
-<option>Экшен</option><option>Шутер</option><option>Приключения</option>
-<option>Гонки</option><option>RPG</option><option>Хоррор</option>
-<option>Спорт</option><option>Стратегия</option><option>Песочница</option>
-</select>
-<select id="sort" onchange="renderGames()">
-<option value="default">По умолчанию</option>
-<option value="az">По названию А–Я</option>
-</select>
-</div>
-<p class="small" id="count"></p>
-<div class="games" id="gameList"></div>
+<section id="catalog" class="page hidden">
+ <div class="section-title"><h2>🎮 КАТАЛОГ <span>ИГР</span></h2></div>
+ <div class="toolbar">
+  <input id="search" placeholder="🔍 Найти игру..." oninput="renderGames()">
+  <select id="genre" onchange="renderGames()">
+   <option value="Все">Все жанры</option><option>Экшен</option><option>Шутер</option>
+   <option>Приключения</option><option>Гонки</option><option>RPG</option>
+   <option>Хоррор</option><option>Спорт</option><option>Стратегия</option><option>Песочница</option>
+  </select>
+  <select id="sort" onchange="renderGames()"><option value="default">По умолчанию</option><option value="az">По названию А–Я</option></select>
+ </div>
+ <div id="count" class="count"></div>
+ <div class="game-grid" id="gameList"></div>
 </section>
 
-<section id="favorites" class="hidden">
-<h2>⭐ ИЗБРАННЫЕ ИГРЫ</h2>
-<div class="games" id="favoriteList"></div>
+<section id="skins" class="page hidden">
+ <div class="section-title"><h2>🎨 ГАЛЕРЕЯ <span>СКИНОВ CS2</span></h2></div>
+ <div class="panel"><p class="muted">Демонстрационная галерея игровых дизайнов. Здесь можно просматривать коллекцию — это не магазин и не система ставок.</p></div>
+ <div class="skin-grid" id="skinList"></div>
 </section>
 
-<section id="profile" class="hidden">
-<div class="panel">
-<h2>👤 МОЙ ПРОФИЛЬ</h2>
-<div class="avatar" id="avatarView">🎮</div>
-<p>Выбери аватар:</p>
-<div class="avatars" id="avatarChoices"></div>
-<p>Никнейм:</p>
-<input id="nickname" maxlength="20" placeholder="Твой никнейм">
-<button onclick="saveName()">Сохранить</button>
-<h3 id="profileName">Игрок</h3>
-<div class="stats">
-<div class="stat">Уровень<br><b id="level">1</b></div>
-<div class="stat">Опыт<br><b id="xp">0 XP</b></div>
-<div class="stat">Монеты<br><b id="coins">0 🪙</b></div>
-<div class="stat">Избранное<br><b id="favCount">0</b></div>
-</div>
-<p class="small">Опыт и монеты — игровые баллы, они не имеют денежной стоимости.</p>
-</div>
-<div class="panel">
-<h2>🏆 ДОСТИЖЕНИЯ</h2>
-<div id="achievements"></div>
-</div>
-<div class="panel">
-<h2>📊 МОИ РЕКОРДЫ</h2>
-<p>🐍 Змейка: <b id="snakeRecord">0</b></p>
-<p>🧠 Викторина: <b id="quizRecord">0</b></p>
-<p>🔢 Угадай число: <b id="guessRecord">0</b></p>
-<p class="small">Рекорды сохраняются в этом браузере.</p>
-</div>
+<section id="favorites" class="page hidden">
+ <div class="section-title"><h2>⭐ МОЁ <span>ИЗБРАННОЕ</span></h2></div>
+ <div class="game-grid" id="favoriteList"></div>
+</section>
+
+<section id="profile" class="page hidden">
+ <div class="panel">
+  <div class="profile-head">
+   <div class="avatar" id="avatarView">🎮</div>
+   <div><div class="small">ИГРОВОЙ ПРОФИЛЬ</div><h2 id="profileName">Игрок</h2><p class="muted">Настрой свой профиль GAMEVERSE GG</p></div>
+  </div>
+  <div class="stats">
+   <div class="stat">Уровень<b id="level">1</b></div>
+   <div class="stat">Опыт<b id="xp">0 XP</b></div>
+   <div class="stat">Монеты<b id="coins">0 🪙</b></div>
+   <div class="stat">Избранное<b id="favCount">0</b></div>
+  </div>
+ </div>
+ <div class="panel">
+  <h2>⚙️ Настройки профиля</h2>
+  <p class="muted">Никнейм</p>
+  <input id="nickname" maxlength="20" placeholder="Твой никнейм">
+  <button onclick="saveName()">Сохранить</button>
+  <p class="muted">Выбери аватар</p>
+  <div class="avatars" id="avatarChoices"></div>
+ </div>
+ <div class="panel"><h2>🏆 Достижения</h2><div id="achievements"></div></div>
+ <div class="panel">
+  <h2>📊 Рекорды аркады</h2>
+  <p>🐍 Змейка: <b id="snakeRecord">0</b></p>
+  <p>🧠 Викторина: <b id="quizRecord">0</b></p>
+  <p>🔢 Угадай число: <b id="guessRecord">0</b></p>
+  <p class="muted">XP, монеты и рекорды — игровые показатели без денежной стоимости.</p>
+ </div>
 </section>
 </main>
-<footer>GAMEVERSE GG © 2026 — PLAY. LEVEL UP. REPEAT.</footer>
+
+<footer>GAMEVERSE GG © 2026 • PLAY • DISCOVER • LEVEL UP</footer>
+<div class="toast" id="toast"></div>
+<div class="modal hidden" id="modal" onclick="if(event.target===this)closeModal()">
+ <div class="modal-box">
+  <h2 id="modalTitle"></h2><p id="modalText" class="muted"></p>
+  <button onclick="closeModal()">Закрыть</button>
+ </div>
+</div>
 
 <script>
-const raw = `
+const $=id=>document.getElementById(id);
+
+/* ЗВУКИ: создаются браузером, отдельные аудиофайлы не нужны */
+let soundOn=true,audio=null,musicTimer=null,musicStep=0;
+function audioReady(){
+ if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();
+ if(audio.state==='suspended')audio.resume();
+}
+function tone(freq=520,duration=.07,type='sine',volume=.035){
+ if(!soundOn)return;
+ try{
+  audioReady();
+  const o=audio.createOscillator(),g=audio.createGain();
+  o.type=type;o.frequency.value=freq;
+  g.gain.setValueAtTime(volume,audio.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration);
+  o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+duration);
+ }catch(e){}
+}
+function clickSound(){tone(650,.045,'triangle',.025)}
+function startMusic(){
+ if(!soundOn||musicTimer)return;
+ audioReady();
+ const notes=[196,246.94,293.66,246.94,174.61,220,261.63,220];
+ musicTimer=setInterval(()=>{
+  if(!soundOn)return;
+  tone(notes[musicStep%notes.length],.55,'sine',.009);
+  musicStep++;
+ },650);
+}
+function stopMusic(){clearInterval(musicTimer);musicTimer=null}
+function toggleSound(){
+ soundOn=!soundOn;
+ $('soundBtn').textContent=soundOn?'🔊 Звук: ВКЛ':'🔇 Звук: ВЫКЛ';
+ if(soundOn){audioReady();tone(700,.1);startMusic();toast('Звук включён')}
+ else{stopMusic();toast('Звук выключен')}
+}
+document.addEventListener('click',e=>{
+ if(e.target.closest('button'))clickSound();
+});
+document.addEventListener('pointerdown',()=>{if(soundOn)startMusic()},{once:true});
+
+/* СТРАНИЦЫ */
+function page(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.toggle('hidden',p.id!==id));
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+ if(id==='catalog')renderGames();
+ if(id==='favorites')renderFavorites();
+ if(id==='profile')renderProfile();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ДАННЫЕ ИГР */
+const raw=`
 Grand Theft Auto V|Экшен|271590
 Red Dead Redemption 2|Приключения|1174180
 Cyberpunk 2077|RPG|1091500
@@ -161,7 +280,7 @@ Assassin's Creed Odyssey|RPG|812140
 Assassin's Creed Origins|Приключения|582160
 Watch Dogs 2|Экшен|447040
 Watch Dogs Legion|Экшен|2239550
-Tom Clancy's The Division 2|Шутер|2221490
+The Division 2|Шутер|2221490
 Rainbow Six Siege|Шутер|359550
 Counter-Strike 2|Шутер|730
 PUBG: Battlegrounds|Шутер|578080
@@ -202,7 +321,6 @@ Half-Life 2|Шутер|220
 Hades|Экшен|1145360
 Hades II|Экшен|1145350
 Hollow Knight|Приключения|367520
-Silksong|Приключения|1030300
 Ori and the Will of the Wisps|Приключения|1057090
 Cuphead|Приключения|268910
 Terraria|Песочница|105600
@@ -229,102 +347,93 @@ Company of Heroes 3|Стратегия|1677280
 Factorio|Стратегия|427520
 Satisfactory|Песочница|526870
 `;
-
-const games=raw.trim().split('\n').map((line,i)=>{
-const [name,genre,id]=line.split('|');
-return {name,genre,id,index:i};
+const games=raw.trim().split('\n').map((line,index)=>{
+ const [name,genre,id]=line.split('|');return{name,genre,id,index};
 });
-let profile=JSON.parse(localStorage.getItem('gv-profile')||'{"name":"Игрок","xp":0,"coins":0}');
+
+/* СОХРАНЕНИЕ СТАРОГО ПРОФИЛЯ */
+let profileData=JSON.parse(localStorage.getItem('gv-profile')||'{"name":"Игрок","xp":0,"coins":0}');
 let records=JSON.parse(localStorage.getItem('gv-records')||'{"snake":0,"quiz":0,"guess":0}');
 let favorites=JSON.parse(localStorage.getItem('gv-favorites')||'[]');
 let avatar=localStorage.getItem('gv-avatar')||'🎮';
-const avatars=['🎮','👑','😎','🐺','🔥','⚡','👾','🦊','🐉','🚀','💀','🌟'];
-
-function page(id){
-['home','catalog','favorites','profile'].forEach(p=>document.getElementById(p).classList.toggle('hidden',p!==id));
-if(id==='catalog')renderGames();
-if(id==='favorites')renderFavorites();
-if(id==='profile')renderProfile();
-}
-function saveProfile(){localStorage.setItem('gv-profile',JSON.stringify(profile));renderProfile()}
+function saveProfile(){localStorage.setItem('gv-profile',JSON.stringify(profileData));renderProfile()}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
 function renderProfile(){
-document.getElementById('avatarView').textContent=avatar;
-document.getElementById('profileName').textContent=profile.name;
-document.getElementById('nickname').value=profile.name;
-document.getElementById('level').textContent=Math.floor(profile.xp/100)+1;
-document.getElementById('xp').textContent=profile.xp+' XP';
-document.getElementById('coins').textContent=profile.coins+' 🪙';
-document.getElementById('favCount').textContent=favorites.length;
-document.getElementById('snakeRecord').textContent=records.snake||0;
-document.getElementById('quizRecord').textContent=records.quiz||0;
-document.getElementById('guessRecord').textContent=records.guess||0;
-const list=[
-['Первый шаг','Добавь первую игру в избранное.',favorites.length>=1],
-['Коллекционер','Добавь 5 игр в избранное.',favorites.length>=5],
-['Большая коллекция','Добавь 10 игр в избранное.',favorites.length>=10],
-['Игрок','Достигни 2-го уровня.',profile.xp>=100],
-['Опытный игрок','Достигни 5-го уровня.',profile.xp>=400]
-];
-document.getElementById('achievements').innerHTML=list.map(a=>`<div class="achievement">${a[2]?'🏆':'🔒'} <b>${a[0]}</b><br><span class="small">${a[1]}</span></div>`).join('');
+ $('avatarView').textContent=avatar;
+ $('profileName').textContent=profileData.name||'Игрок';
+ $('nickname').value=profileData.name||'Игрок';
+ $('level').textContent=Math.floor((profileData.xp||0)/100)+1;
+ $('xp').textContent=(profileData.xp||0)+' XP';
+ $('coins').textContent=(profileData.coins||0)+' 🪙';
+ $('favCount').textContent=favorites.length;
+ $('snakeRecord').textContent=records.snake||0;
+ $('quizRecord').textContent=records.quiz||0;
+ $('guessRecord').textContent=records.guess||0;
+ const list=[
+  ['Первый шаг','Добавь игру в избранное.',favorites.length>=1],
+  ['Коллекционер','Добавь 5 игр в избранное.',favorites.length>=5],
+  ['Большая коллекция','Добавь 10 игр в избранное.',favorites.length>=10],
+  ['Игрок','Достигни 2-го уровня.',(profileData.xp||0)>=100],
+  ['Опытный игрок','Достигни 5-го уровня.',(profileData.xp||0)>=400]
+ ];
+ $('achievements').innerHTML=list.map(a=>`<div class="achievement ${a[2]?'unlocked':''}">${a[2]?'🏆':'🔒'} <b>${a[0]}</b><br><span class="muted">${a[1]}</span></div>`).join('');
 }
 function saveName(){
-profile.name=document.getElementById('nickname').value.trim()||'Игрок';
-saveProfile();
+ profileData.name=$('nickname').value.trim()||'Игрок';saveProfile();toast('Никнейм сохранён');
 }
-function chooseAvatar(a){
-avatar=a;localStorage.setItem('gv-avatar',avatar);renderProfile();
-}
-document.getElementById('avatarChoices').innerHTML=avatars.map(a=>`<button onclick="chooseAvatar('${a}')">${a}</button>`).join('');
+const avatars=['🎮','👑','😎','🐺','🔥','⚡','👾','🦊','🐉','🚀','💀','🌟'];
+$('avatarChoices').innerHTML=avatars.map(a=>`<button onclick="chooseAvatar('${a}')">${a}</button>`).join('');
+function chooseAvatar(a){avatar=a;localStorage.setItem('gv-avatar',a);renderProfile();toast('Аватар обновлён')}
 
+/* КАРТОЧКИ ИГР */
 function gameCard(g){
-const isFav=favorites.includes(g.index);
-return `<article class="game">
-<div class="cover">
-<span>${g.name.slice(0,1)}</span>
-${g.id!=='0'?`<img src="https://cdn.cloudflare.steamstatic.com/steam/apps/${g.id}/header.jpg" alt="" onerror="this.remove()">`:''}
-</div>
-<div class="game-info">
-<h3>${g.name}</h3>
-<div class="genre">${g.genre}</div>
-<div class="game-actions">
-<button onclick="openGame(${g.index})">Подробнее</button>
-<button class="fav" onclick="toggleFav(${g.index})">${isFav?'★':'☆'}</button>
-</div>
-</div></article>`;
+ const fav=favorites.includes(g.index);
+ const cover=g.id!=='0'?`<img src="https://cdn.cloudflare.steamstatic.com/steam/apps/${g.id}/header.jpg" alt="${g.name}" onerror="this.style.display='none'">`:'';
+ return `<article class="game-card"><div class="cover"><span class="fallback">${g.name.slice(0,1)}</span>${cover}</div><div class="game-info"><h3>${g.name}</h3><div class="small">${g.genre}</div><div class="game-actions"><button onclick="openGame(${g.index})">Подробнее</button><button class="favorite" onclick="toggleFav(${g.index})">${fav?'★':'☆'}</button></div></div></article>`;
 }
 function renderGames(){
-let q=document.getElementById('search').value.toLowerCase();
-let genre=document.getElementById('genre').value;
-let sort=document.getElementById('sort').value;
-let result=games.filter(g=>g.name.toLowerCase().includes(q)&&(genre==='Все'||g.genre===genre));
-if(sort==='az')result.sort((a,b)=>a.name.localeCompare(b.name,'ru'));
-document.getElementById('count').textContent='Найдено игр: '+result.length+' из '+games.length;
-document.getElementById('gameList').innerHTML=result.map(gameCard).join('')||'<p>Игры не найдены.</p>';
+ const q=$('search').value.toLowerCase(),genre=$('genre').value,sort=$('sort').value;
+ let result=games.filter(g=>g.name.toLowerCase().includes(q)&&(genre==='Все'||g.genre===genre));
+ if(sort==='az')result.sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+ $('count').textContent='Найдено игр: '+result.length+' из '+games.length;
+ $('gameList').innerHTML=result.map(gameCard).join('')||'<p class="muted">Игры не найдены.</p>';
 }
 function renderFavorites(){
-let result=games.filter(g=>favorites.includes(g.index));
-document.getElementById('favoriteList').innerHTML=result.map(gameCard).join('')||'<p>Пока нет избранных игр. Добавь их в каталоге ⭐</p>';
+ const result=games.filter(g=>favorites.includes(g.index));
+ $('favoriteList').innerHTML=result.map(gameCard).join('')||'<p class="muted">Пока нет избранных игр. Добавь их в каталоге ⭐</p>';
 }
 function toggleFav(i){
-if(favorites.includes(i))favorites=favorites.filter(x=>x!==i);
-else favorites.push(i);
-localStorage.setItem('gv-favorites',JSON.stringify(favorites));
-renderGames();renderFavorites();renderProfile();
+ if(favorites.includes(i))favorites=favorites.filter(x=>x!==i);
+ else favorites.push(i);
+ localStorage.setItem('gv-favorites',JSON.stringify(favorites));
+ renderGames();renderFavorites();renderProfile();toast('Избранное обновлено');
 }
 function openGame(i){
-let g=games[i];
-alert('🎮 '+g.name+'\nЖанр: '+g.genre+'\n\nИгра добавлена в каталог GAMEVERSE GG.\nЭто информационная карточка, скачивание не выполняется.');
+ const g=games[i];
+ $('modalTitle').textContent='🎮 '+g.name;
+ $('modalText').textContent='Жанр: '+g.genre+'. Это информационная карточка GAMEVERSE GG. Скачивание игры с этой страницы не выполняется.';
+ $('modal').classList.remove('hidden');
 }
-function saveRecord(game,score){
-if(score>records[game]){
-records[game]=score;
-localStorage.setItem('gv-records',JSON.stringify(records));
-}
-}
-function reward(xp,coins){
-profile.xp+=xp;profile.coins+=coins;saveProfile();
-}
-document.getElementById('popular').innerHTML=[0,1,2,3,4,5].map(i=>gameCard(games[i])).join('');
+function closeModal(){$('modal').classList.add('hidden')}
+
+/* ГАЛЕРЕЯ СКИНОВ — ДЕМОНСТРАЦИОННЫЕ ДИЗАЙНЫ */
+const skins=[
+ ['Dragon Lore','Засекреченное','🐉','#d69b37'],
+ ['Neon Rider','Засекреченное','🏍️','#b44dff'],
+ ['Asiimov','Засекреченное','🚀','#f07835'],
+ ['Hyper Beast','Тайное','🐲','#e13f88'],
+ ['Printstream','Тайное','⚪','#a6c8d8'],
+ ['Fade','Запрещённое','🌈','#f5a04a'],
+ ['Redline','Запрещённое','🏎️','#df3949'],
+ ['Vaporwave','Тайное','🌌','#9a65e8'],
+ ['Nightwish','Тайное','🌙','#536bd4'],
+ ['Mecha Industries','Засекреченное','🤖','#66c6b0'],
+ ['Blue Steel','Армейское','🔷','#508bd3'],
+ ['Golden Coil','Засекреченное','🐍','#d5b44b']
+];
+$('skinList').innerHTML=skins.map(s=>`<div class="skin-card"><div class="skin-art" style="background:radial-gradient(circle,${s[3]}55,#142335)">${s[2]}</div><div class="rarity">${s[1]}</div><h3>${s[0]}</h3><div class="small">Демонстрационный дизайн</div></div>`).join('');
+
+$('popular').innerHTML=[0,1,2,3,4,5].map(i=>gameCard(games[i])).join('');
 renderProfile();
 </script>
 </body>
