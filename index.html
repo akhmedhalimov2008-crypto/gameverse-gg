@@ -3,33 +3,46 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GAMEVERSE GG — Игровая вселенная</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#10151d;color:white;font-family:Arial,sans-serif}
-header{background:#171f2b;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.logo{font-size:27px;font-weight:bold;color:#65e6a1}
+*{box-sizing:border-box}
+body{margin:0;background:#0b1018;color:#fff;font-family:Arial,sans-serif}
+header{background:#141e2b;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.logo{font-size:27px;font-weight:900;color:#6cf0a9}
 .logo span{color:white}
-nav a{color:#ddd;text-decoration:none;margin:0 10px}
-nav a:hover{color:#65e6a1}
-.hero{padding:75px 8%;background:linear-gradient(100deg,#142a30,#171b32,#25203b)}
-.hero h1{font-size:45px;margin-bottom:15px}
-.hero p{color:#c3cbd5;font-size:17px;line-height:1.6}
-.search{margin-top:25px;padding:15px;width:min(420px,100%);border:1px solid #40505d;border-radius:8px;background:#101820;color:white}
-main{padding:40px 7%}
-h2{margin-bottom:22px}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:20px}
-.game{background:#1b2633;border-radius:12px;overflow:hidden;transition:.2s}
-.game:hover{transform:translateY(-5px);background:#263747}
-.game img{width:100%;height:145px;object-fit:cover}
-.game h3{padding:13px 13px 5px}
-.game p{padding:0 13px 16px;color:#aebbc8;font-size:13px}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px}
-.tool{background:#1b2633;padding:22px;border-radius:12px}
-button{background:#65e6a1;color:#102018;border:0;padding:11px 18px;border-radius:7px;font-weight:bold;cursor:pointer;margin-top:12px}
-input{outline:none}
-footer{text-align:center;padding:30px;background:#171f2b;color:#9ba8b6;margin-top:40px}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{color:#ddd;text-decoration:none}
+nav a:hover{color:#6cf0a9}
+.hero{padding:65px 7%;background:linear-gradient(110deg,#142b32,#172039,#261b35)}
+.hero h1{font-size:43px;margin:0 0 15px}
+.hero p{color:#c4ced8;line-height:1.7}
+.search{margin-top:20px;width:min(500px,100%);padding:15px;border-radius:9px;border:1px solid #3c5361;background:#0d1721;color:white}
+main{padding:35px 6%}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}
+select{background:#172432;color:white;border:1px solid #354a59;padding:12px;border-radius:8px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px}
+.game{background:#172331;border-radius:12px;overflow:hidden;border:1px solid #273847;transition:.2s}
+.game:hover{transform:translateY(-5px);border-color:#6cf0a9}
+.game img{width:100%;height:145px;object-fit:cover;background:#253442}
+.info{padding:14px}
+.info h3{margin:0 0 8px}
+.info p{color:#aab9c8;font-size:13px;min-height:32px}
+.meta{color:#6cf0a9;font-size:12px}
+.actions{display:flex;gap:8px;align-items:center}
+button{border:0;border-radius:7px;padding:10px 13px;background:#6cf0a9;color:#102219;font-weight:bold;cursor:pointer}
+button:hover{filter:brightness(.9)}
+.favorite{background:#26394a;color:white}
+.section{margin-top:55px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.tool{background:#172331;padding:22px;border-radius:12px}
+.tool input{padding:11px;width:100%;margin-top:12px;border-radius:7px;background:#0d1721;border:1px solid #354a59;color:white}
+footer{text-align:center;background:#141e2b;padding:30px;color:#9eabb9;margin-top:50px}
+.modal{display:none;position:fixed;inset:0;background:#000c;z-index:5;align-items:center;justify-content:center;padding:20px}
+.modal-content{background:#192737;padding:25px;border-radius:14px;max-width:500px;width:100%;max-height:85vh;overflow:auto}
+.modal-content img{width:100%;border-radius:9px}
+.close{float:right;background:#34475a;color:white}
+.empty{color:#aab9c8;grid-column:1/-1}
 </style>
 </head>
 <body>
@@ -38,70 +51,153 @@ footer{text-align:center;padding:30px;background:#171f2b;color:#9ba8b6;margin-to
 <nav>
 <a href="#games">Игры</a>
 <a href="#tools">Инструменты</a>
-<a href="#about">О сайте</a>
+<a href="#about">О нас</a>
 </nav>
 </header>
 
 <section class="hero">
 <h1>ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</h1>
-<p>Открывай новые игры, создавай крутые ники и исследуй мир гейминга!</p>
-<input class="search" id="search" placeholder="Поиск игр..." oninput="findGames()">
+<p>Открывай новые игры, изучай игровые миры и создавай свою коллекцию.</p>
+<input class="search" id="search" placeholder="🔍 Найти игру..." oninput="render()">
 </section>
 
 <main>
-<h2 id="games">🔥 Популярные игры</h2>
-<div class="games" id="gameList">
-<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"><h3>GTA V</h3><p>Открытый мир и приключения</p></div>
-<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"><h3>Counter-Strike 2</h3><p>Тактический командный шутер</p></div>
-<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg"><h3>Cyberpunk 2077</h3><p>Фантастический открытый мир</p></div>
-<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg"><h3>Red Dead Redemption 2</h3><p>Большое приключение на Диком Западе</p></div>
-<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg"><h3>Dota 2</h3><p>Командная стратегия</p></div>
-<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"><h3>Baldur's Gate 3</h3><p>Фэнтезийная ролевая игра</p></div>
+<h2 id="games">🔥 Каталог популярных игр</h2>
+<div class="toolbar">
+<select id="genre" onchange="render()">
+<option value="">Все жанры</option>
+<option>Шутер</option>
+<option>Экшен</option>
+<option>Приключения</option>
+<option>Стратегия</option>
+<option>Ролевая игра</option>
+<option>Гонки</option>
+</select>
+<select id="sort" onchange="render()">
+<option value="popular">По популярности</option>
+<option value="az">По названию А-Я</option>
+<option value="za">По названию Я-А</option>
+</select>
+<button onclick="showFavorites()">⭐ Избранное</button>
+<button onclick="showAll()">Все игры</button>
 </div>
+<div class="games" id="gameList"></div>
 
-<section id="tools" style="margin-top:55px">
+<section class="section" id="tools">
 <h2>🛠️ Игровые инструменты</h2>
 <div class="tools">
 <div class="tool">
-<h3>🎲 Генератор ника</h3>
-<p>Создай уникальное игровое имя.</p>
-<button onclick="generate()">Создать ник</button>
-<p id="nickname" style="margin-top:15px;color:#65e6a1"></p>
+<h3>🎲 Генератор игровых ников</h3>
+<p>Создай уникальный ник для игры.</p>
+<button onclick="generateNick()">Создать ник</button>
+<p id="nickname"></p>
 </div>
 <div class="tool">
-<h3>🎯 Случайная игра</h3>
+<h3>🎯 Выбор случайной игры</h3>
 <p>Не знаешь, во что поиграть?</p>
 <button onclick="randomGame()">Выбрать игру</button>
-<p id="random" style="margin-top:15px;color:#65e6a1"></p>
+<p id="random"></p>
 </div>
 </div>
 </section>
 
-<section id="about" style="margin-top:55px">
+<section class="section" id="about">
 <h2>🌍 О GAMEVERSE GG</h2>
-<p style="color:#b5c0cc;line-height:1.7">GAMEVERSE GG — место для любителей компьютерных игр. Здесь ты можешь открывать новые игры и пользоваться игровыми инструментами.</p>
+<p style="color:#b5c0cc;line-height:1.8">GAMEVERSE GG — игровая вселенная для любителей компьютерных игр. Исследуй каталог, собирай любимые игры и открывай новые приключения!</p>
 </section>
 </main>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+<div class="modal-content">
+<button class="close" onclick="closeModal()">Закрыть ✕</button>
+<div id="modalInfo"></div>
+</div>
+</div>
 
 <footer>© 2026 GAMEVERSE GG — Твоя игровая вселенная 🎮</footer>
 
 <script>
-function findGames(){
-let q=document.getElementById('search').value.toLowerCase();
-document.querySelectorAll('.game').forEach(g=>{
-g.style.display=g.innerText.toLowerCase().includes(q)?'block':'none';
-});
+const games=[
+["GTA V","Экшен","Огромный открытый мир, автомобили и приключения.",271590],
+["Counter-Strike 2","Шутер","Командный тактический шутер.",730],
+["Cyberpunk 2077","Ролевая игра","Футуристический мир Найт-Сити.",1091500],
+["Red Dead Redemption 2","Приключения","Приключение на Диком Западе.",1174180],
+["Dota 2","Стратегия","Командная стратегия с героями.",570],
+["Baldur's Gate 3","Ролевая игра","Фэнтезийное приключение.",1086940],
+["The Witcher 3","Ролевая игра","Большое приключение Геральта.",292030],
+["PUBG: Battlegrounds","Шутер","Сражения за выживание.",578080],
+["Rust","Приключения","Выживание в открытом мире.",252490],
+["Elden Ring","Экшен","Исследование огромного фэнтезийного мира.",1245620],
+["Left 4 Dead 2","Шутер","Кооперативная борьба с заражёнными.",550],
+["Forza Horizon 5","Гонки","Гонки по красивым дорогам Мексики.",1551360],
+["Resident Evil 4","Экшен","Захватывающий хоррор-экшен.",2050650],
+["Metro Exodus","Шутер","Путешествие по постапокалиптическому миру.",412020],
+["Fallout 4","Ролевая игра","Исследуй мир после катастрофы.",377160],
+["Team Fortress 2","Шутер","Командные сражения с разными классами.",440],
+["Warframe","Экшен","Научно-фантастические приключения.",230410],
+["Terraria","Приключения","Исследуй, строй и сражайся.",105600],
+["Portal 2","Приключения","Головоломки с порталами.",620],
+["Euro Truck Simulator 2","Гонки","Путешествия по дорогам Европы.",227300]
+].map((g,i)=>({id:g[3],name:g[0],genre:g[1],desc:g[2],rank:i+1}));
+
+let favorites=JSON.parse(localStorage.getItem("gv-favorites")||"[]");
+let favoriteMode=false;
+
+function image(id){
+return "https://cdn.cloudflare.steamstatic.com/steam/apps/"+id+"/header.jpg";
 }
-function generate(){
-let a=['Shadow','Dark','Ghost','Cyber','Fire','Legend','Wolf','Storm'];
-let b=['Player','Killer','Hunter','Dragon','Master','Ninja','King','X'];
-document.getElementById('nickname').innerText=a[Math.floor(Math.random()*a.length)]+b[Math.floor(Math.random()*b.length)]+Math.floor(Math.random()*99);
+function render(){
+let q=document.getElementById("search").value.toLowerCase();
+let genre=document.getElementById("genre").value;
+let sort=document.getElementById("sort").value;
+let list=games.filter(g=>
+g.name.toLowerCase().includes(q)&&(!genre||g.genre===genre)&&(!favoriteMode||favorites.includes(g.id))
+);
+if(sort==="az")list.sort((a,b)=>a.name.localeCompare(b.name));
+if(sort==="za")list.sort((a,b)=>b.name.localeCompare(a.name));
+let html=list.map(g=>`
+<div class="game">
+<img src="${image(g.id)}" alt="${g.name}" loading="lazy" onerror="this.style.display='none'">
+<div class="info">
+<div class="meta">#${g.rank} · ${g.genre}</div>
+<h3>${g.name}</h3>
+<p>${g.desc}</p>
+<div class="actions">
+<button onclick="details(${g.id})">Подробнее</button>
+<button class="favorite" onclick="toggleFavorite(${g.id})">${favorites.includes(g.id)?"★":"☆"}</button>
+</div>
+</div>
+</div>`).join("");
+document.getElementById("gameList").innerHTML=html||'<p class="empty">Игры не найдены.</p>';
+}
+function toggleFavorite(id){
+favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
+localStorage.setItem("gv-favorites",JSON.stringify(favorites));
+render();
+}
+function showFavorites(){favoriteMode=true;render();document.getElementById("games").scrollIntoView();}
+function showAll(){favoriteMode=false;document.getElementById("search").value="";document.getElementById("genre").value="";render();}
+function details(id){
+let g=games.find(x=>x.id===id);
+document.getElementById("modalInfo").innerHTML=`
+<img src="${image(g.id)}" alt="${g.name}">
+<h2>${g.name}</h2><p class="meta">${g.genre} · Место в каталоге: ${g.rank}</p>
+<p style="line-height:1.7;margin:15px 0">${g.desc}</p>
+<p>Идентификатор игры в Steam: ${g.id}</p>
+<a style="color:#6cf0a9" target="_blank" rel="noopener" href="https://store.steampowered.com/app/${g.id}/">Открыть страницу игры в Steam ↗</a>`;
+document.getElementById("modal").style.display="flex";
+}
+function closeModal(){document.getElementById("modal").style.display="none";}
+function generateNick(){
+let a=["Shadow","Dark","Ghost","Cyber","Fire","Legend","Wolf","Storm","Neo","Frost"];
+let b=["Player","Hunter","Dragon","Master","Ninja","King","X","Pro","Sniper","Hero"];
+document.getElementById("nickname").innerText=a[Math.floor(Math.random()*a.length)]+b[Math.floor(Math.random()*b.length)]+Math.floor(Math.random()*999);
 }
 function randomGame(){
-let games=['GTA V','Counter-Strike 2','Cyberpunk 2077','Red Dead Redemption 2','Dota 2','Baldur’s Gate 3'];
-document.getElementById('random').innerText=games[Math.floor(Math.random()*games.length)];
+let g=games[Math.floor(Math.random()*games.length)];
+document.getElementById("random").innerText="Попробуй: "+g.name+"!";
 }
+render();
 </script>
 </body>
 </html>
-
