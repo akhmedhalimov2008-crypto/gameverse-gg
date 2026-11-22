@@ -3,141 +3,317 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAMEVERSE GG — Arcade</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GAMEVERSE GG — PRO</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090d14;color:#f4f6fa;font-family:Arial,sans-serif}
-header{padding:25px 7%;background:#111a27;border-bottom:2px solid #20d889}
-header h1{margin:0;color:#20d889;font-size:30px}
+body{margin:0;background:#090e17;color:#f4f6fa;font-family:Arial,sans-serif}
+header{padding:25px 7%;background:#111b2a;border-bottom:2px solid #20d889}
+header h1{margin:0;color:#20d889;font-size:32px}
 header p{color:#aab6c5}
-nav{display:flex;gap:12px;flex-wrap:wrap;padding:15px 7%;background:#0d1420}
-button{background:#20d889;color:#07130e;border:0;border-radius:8px;padding:11px 17px;font-weight:bold;cursor:pointer}
-button:hover{filter:brightness(1.12)}
-nav button{background:#1b2939;color:white}
-main{padding:25px 7%;max-width:1200px;margin:auto}
-.panel{background:#121c2a;border:1px solid #253449;border-radius:14px;padding:20px;margin-bottom:20px}
+nav{padding:14px 7%;background:#0d1521;display:flex;gap:10px;flex-wrap:wrap}
+button{cursor:pointer;border:0;border-radius:8px;padding:11px 16px;background:#20d889;color:#06130d;font-weight:bold}
+button:hover{filter:brightness(1.15)}
+nav button{background:#203047;color:white}
+main{max-width:1250px;margin:auto;padding:25px 5%}
+.panel{background:#121d2c;border:1px solid #26384e;border-radius:14px;padding:20px;margin-bottom:20px}
 h2{color:#20d889}
-.game-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.game-card{background:#1a293b;padding:20px;border-radius:12px}
-.game-card h3{margin-top:0}
-input{background:#09121e;color:white;border:1px solid #34465e;padding:12px;border-radius:8px;margin:5px;max-width:100%}
-#snake{background:#050a10;border:2px solid #20d889;border-radius:8px;max-width:100%}
-.hidden{display:none}
-.small{color:#aab6c5}
-#quizAnswers button{display:block;margin:9px 0;width:100%;text-align:left}
+input,select{background:#0b1420;color:white;border:1px solid #354a63;border-radius:8px;padding:12px;margin:5px}
+input{min-width:220px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+.game{background:#152337;border:1px solid #2a3b51;border-radius:12px;overflow:hidden}
+.cover{height:115px;background:linear-gradient(135deg,#173d39,#17233d);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover}
+.cover span{position:absolute;font-size:38px;font-weight:bold;color:#ffffff55}
+.game-info{padding:13px}
+.game-info h3{font-size:15px;min-height:35px;margin:0 0 8px}
+.genre{color:#9eafc3;font-size:12px}
+.game-actions{display:flex;gap:7px;margin-top:12px}
+.game-actions button{padding:8px 10px;font-size:12px}
+.fav{background:#263b52;color:white}
+.hidden{display:none!important}
+.small{color:#9eafc3;font-size:13px}
+.avatar{font-size:42px}
+.avatars{display:flex;gap:12px;flex-wrap:wrap}
+.avatars button{font-size:25px;padding:10px;background:#263b52;color:white}
+.stat{background:#1a2b40;padding:15px;border-radius:10px;min-width:120px}
+.stats{display:flex;gap:12px;flex-wrap:wrap}
+.achievement{background:#1a2b40;border-radius:10px;padding:13px;margin:8px 0}
 footer{text-align:center;color:#8290a2;padding:30px}
 </style>
 </head>
 <body>
 <header>
 <h1>🎮 GAMEVERSE GG</h1>
-<p>YOUR GAMING UNIVERSE — ARCADE 4.0</p>
+<p>YOUR GAMING UNIVERSE — PRO EDITION</p>
 </header>
-
 <nav>
-<button onclick="showPage('home')">Главная</button>
-<button onclick="showPage('arcade')">Мини-игры</button>
-<button onclick="showPage('profile')">Мой профиль</button>
+<button onclick="page('home')">Главная</button>
+<button onclick="page('catalog')">Каталог игр</button>
+<button onclick="page('favorites')">⭐ Избранное</button>
+<button onclick="page('profile')">👤 Профиль</button>
 </nav>
-
 <main>
 <section id="home">
 <div class="panel">
 <h2>Добро пожаловать в GAMEVERSE GG!</h2>
-<p>Играй, устанавливай рекорды и получай виртуальные награды.</p>
-<button onclick="showPage('arcade')">Играть сейчас</button>
+<p>Твоя игровая вселенная. Выбирай игры, собирай избранное и открывай достижения.</p>
+<button onclick="page('catalog')">Открыть каталог</button>
 </div>
-<div class="game-grid">
-<div class="game-card"><h3>🐍 Змейка</h3><p>Собирай очки и не сталкивайся со стенами.</p></div>
-<div class="game-card"><h3>🧠 Игровая викторина</h3><p>Проверь свои знания об играх.</p></div>
-<div class="game-card"><h3>🔢 Угадай число</h3><p>Найди загаданное число от 1 до 100.</p></div>
+<div class="panel">
+<h2>🔥 Популярные игры</h2>
+<div class="games" id="popular"></div>
 </div>
 </section>
 
-<section id="arcade" class="hidden">
-<h2>🕹️ ИГРОВАЯ АРКАДА</h2>
-<div class="game-grid">
-<div class="game-card">
-<h3>🐍 Змейка</h3>
-<p>Очки: <b id="snakeScore">0</b></p>
-<canvas id="snake" width="300" height="300"></canvas>
-<p class="small">Управление: стрелки на клавиатуре.</p>
-<button onclick="startSnake()">Начать / заново</button>
-<div style="margin-top:12px">
-<button onclick="setDirection(0,-1)">⬆️</button><br>
-<button onclick="setDirection(-1,0)">⬅️</button>
-<button onclick="setDirection(0,1)">⬇️</button>
-<button onclick="setDirection(1,0)">➡️</button>
+<section id="catalog" class="hidden">
+<h2>🎮 КАТАЛОГ ИГР</h2>
+<div class="toolbar">
+<input id="search" placeholder="🔍 Поиск игры..." oninput="renderGames()">
+<select id="genre" onchange="renderGames()">
+<option value="Все">Все жанры</option>
+<option>Экшен</option><option>Шутер</option><option>Приключения</option>
+<option>Гонки</option><option>RPG</option><option>Хоррор</option>
+<option>Спорт</option><option>Стратегия</option><option>Песочница</option>
+</select>
+<select id="sort" onchange="renderGames()">
+<option value="default">По умолчанию</option>
+<option value="az">По названию А–Я</option>
+</select>
 </div>
-<p id="snakeMessage" class="small">Нажми «Начать».</p>
-</div>
+<p class="small" id="count"></p>
+<div class="games" id="gameList"></div>
+</section>
 
-<div class="game-card">
-<h3>🧠 Игровая викторина</h3>
-<p id="quizQuestion">Нажми кнопку, чтобы начать.</p>
-<div id="quizAnswers"></div>
-<p id="quizResult"></p>
-<button onclick="startQuiz()">Начать викторину</button>
-</div>
-
-<div class="game-card">
-<h3>🔢 Угадай число</h3>
-<p>Я загадал число от 1 до 100.</p>
-<input id="guessInput" type="number" min="1" max="100" placeholder="Твоё число">
-<button onclick="checkGuess()">Проверить</button>
-<p id="guessResult">Попробуй угадать!</p>
-<button onclick="newGuess()">Новая игра</button>
-</div>
-</div>
+<section id="favorites" class="hidden">
+<h2>⭐ ИЗБРАННЫЕ ИГРЫ</h2>
+<div class="games" id="favoriteList"></div>
 </section>
 
 <section id="profile" class="hidden">
 <div class="panel">
 <h2>👤 МОЙ ПРОФИЛЬ</h2>
-<p>Никнейм: <input id="nickname" maxlength="20" placeholder="Введи никнейм"></p>
-<button onclick="saveNickname()">Сохранить ник</button>
+<div class="avatar" id="avatarView">🎮</div>
+<p>Выбери аватар:</p>
+<div class="avatars" id="avatarChoices"></div>
+<p>Никнейм:</p>
+<input id="nickname" maxlength="20" placeholder="Твой никнейм">
+<button onclick="saveName()">Сохранить</button>
 <h3 id="profileName">Игрок</h3>
-<p>Уровень: <b id="level">1</b></p>
-<p>Опыт: <b id="xp">0</b> XP</p>
-<p>Монеты: <b id="coins">0</b> 🪙</p>
-<p class="small">Монеты и опыт — игровые баллы, они не имеют денежной стоимости.</p>
+<div class="stats">
+<div class="stat">Уровень<br><b id="level">1</b></div>
+<div class="stat">Опыт<br><b id="xp">0 XP</b></div>
+<div class="stat">Монеты<br><b id="coins">0 🪙</b></div>
+<div class="stat">Избранное<br><b id="favCount">0</b></div>
+</div>
+<p class="small">Опыт и монеты — игровые баллы, они не имеют денежной стоимости.</p>
 </div>
 <div class="panel">
-<h2>🏆 МОИ РЕКОРДЫ</h2>
-<p>Змейка: <b id="snakeBest">0</b></p>
-<p>Викторина: <b id="quizBest">0</b></p>
-<p>Угадай число: <b id="guessBest">0</b></p>
+<h2>🏆 ДОСТИЖЕНИЯ</h2>
+<div id="achievements"></div>
+</div>
+<div class="panel">
+<h2>📊 МОИ РЕКОРДЫ</h2>
+<p>🐍 Змейка: <b id="snakeRecord">0</b></p>
+<p>🧠 Викторина: <b id="quizRecord">0</b></p>
+<p>🔢 Угадай число: <b id="guessRecord">0</b></p>
+<p class="small">Рекорды сохраняются в этом браузере.</p>
 </div>
 </section>
 </main>
 <footer>GAMEVERSE GG © 2026 — PLAY. LEVEL UP. REPEAT.</footer>
 
 <script>
-const $=id=>document.getElementById(id);
-function showPage(page){
-['home','arcade','profile'].forEach(p=>$(p).classList.toggle('hidden',p!==page));
-if(page==='profile')renderProfile();
-}
+const raw = `
+Grand Theft Auto V|Экшен|271590
+Red Dead Redemption 2|Приключения|1174180
+Cyberpunk 2077|RPG|1091500
+The Witcher 3: Wild Hunt|RPG|292030
+Elden Ring|RPG|1245620
+Dark Souls III|RPG|374320
+Sekiro: Shadows Die Twice|Экшен|814380
+Hogwarts Legacy|Приключения|990080
+Horizon Zero Dawn|Приключения|1151640
+God of War|Экшен|1593500
+God of War Ragnarök|Экшен|2322010
+Marvel's Spider-Man Remastered|Экшен|1817070
+Marvel's Spider-Man 2|Экшен|2651280
+The Last of Us Part I|Приключения|1888930
+Uncharted: Legacy of Thieves|Приключения|1659420
+Resident Evil 4|Хоррор|2050650
+Resident Evil Village|Хоррор|1196590
+Resident Evil 2|Хоррор|883710
+Silent Hill 2|Хоррор|2124490
+Dead Space|Хоррор|1693980
+Dying Light|Экшен|239140
+Dying Light 2|Экшен|534380
+Metro Exodus|Шутер|412020
+Metro Last Light Redux|Шутер|287390
+S.T.A.L.K.E.R. 2|Шутер|1643320
+Fallout 4|RPG|377160
+Fallout 76|RPG|1151340
+Skyrim Special Edition|RPG|489830
+Far Cry 5|Шутер|552520
+Far Cry 6|Шутер|2369390
+Assassin's Creed Valhalla|Приключения|2208920
+Assassin's Creed Odyssey|RPG|812140
+Assassin's Creed Origins|Приключения|582160
+Watch Dogs 2|Экшен|447040
+Watch Dogs Legion|Экшен|2239550
+Tom Clancy's The Division 2|Шутер|2221490
+Rainbow Six Siege|Шутер|359550
+Counter-Strike 2|Шутер|730
+PUBG: Battlegrounds|Шутер|578080
+Apex Legends|Шутер|1172470
+Dota 2|Стратегия|570
+Team Fortress 2|Шутер|440
+Left 4 Dead 2|Шутер|550
+Call of Duty: Modern Warfare III|Шутер|2519060
+Call of Duty: Black Ops III|Шутер|311210
+Battlefield 1|Шутер|1238840
+Battlefield V|Шутер|1238810
+DOOM Eternal|Шутер|782330
+Wolfenstein II|Шутер|612880
+Titanfall 2|Шутер|1237970
+Halo Infinite|Шутер|1240440
+Forza Horizon 5|Гонки|1551360
+Forza Horizon 4|Гонки|1293830
+Need for Speed Heat|Гонки|1222680
+Need for Speed Unbound|Гонки|1846380
+Assetto Corsa|Гонки|244210
+Euro Truck Simulator 2|Гонки|227300
+American Truck Simulator|Гонки|270880
+BeamNG.drive|Гонки|284160
+F1 24|Гонки|2488620
+EA SPORTS FC 25|Спорт|2669320
+NBA 2K25|Спорт|2878980
+WWE 2K24|Спорт|2315690
+Mortal Kombat 1|Экшен|1971870
+Mortal Kombat 11|Экшен|976310
+Tekken 8|Экшен|1778820
+Street Fighter 6|Экшен|1364780
+Dragon Ball: Sparking! ZERO|Экшен|1790600
+It Takes Two|Приключения|1426210
+A Way Out|Приключения|1222700
+Split Fiction|Приключения|2001120
+Portal 2|Приключения|620
+Half-Life 2|Шутер|220
+Hades|Экшен|1145360
+Hades II|Экшен|1145350
+Hollow Knight|Приключения|367520
+Silksong|Приключения|1030300
+Ori and the Will of the Wisps|Приключения|1057090
+Cuphead|Приключения|268910
+Terraria|Песочница|105600
+Minecraft|Песочница|0
+Stardew Valley|Песочница|413150
+No Man's Sky|Приключения|275850
+Subnautica|Приключения|264710
+ARK: Survival Evolved|Приключения|346110
+Rust|Приключения|252490
+The Forest|Хоррор|242760
+Sons of the Forest|Хоррор|1326470
+Phasmophobia|Хоррор|739630
+Outlast|Хоррор|238320
+Amnesia: The Dark Descent|Хоррор|57300
+Dead by Daylight|Хоррор|381210
+Among Us|Приключения|945360
+Fall Guys|Приключения|1091500
+The Sims 4|Песочница|1222670
+Cities: Skylines|Стратегия|255710
+Civilization VI|Стратегия|289070
+Age of Empires IV|Стратегия|1466860
+Total War: WARHAMMER III|Стратегия|1142710
+Company of Heroes 3|Стратегия|1677280
+Factorio|Стратегия|427520
+Satisfactory|Песочница|526870
+`;
+
+const games=raw.trim().split('\n').map((line,i)=>{
+const [name,genre,id]=line.split('|');
+return {name,genre,id,index:i};
+});
 let profile=JSON.parse(localStorage.getItem('gv-profile')||'{"name":"Игрок","xp":0,"coins":0}');
 let records=JSON.parse(localStorage.getItem('gv-records')||'{"snake":0,"quiz":0,"guess":0}');
+let favorites=JSON.parse(localStorage.getItem('gv-favorites')||'[]');
+let avatar=localStorage.getItem('gv-avatar')||'🎮';
+const avatars=['🎮','👑','😎','🐺','🔥','⚡','👾','🦊','🐉','🚀','💀','🌟'];
+
+function page(id){
+['home','catalog','favorites','profile'].forEach(p=>document.getElementById(p).classList.toggle('hidden',p!==id));
+if(id==='catalog')renderGames();
+if(id==='favorites')renderFavorites();
+if(id==='profile')renderProfile();
+}
 function saveProfile(){localStorage.setItem('gv-profile',JSON.stringify(profile));renderProfile()}
 function renderProfile(){
-$('profileName').textContent=profile.name;
-$('nickname').value=profile.name;
-$('level').textContent=Math.floor(profile.xp/100)+1;
-$('xp').textContent=profile.xp;
-$('coins').textContent=profile.coins;
-$('snakeBest').textContent=records.snake;
-$('quizBest').textContent=records.quiz;
-$('guessBest').textContent=records.guess;
+document.getElementById('avatarView').textContent=avatar;
+document.getElementById('profileName').textContent=profile.name;
+document.getElementById('nickname').value=profile.name;
+document.getElementById('level').textContent=Math.floor(profile.xp/100)+1;
+document.getElementById('xp').textContent=profile.xp+' XP';
+document.getElementById('coins').textContent=profile.coins+' 🪙';
+document.getElementById('favCount').textContent=favorites.length;
+document.getElementById('snakeRecord').textContent=records.snake||0;
+document.getElementById('quizRecord').textContent=records.quiz||0;
+document.getElementById('guessRecord').textContent=records.guess||0;
+const list=[
+['Первый шаг','Добавь первую игру в избранное.',favorites.length>=1],
+['Коллекционер','Добавь 5 игр в избранное.',favorites.length>=5],
+['Большая коллекция','Добавь 10 игр в избранное.',favorites.length>=10],
+['Игрок','Достигни 2-го уровня.',profile.xp>=100],
+['Опытный игрок','Достигни 5-го уровня.',profile.xp>=400]
+];
+document.getElementById('achievements').innerHTML=list.map(a=>`<div class="achievement">${a[2]?'🏆':'🔒'} <b>${a[0]}</b><br><span class="small">${a[1]}</span></div>`).join('');
 }
-function saveNickname(){
-profile.name=$('nickname').value.trim()||'Игрок';
+function saveName(){
+profile.name=document.getElementById('nickname').value.trim()||'Игрок';
 saveProfile();
 }
-function reward(xp,coins){
-profile.xp+=xp;profile.coins+=coins;saveProfile();
+function chooseAvatar(a){
+avatar=a;localStorage.setItem('gv-avatar',avatar);renderProfile();
+}
+document.getElementById('avatarChoices').innerHTML=avatars.map(a=>`<button onclick="chooseAvatar('${a}')">${a}</button>`).join('');
+
+function gameCard(g){
+const isFav=favorites.includes(g.index);
+return `<article class="game">
+<div class="cover">
+<span>${g.name.slice(0,1)}</span>
+${g.id!=='0'?`<img src="https://cdn.cloudflare.steamstatic.com/steam/apps/${g.id}/header.jpg" alt="" onerror="this.remove()">`:''}
+</div>
+<div class="game-info">
+<h3>${g.name}</h3>
+<div class="genre">${g.genre}</div>
+<div class="game-actions">
+<button onclick="openGame(${g.index})">Подробнее</button>
+<button class="fav" onclick="toggleFav(${g.index})">${isFav?'★':'☆'}</button>
+</div>
+</div></article>`;
+}
+function renderGames(){
+let q=document.getElementById('search').value.toLowerCase();
+let genre=document.getElementById('genre').value;
+let sort=document.getElementById('sort').value;
+let result=games.filter(g=>g.name.toLowerCase().includes(q)&&(genre==='Все'||g.genre===genre));
+if(sort==='az')result.sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+document.getElementById('count').textContent='Найдено игр: '+result.length+' из '+games.length;
+document.getElementById('gameList').innerHTML=result.map(gameCard).join('')||'<p>Игры не найдены.</p>';
+}
+function renderFavorites(){
+let result=games.filter(g=>favorites.includes(g.index));
+document.getElementById('favoriteList').innerHTML=result.map(gameCard).join('')||'<p>Пока нет избранных игр. Добавь их в каталоге ⭐</p>';
+}
+function toggleFav(i){
+if(favorites.includes(i))favorites=favorites.filter(x=>x!==i);
+else favorites.push(i);
+localStorage.setItem('gv-favorites',JSON.stringify(favorites));
+renderGames();renderFavorites();renderProfile();
+}
+function openGame(i){
+let g=games[i];
+alert('🎮 '+g.name+'\nЖанр: '+g.genre+'\n\nИгра добавлена в каталог GAMEVERSE GG.\nЭто информационная карточка, скачивание не выполняется.');
 }
 function saveRecord(game,score){
 if(score>records[game]){
@@ -145,129 +321,11 @@ records[game]=score;
 localStorage.setItem('gv-records',JSON.stringify(records));
 }
 }
-
-/* ЗМЕЙКА */
-const canvas=$('snake'),ctx=canvas.getContext('2d');
-const cell=15,tiles=20;
-let snake,food,dir,nextDir,score,snakeTimer,running=false;
-function placeFood(){
-food={x:Math.floor(Math.random()*tiles),y:Math.floor(Math.random()*tiles)};
+function reward(xp,coins){
+profile.xp+=xp;profile.coins+=coins;saveProfile();
 }
-function startSnake(){
-clearInterval(snakeTimer);
-snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];
-dir={x:1,y:0};nextDir={x:1,y:0};score=0;running=true;
-$('snakeScore').textContent=score;
-$('snakeMessage').textContent='Игра началась!';
-placeFood();drawSnake();
-snakeTimer=setInterval(moveSnake,120);
-}
-function setDirection(x,y){
-if(!running)return;
-if(x===-dir.x&&y===-dir.y)return;
-nextDir={x,y};
-}
-document.addEventListener('keydown',e=>{
-const keys={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};
-if(keys[e.key]){e.preventDefault();setDirection(...keys[e.key])}
-});
-function drawSnake(){
-ctx.fillStyle='#050a10';ctx.fillRect(0,0,300,300);
-ctx.fillStyle='#ff5268';ctx.fillRect(food.x*cell,food.y*cell,cell-1,cell-1);
-snake.forEach((s,i)=>{
-ctx.fillStyle=i===0?'#20d889':'#159b67';
-ctx.fillRect(s.x*cell,s.y*cell,cell-1,cell-1);
-});
-}
-function moveSnake(){
-dir=nextDir;
-let head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
-let ate=head.x===food.x&&head.y===food.y;
-if(head.x<0||head.y<0||head.x>=tiles||head.y>=tiles||
-snake.slice(0,ate?snake.length:snake.length-1).some(s=>s.x===head.x&&s.y===head.y)){
-endSnake();return;
-}
-snake.unshift(head);
-if(ate){score++;$('snakeScore').textContent=score;placeFood()}
-else snake.pop();
-drawSnake();
-}
-function endSnake(){
-clearInterval(snakeTimer);running=false;
-saveRecord('snake',score);
-$('snakeMessage').textContent='Игра окончена! Результат: '+score;
-if(score>0)reward(score*2,score);
-}
-
-/* ВИКТОРИНА */
-const questions=[
-{q:'Какая компания создала Minecraft?',a:['Mojang','Valve','Rockstar'],c:0},
-{q:'В какой игре есть карта Dust 2?',a:['PUBG','CS2','Fortnite'],c:1},
-{q:'Кто создал GTA?',a:['Ubisoft','Rockstar Games','EA'],c:1},
-{q:'Как называется герой игры God of War?',a:['Кратос','Геральт','Марио'],c:0},
-{q:'Какая игра связана с королевской битвой?',a:['Tetris','PUBG','Portal'],c:1}
-];
-let currentQuestion=0,quizScore=0,quizActive=false;
-function startQuiz(){
-currentQuestion=0;quizScore=0;quizActive=true;
-showQuestion();
-}
-function showQuestion(){
-let q=questions[currentQuestion];
-$('quizQuestion').textContent=(currentQuestion+1)+'. '+q.q;
-$('quizAnswers').innerHTML='';
-q.a.forEach((answer,i)=>{
-let b=document.createElement('button');
-b.textContent=answer;
-b.onclick=()=>answerQuiz(i);
-$('quizAnswers').appendChild(b);
-});
-$('quizResult').textContent='';
-}
-function answerQuiz(i){
-if(!quizActive)return;
-if(i===questions[currentQuestion].c)quizScore++;
-currentQuestion++;
-if(currentQuestion<questions.length){showQuestion()}
-else{
-quizActive=false;
-$('quizQuestion').textContent='Викторина завершена!';
-$('quizAnswers').innerHTML='';
-$('quizResult').textContent='Правильных ответов: '+quizScore+' из '+questions.length;
-saveRecord('quiz',quizScore);
-reward(quizScore*10,quizScore*5);
-}
-}
-
-/* УГАДАЙ ЧИСЛО */
-let secret=0,attempts=0,guessFinished=false;
-function newGuess(){
-secret=Math.floor(Math.random()*100)+1;
-attempts=0;guessFinished=false;
-$('guessInput').value='';
-$('guessResult').textContent='Новое число загадано!';
-}
-function checkGuess(){
-if(guessFinished)return;
-let n=Number($('guessInput').value);
-if(!Number.isInteger(n)||n<1||n>100){
-$('guessResult').textContent='Введи целое число от 1 до 100.';
-return;
-}
-attempts++;
-if(n===secret){
-guessFinished=true;
-$('guessResult').textContent='Правильно! Попыток: '+attempts;
-let points=Math.max(1,11-attempts);
-saveRecord('guess',Math.max(records.guess,points));
-reward(points*5,points*3);
-}else{
-$('guessResult').textContent=n<secret?'Загаданное число больше.':'Загаданное число меньше.';
-}
-}
-newGuess();
+document.getElementById('popular').innerHTML=[0,1,2,3,4,5].map(i=>gameCard(games[i])).join('');
 renderProfile();
-drawSnake();
 </script>
 </body>
 </html>
