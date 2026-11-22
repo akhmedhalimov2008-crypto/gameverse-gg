@@ -3,357 +3,319 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAMEVERSE GG</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GAMEVERSE GG — Игровой портал</title>
+<meta name="description" content="GAMEVERSE GG — каталог игр, игровые новости, обзоры и руководства.">
 <style>
-:root {
-  --bg:#0b0e12;
-  --panel:#121820;
-  --panel2:#19222d;
-  --green:#a3e635;
-  --text:#f3f5f7;
-  --muted:#8995a3;
-  --border:#27313c;
+:root{
+  --bg:#0b0d12;--panel:#121720;--panel2:#19212c;
+  --line:#26303d;--green:#a3e635;--text:#f3f5f8;
+  --muted:#929eac;--red:#ff6878;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
-  font-size:14px;
-}
+body{margin:0;background:var(--bg);color:var(--text);font:14px Arial,sans-serif}
 button,input{font:inherit}
 button{cursor:pointer}
-header{
-  height:62px;
-  background:#10151c;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 5%;
-  position:sticky;
-  top:0;
-  z-index:10;
+a{color:inherit;text-decoration:none}
+.topbar{
+  height:66px;background:#10151d;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 max(4%,calc((100% - 1250px)/2));position:sticky;top:0;z-index:20;
 }
-.logo{
-  font-size:19px;
-  font-weight:900;
-  letter-spacing:-.7px;
-}
+.logo{font-size:21px;font-weight:900;letter-spacing:-1px;white-space:nowrap}
 .logo span{color:var(--green)}
-nav{display:flex;gap:7px;align-items:center}
-nav button{
-  color:#aeb8c4;
-  background:transparent;
-  border:0;
-  padding:9px 11px;
-  border-radius:7px;
-  font-size:13px;
+.nav{display:flex;gap:5px;align-items:center}
+.nav button{
+  background:transparent;border:0;color:#aab4c0;padding:10px 11px;
+  border-radius:7px;font-size:13px
 }
-nav button.active,nav button:hover{
-  color:var(--green);
-  background:#202a33;
+.nav button:hover,.nav button.active{background:#202a35;color:var(--green)}
+.header-right{display:flex;align-items:center;gap:10px}
+.login{
+  border:0;background:var(--green);color:#111;font-weight:bold;
+  padding:10px 15px;border-radius:7px
 }
-.login-btn{
-  background:var(--green);
-  color:#111;
-  border:0;
-  border-radius:7px;
-  padding:9px 13px;
-  font-weight:700;
-  font-size:12px;
-}
-.user-mini{
-  display:none;
-  align-items:center;
-  gap:8px;
-  color:var(--text);
-  font-size:12px;
-}
-.user-mini img{
-  width:28px;height:28px;
-  border-radius:50%;
-  object-fit:cover;
-}
-main{
-  width:min(1100px,92%);
-  margin:24px auto 60px;
-}
-.page{display:none}
-.page.active{display:block}
+.user-mini{display:none;align-items:center;gap:8px;cursor:pointer}
+.user-mini img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+.user-mini span{max-width:100px;overflow:hidden;text-overflow:ellipsis}
+.mobile-menu{display:none;background:none;color:white;border:0;font-size:22px}
+.wrap{width:min(1250px,92%);margin:25px auto 65px}
+.page{display:none}.page.active{display:block}
 .hero{
-  background:linear-gradient(110deg,#1c3025,#15202a 65%,#202b36);
-  border:1px solid #304333;
-  border-radius:12px;
-  padding:28px;
-  margin-bottom:20px;
+  min-height:300px;border:1px solid #344333;border-radius:13px;
+  padding:35px;display:flex;align-items:center;position:relative;overflow:hidden;
+  background:linear-gradient(90deg,rgba(8,13,12,.98),rgba(8,13,12,.75),rgba(8,13,12,.2)),
+  url("https://cdn.akamai.steamstatic.com/steam/apps/1091500/library_hero.jpg") center/cover;
 }
-.hero small{
-  color:var(--green);
-  font-weight:bold;
-  letter-spacing:1px;
+.hero-content{max-width:550px;position:relative;z-index:1}
+.eyebrow{color:var(--green);font-size:11px;font-weight:bold;letter-spacing:2px}
+.hero h1{font-size:38px;line-height:1.1;margin:12px 0}
+.hero p{color:#c2cbd3;line-height:1.7;max-width:480px}
+.btn{
+  background:var(--green);color:#10130d;border:0;border-radius:7px;
+  padding:11px 16px;font-weight:bold
 }
-.hero h1{
-  font-size:28px;
-  margin:10px 0;
+.btn.secondary{background:#26313c;color:#e9edf1}
+.btn.outline{background:transparent;border:1px solid var(--line);color:white}
+.section{margin-top:29px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.section-head h2{font-size:19px;margin:0}
+.section-head button{border:0;background:transparent;color:var(--green);font-size:12px}
+.sub{color:var(--muted);font-size:12px}
+.cards{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px
 }
-.hero p{
-  color:#b4c0ca;
-  margin:0 0 17px;
-  line-height:1.5;
+.game-card{
+  min-width:0;background:var(--panel);border:1px solid var(--line);
+  border-radius:9px;overflow:hidden;transition:.18s
 }
-.primary{
-  background:var(--green);
-  border:0;
-  color:#111;
-  border-radius:7px;
-  padding:10px 15px;
-  font-weight:bold;
+.game-card:hover{transform:translateY(-3px);border-color:#718e3d}
+.cover{height:145px;background:#202a34;position:relative;cursor:pointer}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover .no-img{height:100%;display:grid;place-items:center;color:#64717e;font-size:30px}
+.game-info{padding:11px}
+.game-title{font-size:13px;font-weight:bold;line-height:1.4;min-height:35px;cursor:pointer}
+.game-meta{display:flex;justify-content:space-between;align-items:center;margin-top:9px;gap:5px}
+.tag{font-size:10px;color:var(--green);background:#263322;padding:5px 7px;border-radius:5px}
+.icon-btn{background:#25303c;border:0;color:#c4ced8;border-radius:6px;padding:6px 9px}
+.icon-btn.selected{color:#ff6d82}
+.searchbar{
+  display:flex;gap:9px;margin:15px 0;flex-wrap:wrap
 }
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:20px 0 13px;
+.searchbar input,.searchbar select{
+  background:var(--panel);color:white;border:1px solid var(--line);
+  padding:12px;border-radius:8px;outline:none
 }
-.section-title h2{font-size:18px;margin:0}
-.muted{color:var(--muted)}
-.search{
-  width:100%;
-  background:var(--panel);
-  border:1px solid var(--border);
-  color:white;
-  padding:12px;
-  border-radius:8px;
-  outline:none;
-  margin-bottom:14px;
+.searchbar input{flex:1;min-width:190px}
+.searchbar select{min-width:145px}
+.searchbar input:focus,.searchbar select:focus{border-color:var(--green)}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin:13px 0 18px}
+.chip{border:1px solid var(--line);background:var(--panel);color:#b6c0cb;padding:8px 12px;border-radius:20px;font-size:12px}
+.chip.active{background:#29391f;border-color:#617c37;color:var(--green)}
+.two-col{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+.feature{
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;display:grid;grid-template-columns:42% 1fr;min-height:155px
 }
-.search:focus{border-color:var(--green)}
-.games{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(155px,1fr));
-  gap:12px;
-}
-.game{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:9px;
-  overflow:hidden;
-  transition:.2s;
-}
-.game:hover{
-  transform:translateY(-3px);
-  border-color:#718d3c;
-}
-.game img{
-  width:100%;
-  height:105px;
-  object-fit:cover;
-  display:block;
-  background:#202a33;
-}
-.game-info{padding:10px}
-.game h3{
-  font-size:13px;
-  margin:0 0 9px;
-  min-height:30px;
-}
-.game-bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.game-tag{
-  color:var(--green);
-  font-size:11px;
-}
-.fav{
-  border:0;
-  background:#25303b;
-  color:#b9c5d0;
-  border-radius:6px;
-  padding:5px 8px;
-}
-.fav.selected{color:#ff6b82}
-.panel{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:20px;
-}
-.profile-top{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:18px;
-}
-.profile-top img{
-  width:65px;height:65px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#27313c;
-}
-.profile-top h2{margin:0 0 5px;font-size:18px}
-.profile-top p{margin:0;color:var(--muted);font-size:12px}
+.feature img{width:100%;height:100%;object-fit:cover;background:#202a34}
+.feature-content{padding:17px}
+.feature-content h3{font-size:16px;margin:8px 0}
+.feature-content p{color:var(--muted);font-size:12px;line-height:1.6}
+.news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.news-card{background:var(--panel);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.news-card img{width:100%;height:130px;object-fit:cover;background:#202a34}
+.news-content{padding:13px}
+.news-content h3{font-size:14px;line-height:1.4;margin:7px 0}
+.news-content p{font-size:12px;color:var(--muted);line-height:1.6}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:20px}
+.profile-head{display:flex;align-items:center;gap:15px;margin-bottom:18px}
+.profile-head img{width:66px;height:66px;border-radius:50%;object-fit:cover;background:#27313c}
+.profile-head h2{margin:0 0 5px;font-size:19px}
+.profile-head p{margin:0;color:var(--muted);font-size:12px}
 .google-btn{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  width:100%;
-  padding:12px;
-  background:white;
-  color:#202124;
-  border:0;
-  border-radius:7px;
-  font-weight:bold;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:13px;border:0;border-radius:7px;background:#fff;color:#202124;font-weight:bold
 }
-.google-icon{
-  font-size:17px;
-  font-weight:900;
-  color:#4285f4;
+.google-g{font-size:18px;color:#4285f4;font-weight:900}
+.status{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;overflow-wrap:anywhere}
+.status.error{color:#ff7b86}.status.ok{color:var(--green)}
+.profile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:17px}
+.stat{background:var(--panel2);padding:13px;border-radius:8px}
+.stat strong{display:block;font-size:19px;color:var(--green)}
+.stat span{font-size:11px;color:var(--muted)}
+.empty{padding:30px;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:var(--muted)}
+.modal{
+  position:fixed;inset:0;background:#000b;z-index:50;display:none;
+  align-items:center;justify-content:center;padding:18px
 }
-.status{
-  margin-top:12px;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
-  overflow-wrap:anywhere;
+.modal.open{display:flex}
+.modal-box{
+  background:#121923;border:1px solid var(--line);border-radius:12px;
+  width:min(650px,100%);max-height:90vh;overflow:auto;position:relative
 }
-.status.error{color:#ff7d88}
-.status.success{color:var(--green)}
-footer{
-  text-align:center;
-  color:#64717e;
-  padding:25px 10px;
-  border-top:1px solid var(--border);
-  font-size:12px;
+.modal-box>img{width:100%;height:220px;object-fit:cover;background:#202a34}
+.modal-body{padding:20px}
+.modal-close{position:absolute;right:12px;top:12px;background:#10151c;color:white;border:0;border-radius:7px;padding:8px 11px}
+.modal-body h2{margin:0 0 8px}
+.modal-body p{color:#b2bdc8;line-height:1.7}
+.modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+footer{border-top:1px solid var(--line);padding:25px;text-align:center;color:#687583;font-size:12px}
+footer b{color:var(--green)}
+@media(max-width:950px){
+  .cards{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .nav button{padding:9px 7px}
 }
-.empty{
-  padding:25px;
-  text-align:center;
-  color:var(--muted);
-  background:var(--panel);
-  border-radius:9px;
+@media(max-width:700px){
+  .topbar{height:auto;min-height:62px;flex-wrap:wrap;padding:12px 4%}
+  .mobile-menu{display:block}
+  .nav{display:none;order:3;width:100%;overflow:auto}
+  .nav.open{display:flex}
+  .nav button{white-space:nowrap}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .cover{height:115px}
+  .hero{padding:23px;min-height:270px}
+  .hero h1{font-size:29px}
+  .two-col{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .feature{grid-template-columns:1fr}
+  .feature img{height:145px}
 }
-@media(max-width:650px){
-  header{height:auto;min-height:58px;padding:10px 4%;flex-wrap:wrap;gap:8px}
-  .logo{font-size:17px}
-  nav{order:3;width:100%;overflow-x:auto}
-  nav button{white-space:nowrap;padding:8px}
-  main{margin-top:15px}
-  .hero{padding:20px}
-  .hero h1{font-size:23px}
-  .games{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-  .game img{height:95px}
+@media(max-width:430px){
+  .news-grid{grid-template-columns:1fr}
+  .header-right{gap:5px}
+  .login{padding:9px 10px}
+  .wrap{margin-top:16px}
 }
 </style>
 </head>
 
 <body>
-
-<header>
-  <div class="logo">GAMEVERSE <span>GG</span></div>
-
-  <nav>
+<header class="topbar">
+  <a class="logo" href="#" onclick="go('home');return false">GAMEVERSE <span>GG</span></a>
+  <button class="mobile-menu" id="mobileMenu">☰</button>
+  <nav class="nav" id="nav">
     <button class="active" data-page="home">Главная</button>
-    <button data-page="games">Игры</button>
+    <button data-page="catalog">Игры</button>
+    <button data-page="news">Новости</button>
+    <button data-page="guides">Гайды</button>
+    <button data-page="upcoming">Скоро</button>
     <button data-page="favorites">Избранное</button>
     <button data-page="profile">Профиль</button>
   </nav>
-
-  <button class="login-btn" id="headerLogin">Войти</button>
-
-  <div class="user-mini" id="userMini">
-    <img id="miniAvatar" src="" alt="">
-    <span id="miniName"></span>
+  <div class="header-right">
+    <button class="login" id="headerLogin">Войти</button>
+    <div class="user-mini" id="userMini" onclick="go('profile')">
+      <img id="miniAvatar" alt="Аватар">
+      <span id="miniName"></span>
+    </div>
   </div>
 </header>
 
-<main>
+<main class="wrap">
 
+<!-- HOME -->
 <section class="page active" id="home">
   <div class="hero">
-    <small>WELCOME TO GAMEVERSE</small>
-    <h1>Твой игровой мир</h1>
-    <p>Открывай новые игры, создавай свою коллекцию и сохраняй любимые проекты.</p>
-    <button class="primary" onclick="showPage('games')">Открыть каталог</button>
+    <div class="hero-content">
+      <div class="eyebrow">ТВОЙ ИГРОВОЙ МИР</div>
+      <h1>Открой для себя новые игры</h1>
+      <p>Исследуй каталог, находи интересные проекты, читай обзоры и собирай собственную игровую коллекцию.</p>
+      <button class="btn" onclick="go('catalog')">Исследовать игры →</button>
+    </div>
   </div>
 
-  <div class="section-title">
-    <h2>Популярные игры</h2>
-    <span class="muted">GAMEVERSE GG</span>
+  <div class="section">
+    <div class="section-head"><h2>Популярные игры</h2><button onclick="go('catalog')">Весь каталог →</button></div>
+    <div class="cards" id="popularGames"></div>
   </div>
-  <div class="games" id="homeGames"></div>
+
+  <div class="section">
+    <div class="section-head"><h2>Игровые новости и статьи</h2><button onclick="go('news')">Все материалы →</button></div>
+    <div class="news-grid" id="homeNews"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Скоро выйдут</h2><button onclick="go('upcoming')">Смотреть все →</button></div>
+    <div class="cards" id="homeUpcoming"></div>
+  </div>
 </section>
 
-<section class="page" id="games">
-  <div class="section-title">
-    <h2>Каталог игр</h2>
-    <span class="muted" id="gameCount"></span>
+<!-- CATALOG -->
+<section class="page" id="catalog">
+  <div class="section-head">
+    <h2>Каталог игр</h2><span class="sub" id="gameCount"></span>
   </div>
-  <input class="search" id="searchInput" placeholder="Поиск игры...">
-  <div class="games" id="allGames"></div>
+  <div class="searchbar">
+    <input id="search" placeholder="Найти игру по названию...">
+    <select id="sort">
+      <option value="popular">Сначала популярные</option>
+      <option value="az">По названию: А–Я</option>
+      <option value="za">По названию: Я–А</option>
+    </select>
+  </div>
+  <div class="chips" id="genreChips"></div>
+  <div class="cards" id="catalogGames"></div>
 </section>
 
+<!-- NEWS -->
+<section class="page" id="news">
+  <div class="section-head"><h2>Новости и материалы</h2><span class="sub">GAMEVERSE GG</span></div>
+  <p class="sub">Статьи и редакционные материалы об играх и игровой индустрии.</p>
+  <div class="news-grid" id="newsGrid"></div>
+</section>
+
+<!-- GUIDES -->
+<section class="page" id="guides">
+  <div class="section-head"><h2>Игровые руководства</h2></div>
+  <div class="news-grid" id="guidesGrid"></div>
+</section>
+
+<!-- UPCOMING -->
+<section class="page" id="upcoming">
+  <div class="section-head"><h2>Ожидаемые релизы</h2></div>
+  <p class="sub">Игры, за которыми стоит следить. Даты релиза могут меняться.</p>
+  <div class="cards" id="upcomingGames"></div>
+</section>
+
+<!-- FAVORITES -->
 <section class="page" id="favorites">
-  <div class="section-title">
-    <h2>Избранное</h2>
-  </div>
-  <div class="games" id="favoriteGames"></div>
+  <div class="section-head"><h2>Избранные игры</h2></div>
+  <div class="cards" id="favoriteGames"></div>
 </section>
 
+<!-- PROFILE -->
 <section class="page" id="profile">
-  <div class="section-title">
-    <h2>Мой профиль</h2>
-  </div>
-
+  <div class="section-head"><h2>Мой профиль</h2></div>
   <div class="panel">
-    <div class="profile-top">
-      <img id="profileAvatar"
-      src="https://www.gravatar.com/avatar/?d=mp&s=100" alt="Аватар">
-      <div>
-        <h2 id="profileName">Гость</h2>
-        <p id="profileEmail">Войди через Google, чтобы открыть профиль</p>
-      </div>
+    <div class="profile-head">
+      <img id="profileAvatar" src="https://www.gravatar.com/avatar/?d=mp&s=100" alt="Аватар">
+      <div><h2 id="profileName">Гость</h2><p id="profileEmail">Войди через Google, чтобы открыть профиль</p></div>
     </div>
-
-    <button class="google-btn" id="googleLogin">
-      <span class="google-icon">G</span>
-      Войти через Google
-    </button>
-
-    <button class="primary" id="logoutBtn"
-    style="display:none;margin-top:12px;width:100%">
-      Выйти из аккаунта
-    </button>
-
-    <div class="status" id="authStatus">
-      Авторизуйся, чтобы использовать свой профиль.
+    <button class="google-btn" id="googleLogin"><span class="google-g">G</span> Войти через Google</button>
+    <button class="btn secondary" id="logoutBtn" style="display:none;width:100%;margin-top:10px">Выйти из аккаунта</button>
+    <div class="status" id="authStatus">Войди через Google, чтобы использовать свой профиль.</div>
+    <div class="profile-stats">
+      <div class="stat"><strong id="favCount">0</strong><span>Избранное</span></div>
+      <div class="stat"><strong id="libraryCount">0</strong><span>Моя библиотека</span></div>
+      <div class="stat"><strong id="totalCount">0</strong><span>Игр в каталоге</span></div>
     </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><h2>Моя библиотека</h2></div>
+    <div class="cards" id="myLibrary"></div>
   </div>
 </section>
 
 </main>
 
-<footer>
-  GAMEVERSE GG © 2026 · Играй. Открывай. Наслаждайся.
-</footer>
+<footer>GAMEVERSE <b>GG</b> © 2026 · Играй. Открывай. Исследуй.</footer>
 
-<!-- Firebase SDK -->
+<div class="modal" id="gameModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img id="modalImage" alt="">
+    <div class="modal-body">
+      <div class="eyebrow" id="modalGenre"></div>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
+      <div class="modal-actions">
+        <button class="btn" id="modalSteam">Страница Steam ↗</button>
+        <button class="btn secondary" id="modalFav">♡ В избранное</button>
+        <button class="btn outline" id="modalLibrary">＋ В библиотеку</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 
 <script>
 // =====================================
-// FIREBASE CONFIGURATION
+// FIREBASE — ТВОЙ ТЕКУЩИЙ ПРОЕКТ
 // =====================================
-
 const firebaseConfig = {
-  apiKey: "AIzaSyD1Anwa8zHP7yutYiSCjFDYW_llqXebYj4" ,
+  apiKey: "AIzaSyD1Anwa8zHP7yutYiSCjFDYW_llqXebJY4",
   authDomain: "gameverse-gg.firebaseapp.com",
   projectId: "gameverse-gg",
   storageBucket: "gameverse-gg.firebasestorage.app",
@@ -369,267 +331,299 @@ try {
   firebase.initializeApp(firebaseConfig);
   auth = firebase.auth();
   firebaseReady = true;
-
-  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    .catch(error => showAuthMessage(error.message, true));
-
-} catch(error) {
-  showAuthMessage("Ошибка подключения Firebase: " + error.message, true);
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+} catch(e) {
+  console.error("Firebase initialization:", e);
 }
 
 // =====================================
-// GAMES
+// GAME DATABASE
+// Steam app IDs are used for cover art
 // =====================================
-
 const games = [
-  {id:730,name:"Counter-Strike 2",tag:"Шутер"},
-  {id:271590,name:"Grand Theft Auto V",tag:"Экшен"},
-  {id:1091500,name:"Cyberpunk 2077",tag:"RPG"},
-  {id:292030,name:"The Witcher 3",tag:"RPG"},
-  {id:1174180,name:"Red Dead Redemption 2",tag:"Приключения"},
-  {id:1245620,name:"ELDEN RING",tag:"RPG"},
-  {id:1086940,name:"Baldur's Gate 3",tag:"RPG"},
-  {id:413150,name:"Stardew Valley",tag:"Симулятор"},
-  {id:105600,name:"Terraria",tag:"Приключения"},
-  {id:570,name:"Dota 2",tag:"MOBA"},
-  {id:440,name:"Team Fortress 2",tag:"Шутер"},
-  {id:4000,name:"Garry's Mod",tag:"Песочница"},
-  {id:550,name:"Left 4 Dead 2",tag:"Шутер"},
-  {id:252490,name:"Rust",tag:"Выживание"},
-  {id:1172470,name:"Apex Legends",tag:"Шутер"},
-  {id:578080,name:"PUBG: BATTLEGROUNDS",tag:"Шутер"},
-  {id:1085660,name:"Destiny 2",tag:"Экшен"},
-  {id:289070,name:"Civilization VI",tag:"Стратегия"}
+ {id:730,name:"Counter-Strike 2",genre:"Шутер",desc:"Командный соревновательный шутер от Valve. Сражайся в командах и совершенствуй свои навыки."},
+ {id:271590,name:"Grand Theft Auto V",genre:"Экшен",desc:"Открытый мир, криминальные истории и множество возможностей в большом городе."},
+ {id:1091500,name:"Cyberpunk 2077",genre:"RPG",desc:"Футуристическая ролевая игра в огромном городе Найт-Сити."},
+ {id:292030,name:"The Witcher 3: Wild Hunt",genre:"RPG",desc:"Большое фэнтезийное приключение с открытым миром и запоминающимися персонажами."},
+ {id:1174180,name:"Red Dead Redemption 2",genre:"Приключения",desc:"Приключение на Диком Западе с большим открытым миром."},
+ {id:1245620,name:"ELDEN RING",genre:"RPG",desc:"Фэнтезийное приключение с исследованием мира и сложными испытаниями."},
+ {id:1086940,name:"Baldur's Gate 3",genre:"RPG",desc:"Ролевая игра с большим миром, выбором решений и пошаговыми сражениями."},
+ {id:413150,name:"Stardew Valley",genre:"Симулятор",desc:"Спокойная игра о ферме, дружбе, исследовании и жизни в небольшом городке."},
+ {id:105600,name:"Terraria",genre:"Приключения",desc:"Исследуй мир, строй, создавай предметы и открывай новые территории."},
+ {id:570,name:"Dota 2",genre:"MOBA",desc:"Командная стратегия с героями, способностями и соревновательными матчами."},
+ {id:440,name:"Team Fortress 2",genre:"Шутер",desc:"Командный шутер с разными классами персонажей и игровыми режимами."},
+ {id:4000,name:"Garry's Mod",genre:"Песочница",desc:"Песочница с физикой, пользовательскими режимами и огромным количеством возможностей."},
+ {id:550,name:"Left 4 Dead 2",genre:"Шутер",desc:"Кооперативный экшен, в котором команда проходит кампании вместе."},
+ {id:252490,name:"Rust",genre:"Выживание",desc:"Многопользовательская игра о выживании, строительстве и исследовании."},
+ {id:1172470,name:"Apex Legends",genre:"Шутер",desc:"Командный геройский шутер с уникальными персонажами и способностями."},
+ {id:578080,name:"PUBG: BATTLEGROUNDS",genre:"Шутер",desc:"Соревновательная игра в жанре королевской битвы."},
+ {id:1085660,name:"Destiny 2",genre:"Экшен",desc:"Фантастический онлайн-шутер с кооперативными и соревновательными режимами."},
+ {id:289070,name:"Civilization VI",genre:"Стратегия",desc:"Построй собственную цивилизацию и проведи её через разные эпохи."},
+ {id:2358720,name:"Black Myth: Wukong",genre:"Экшен",desc:"Приключенческий экшен, вдохновлённый китайской мифологией."},
+ {id:990080,name:"Hogwarts Legacy",genre:"Приключения",desc:"Исследуй волшебный мир и создай собственную историю ученика школы магии."},
+ {id:1966720,name:"Lethal Company",genre:"Кооператив",desc:"Кооперативное приключение с исследованием заброшенных объектов."},
+ {id:108600,name:"Project Zomboid",genre:"Выживание",desc:"Изометрическая игра о выживании в открытом мире."},
+ {id:252950,name:"Rocket League",genre:"Спорт",desc:"Футбол на автомобилях с быстрыми матчами и трюками."},
+ {id:1240440,name:"Halo Infinite",genre:"Шутер",desc:"Научно-фантастический шутер с одиночной кампанией и мультиплеером."},
+ {id:292730,name:"Call of Duty: Infinite Warfare",genre:"Шутер",desc:"Фантастический шутер с космическими сражениями."}
 ];
 
+const upcoming = [
+ {id:0,name:"Grand Theft Auto VI",genre:"Экшен",desc:"Ожидаемая новая часть серии Grand Theft Auto. Следи за официальными новостями о релизе.",image:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=900"},
+ {id:0,name:"The Witcher IV",genre:"RPG",desc:"Следующая глава фэнтезийной серии The Witcher.",image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900"},
+ {id:0,name:"Fable",genre:"RPG",desc:"Новое приключение в фэнтезийном мире Fable.",image:"https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900"},
+ {id:0,name:"Marvel's Wolverine",genre:"Экшен",desc:"Будущий приключенческий проект о Росомахе.",image:"https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=900"}
+];
+
+// These are example editorial articles, not live news feeds.
+const articles = [
+ {title:"Как выбрать игру для своего компьютера",type:"Руководство",desc:"На что смотреть перед установкой: системные требования, жанр, объём памяти и настройки графики.",image:"https://images.unsplash.com/photo-1493711662062-fa541dbc3fc8?w=800"},
+ {title:"Почему кооперативные игры так интересны",type:"Статья",desc:"Играть вместе с друзьями — отдельный способ получать удовольствие от игр.",image:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800"},
+ {title:"Как настроить графику в играх",type:"Гайд",desc:"Разбираемся с разрешением, качеством теней, сглаживанием и ограничением кадров.",image:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800"},
+ {title:"Что такое RPG и с чего начать",type:"Обзор жанра",desc:"Ролевые игры, развитие персонажа, задания и исследование миров.",image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800"},
+ {title:"Как найти игру для совместного прохождения",type:"Подборка",desc:"Идеи для тех, кто хочет играть вдвоём или целой компанией.",image:"https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=800"},
+ {title:"Как работает игровой каталог",type:"О GAMEVERSE",desc:"Сохраняй интересные проекты, ищи игры и создавай собственную коллекцию.",image:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800"}
+];
+
+const guides = [
+ {title:"Как выбрать настройки графики",type:"ПК",desc:"Начни с разрешения экрана, затем настрой качество текстур, теней и эффектов.",image:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800"},
+ {title:"Как освободить место на диске",type:"Компьютер",desc:"Проверь размер установленных игр и удали то, чем больше не пользуешься.",image:"https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800"},
+ {title:"Как играть с друзьями",type:"Мультиплеер",desc:"Проверь поддержку кооператива, платформы и возможность приглашать друзей.",image:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800"}
+];
+
+// =====================================
+// LOCAL PLAYER DATA
+// =====================================
 let favorites = JSON.parse(localStorage.getItem("gv_favorites") || "[]");
+let library = JSON.parse(localStorage.getItem("gv_library") || "[]");
+let selectedGenre = "Все";
+let currentGame = null;
 
-function saveFavorites(){
+function saveData(){
   localStorage.setItem("gv_favorites",JSON.stringify(favorites));
+  localStorage.setItem("gv_library",JSON.stringify(library));
+}
+function getGame(id){return games.find(g=>g.id===id)}
+function imageUrl(game){
+  return game.image || `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg`;
 }
 
-function gameCard(game){
-  const selected = favorites.includes(game.id);
-
-  return `
-    <article class="game">
-      <img
-        src="https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg"
-        alt="${game.name}"
-        loading="lazy"
-        onerror="this.style.display='none'"
-      >
-      <div class="game-info">
-        <h3>${game.name}</h3>
-        <div class="game-bottom">
-          <span class="game-tag">${game.tag}</span>
-          <button class="fav ${selected ? "selected" : ""}"
-            onclick="toggleFavorite(${game.id})"
-            title="Добавить в избранное">
-            ${selected ? "♥" : "♡"}
-          </button>
-        </div>
+// =====================================
+// GAME CARDS
+// =====================================
+function card(game){
+  const fav=favorites.includes(game.id);
+  const owned=library.includes(game.id);
+  return `<article class="game-card">
+    <div class="cover" onclick="openGame(${game.id})">
+      <img src="${imageUrl(game)}" alt="${escapeHtml(game.name)}" loading="lazy"
+       onerror="this.outerHTML='<div class=no-img>🎮</div>'">
+    </div>
+    <div class="game-info">
+      <div class="game-title" onclick="openGame(${game.id})">${escapeHtml(game.name)}</div>
+      <div class="game-meta">
+        <span class="tag">${escapeHtml(game.genre)}</span>
+        <button class="icon-btn ${fav?'selected':''}" onclick="toggleFav(${game.id})" title="Избранное">${fav?'♥':'♡'}</button>
       </div>
-    </article>
-  `;
+      ${owned?'<div class="sub" style="margin-top:8px;color:var(--green)">✓ В библиотеке</div>':''}
+    </div>
+  </article>`;
 }
-
-function renderGames(){
-  const query = document.getElementById("searchInput").value.toLowerCase();
-  const filtered = games.filter(g => g.name.toLowerCase().includes(query));
-
-  document.getElementById("allGames").innerHTML =
-    filtered.length ? filtered.map(gameCard).join("") :
-    '<div class="empty">Игры не найдены.</div>';
-
-  document.getElementById("gameCount").textContent =
-    filtered.length + " игр";
+function upcomingCard(game,index){
+ return `<article class="game-card">
+  <div class="cover"><img src="${game.image}" alt="${escapeHtml(game.name)}" loading="lazy"></div>
+  <div class="game-info"><div class="game-title">${escapeHtml(game.name)}</div>
+  <div class="game-meta"><span class="tag">${game.genre}</span><span class="sub">Ожидается</span></div></div>
+ </article>`;
 }
-
-function renderHome(){
-  document.getElementById("homeGames").innerHTML =
-    games.slice(0,6).map(gameCard).join("");
+function escapeHtml(s){
+ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
-
+function renderPopular(){
+ document.getElementById("popularGames").innerHTML=games.slice(0,10).map(card).join("");
+}
+function renderCatalog(){
+ const q=document.getElementById("search").value.toLowerCase().trim();
+ const sort=document.getElementById("sort").value;
+ let list=games.filter(g=>(g.name.toLowerCase().includes(q)||g.genre.toLowerCase().includes(q))&&(selectedGenre==="Все"||g.genre===selectedGenre));
+ if(sort==="az")list.sort((a,b)=>a.name.localeCompare(b.name,"ru"));
+ if(sort==="za")list.sort((a,b)=>b.name.localeCompare(a.name,"ru"));
+ document.getElementById("gameCount").textContent=list.length+" игр";
+ document.getElementById("catalogGames").innerHTML=list.length?list.map(card).join(""):'<div class="empty">Ничего не найдено.</div>';
+}
+function renderChips(){
+ const genres=["Все",...new Set(games.map(g=>g.genre))];
+ document.getElementById("genreChips").innerHTML=genres.map(g=>
+  `<button class="chip ${selectedGenre===g?'active':''}" onclick="setGenre('${g.replace(/'/g,"\\'")}')">${g}</button>`
+ ).join("");
+}
+function setGenre(g){selectedGenre=g;renderChips();renderCatalog()}
 function renderFavorites(){
-  const list = games.filter(g => favorites.includes(g.id));
-
-  document.getElementById("favoriteGames").innerHTML =
-    list.length ? list.map(gameCard).join("") :
-    '<div class="empty">Пока здесь нет избранных игр.</div>';
+ const list=games.filter(g=>favorites.includes(g.id));
+ document.getElementById("favoriteGames").innerHTML=list.length?list.map(card).join(""):'<div class="empty">Ты пока не добавил игры в избранное.</div>';
+}
+function renderLibrary(){
+ const list=games.filter(g=>library.includes(g.id));
+ document.getElementById("myLibrary").innerHTML=list.length?list.map(card).join(""):'<div class="empty">Твоя библиотека пока пуста. Открой игру и добавь её.</div>';
+}
+function toggleFav(id){
+ favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
+ saveData();renderAll();
+ if(currentGame)updateModalButtons();
+}
+function toggleLibrary(id){
+ library=library.includes(id)?library.filter(x=>x!==id):[...library,id];
+ saveData();renderAll();if(currentGame)updateModalButtons();
 }
 
-function toggleFavorite(id){
-  if(favorites.includes(id)){
-    favorites = favorites.filter(x => x !== id);
-  }else{
-    favorites.push(id);
-  }
-
-  saveFavorites();
-  renderAll();
+// =====================================
+// GAME DETAILS
+// =====================================
+function openGame(id){
+ const g=getGame(id);if(!g)return;
+ currentGame=g;
+ document.getElementById("modalImage").src=imageUrl(g);
+ document.getElementById("modalTitle").textContent=g.name;
+ document.getElementById("modalGenre").textContent=g.genre;
+ document.getElementById("modalDescription").textContent=g.desc;
+ document.getElementById("modalSteam").onclick=()=>window.open(`https://store.steampowered.com/app/${g.id}/`,"_blank","noopener");
+ updateModalButtons();
+ document.getElementById("gameModal").classList.add("open");
 }
+function updateModalButtons(){
+ if(!currentGame)return;
+ const fav=favorites.includes(currentGame.id);
+ const owned=library.includes(currentGame.id);
+ document.getElementById("modalFav").textContent=fav?"♥ В избранном":"♡ В избранное";
+ document.getElementById("modalLibrary").textContent=owned?"✓ В библиотеке":"＋ В библиотеку";
+ document.getElementById("modalFav").onclick=()=>toggleFav(currentGame.id);
+ document.getElementById("modalLibrary").onclick=()=>toggleLibrary(currentGame.id);
+}
+function closeModal(){document.getElementById("gameModal").classList.remove("open")}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
 
-function renderAll(){
-  renderHome();
-  renderGames();
-  renderFavorites();
+// =====================================
+// NEWS AND GUIDES
+// =====================================
+function articleCard(a){
+ return `<article class="news-card">
+ <img src="${a.image}" alt="" loading="lazy">
+ <div class="news-content"><span class="tag">${a.type}</span>
+ <h3>${escapeHtml(a.title)}</h3><p>${escapeHtml(a.desc)}</p></div></article>`;
+}
+function renderArticles(){
+ document.getElementById("homeNews").innerHTML=articles.slice(0,3).map(articleCard).join("");
+ document.getElementById("newsGrid").innerHTML=articles.map(articleCard).join("");
+ document.getElementById("guidesGrid").innerHTML=guides.map(articleCard).join("");
 }
 
 // =====================================
 // NAVIGATION
 // =====================================
-
-function showPage(page){
-  document.querySelectorAll(".page").forEach(el =>
-    el.classList.remove("active")
-  );
-
-  document.getElementById(page).classList.add("active");
-
-  document.querySelectorAll("nav button").forEach(btn =>
-    btn.classList.toggle("active",btn.dataset.page === page)
-  );
-
-  if(page === "favorites") renderFavorites();
-
-  window.scrollTo({top:0,behavior:"smooth"});
+function go(page){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(page).classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+ document.getElementById("nav").classList.remove("open");
+ window.scrollTo({top:0,behavior:"smooth"});
+ if(page==="catalog")renderCatalog();
+ if(page==="favorites")renderFavorites();
+ if(page==="profile"){renderLibrary();updateStats()}
 }
-
-document.querySelectorAll("nav button").forEach(btn => {
-  btn.addEventListener("click",() => showPage(btn.dataset.page));
-});
-
-document.getElementById("searchInput").addEventListener("input",renderGames);
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.getElementById("mobileMenu").addEventListener("click",()=>document.getElementById("nav").classList.toggle("open"));
+document.getElementById("search").addEventListener("input",renderCatalog);
+document.getElementById("sort").addEventListener("change",renderCatalog);
 
 // =====================================
-// GOOGLE SIGN IN
+// GOOGLE AUTHENTICATION
 // =====================================
-
-function showAuthMessage(message,isError=false){
-  const box = document.getElementById("authStatus");
-  if(!box) return;
-
-  box.textContent = message;
-  box.className = "status " + (isError ? "error" : "success");
+function authMessage(message,error=false){
+ const el=document.getElementById("authStatus");
+ el.textContent=message;
+ el.className="status "+(error?"error":"ok");
 }
-
-function explainFirebaseError(error){
-  const messages = {
-    "auth/api-key-not-valid":
-      "Firebase не принимает API-ключ. Проверь ключ в настройках проекта Google Cloud.",
-    "auth/unauthorized-domain":
-      "Домен сайта не добавлен в Firebase Authentication → Authorized domains.",
-    "auth/operation-not-allowed":
-      "В Firebase отключён вход через Google.",
-    "auth/popup-blocked":
-      "Браузер заблокировал окно входа. Разреши всплывающие окна.",
-    "auth/popup-closed-by-user":
-      "Окно входа было закрыто.",
-    "auth/network-request-failed":
-      "Проверь интернет-соединение."
-  };
-
-  return messages[error.code] ||
-    "Ошибка входа: " + (error.message || error.code || "неизвестная ошибка");
+function authError(error){
+ const messages={
+  "auth/api-key-not-valid":"Firebase не принимает API-ключ. Проверь настройки ключа в Google Cloud.",
+  "auth/unauthorized-domain":"Добавь домен GitHub Pages в Firebase → Authentication → Authorized domains.",
+  "auth/operation-not-allowed":"В Firebase отключён вход через Google.",
+  "auth/popup-blocked":"Браузер заблокировал окно. Разреши всплывающие окна.",
+  "auth/popup-closed-by-user":"Окно входа было закрыто.",
+  "auth/network-request-failed":"Проверь подключение к интернету."
+ };
+ return messages[error.code]||"Ошибка входа: "+(error.message||error.code);
 }
-
-async function googleSignIn(){
-  if(!firebaseReady || !auth){
-    showAuthMessage("Firebase не подключён. Проверь конфигурацию.",true);
-    return;
-  }
-
-  const buttons = [
-    document.getElementById("googleLogin"),
-    document.getElementById("headerLogin")
-  ];
-
-  buttons.forEach(b => {
-    b.disabled = true;
-    b.style.opacity = ".6";
-  });
-
-  showAuthMessage("Подключаем Google...");
-
-  try{
-    const provider = new firebase.auth.GoogleAuthProvider();
-    provider.setCustomParameters({prompt:"select_account"});
-
-    await auth.signInWithPopup(provider);
-
-  }catch(error){
-    console.error("Google login error:",error);
-    showAuthMessage(explainFirebaseError(error),true);
-  }finally{
-    buttons.forEach(b => {
-      b.disabled = false;
-      b.style.opacity = "1";
-    });
-  }
+async function googleLogin(){
+ if(!firebaseReady||!auth){authMessage("Firebase не подключён. Проверь конфигурацию.",true);return}
+ const btn=document.getElementById("googleLogin");
+ btn.disabled=true;btn.style.opacity=".6";
+ authMessage("Открываем окно Google...");
+ try{
+  const provider=new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({prompt:"select_account"});
+  await auth.signInWithPopup(provider);
+ }catch(e){
+  console.error("Google sign-in:",e);
+  authMessage(authError(e),true);
+ }finally{
+  btn.disabled=false;btn.style.opacity="1";
+ }
 }
-
-document.getElementById("googleLogin")
-  .addEventListener("click",googleSignIn);
-
-document.getElementById("headerLogin")
-  .addEventListener("click",() => showPage("profile"));
-
+document.getElementById("googleLogin").addEventListener("click",googleLogin);
+document.getElementById("headerLogin").addEventListener("click",()=>go("profile"));
 document.getElementById("logoutBtn").addEventListener("click",async()=>{
-  try{
-    await auth.signOut();
-    showAuthMessage("Ты вышел из аккаунта.");
-  }catch(error){
-    showAuthMessage(error.message,true);
-  }
+ try{await auth.signOut();authMessage("Ты вышел из аккаунта.")}
+ catch(e){authMessage(e.message,true)}
 });
 
-// =====================================
-// USER PROFILE
-// =====================================
-
-if(firebaseReady){
-  auth.onAuthStateChanged(user => {
-    const loginButton = document.getElementById("headerLogin");
-    const userMini = document.getElementById("userMini");
-    const logoutButton = document.getElementById("logoutBtn");
-    const googleButton = document.getElementById("googleLogin");
-
-    if(user){
-      const name = user.displayName || "Игрок";
-      const email = user.email || "";
-      const avatar = user.photoURL ||
-        "https://www.gravatar.com/avatar/?d=mp&s=100";
-
-      document.getElementById("profileName").textContent = name;
-      document.getElementById("profileEmail").textContent = email;
-      document.getElementById("profileAvatar").src = avatar;
-      document.getElementById("miniAvatar").src = avatar;
-      document.getElementById("miniName").textContent = name;
-
-      loginButton.style.display = "none";
-      userMini.style.display = "flex";
-      logoutButton.style.display = "block";
-      googleButton.style.display = "none";
-
-      showAuthMessage("Ты успешно вошёл в GAMEVERSE GG.");
-    }else{
-      document.getElementById("profileName").textContent = "Гость";
-      document.getElementById("profileEmail").textContent =
-        "Войди через Google, чтобы открыть профиль";
-      document.getElementById("profileAvatar").src =
-        "https://www.gravatar.com/avatar/?d=mp&s=100";
-
-      loginButton.style.display = "block";
-      userMini.style.display = "none";
-      logoutButton.style.display = "none";
-      googleButton.style.display = "flex";
-    }
-  });
+function updateStats(){
+ document.getElementById("favCount").textContent=favorites.length;
+ document.getElementById("libraryCount").textContent=library.length;
+ document.getElementById("totalCount").textContent=games.length;
 }
+function updateUser(user){
+ const headerLogin=document.getElementById("headerLogin");
+ const mini=document.getElementById("userMini");
+ const google=document.getElementById("googleLogin");
+ const logout=document.getElementById("logoutBtn");
+ if(user){
+  const name=user.displayName||"Игрок";
+  const avatar=user.photoURL||"https://www.gravatar.com/avatar/?d=mp&s=100";
+  document.getElementById("profileName").textContent=name;
+  document.getElementById("profileEmail").textContent=user.email||"";
+  document.getElementById("profileAvatar").src=avatar;
+  document.getElementById("miniAvatar").src=avatar;
+  document.getElementById("miniName").textContent=name;
+  headerLogin.style.display="none";mini.style.display="flex";
+  google.style.display="none";logout.style.display="block";
+  authMessage("Ты успешно вошёл в GAMEVERSE GG.");
+ }else{
+  document.getElementById("profileName").textContent="Гость";
+  document.getElementById("profileEmail").textContent="Войди через Google, чтобы открыть профиль";
+  document.getElementById("profileAvatar").src="https://www.gravatar.com/avatar/?d=mp&s=100";
+  headerLogin.style.display="block";mini.style.display="none";
+  google.style.display="flex";logout.style.display="none";
+ }
+ updateStats();
+}
+if(firebaseReady)auth.onAuthStateChanged(updateUser);
 
+// =====================================
+// START
+// =====================================
+function renderAll(){
+ renderPopular();
+ renderCatalog();
+ renderFavorites();
+ renderLibrary();
+ renderChips();
+ document.getElementById("homeUpcoming").innerHTML=upcoming.slice(0,5).map(upcomingCard).join("");
+ document.getElementById("upcomingGames").innerHTML=upcoming.map(upcomingCard).join("");
+ renderArticles();
+ updateStats();
+}
 renderAll();
 </script>
-
 </body>
 </html>
