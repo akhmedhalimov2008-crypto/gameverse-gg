@@ -4,200 +4,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GAMEVERSE GG — Игровая вселенная</title>
+<title>GAMEVERSE GG 3.0</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b1018;color:#fff;font-family:Arial,sans-serif}
-header{background:#141e2b;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.logo{font-size:27px;font-weight:900;color:#6cf0a9}
+body{margin:0;background:#0b111a;color:white;font-family:Arial,sans-serif}
+header{background:#172331;padding:20px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.logo{font-size:25px;font-weight:900;color:#65e6a1}
 .logo span{color:white}
-nav{display:flex;gap:20px;flex-wrap:wrap}
+nav{display:flex;gap:18px;flex-wrap:wrap}
 nav a{color:#ddd;text-decoration:none}
-nav a:hover{color:#6cf0a9}
-.hero{padding:65px 7%;background:linear-gradient(110deg,#142b32,#172039,#261b35)}
-.hero h1{font-size:43px;margin:0 0 15px}
-.hero p{color:#c4ced8;line-height:1.7}
-.search{margin-top:20px;width:min(500px,100%);padding:15px;border-radius:9px;border:1px solid #3c5361;background:#0d1721;color:white}
+nav a:hover{color:#65e6a1}
+.hero{padding:50px 7%;background:linear-gradient(110deg,#14352e,#18223b,#302044)}
+.hero h1{font-size:38px}
+.hero p{color:#c4d0db;line-height:1.6}
 main{padding:35px 6%}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}
-select{background:#172432;color:white;border:1px solid #354a59;padding:12px;border-radius:8px}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px}
-.game{background:#172331;border-radius:12px;overflow:hidden;border:1px solid #273847;transition:.2s}
-.game:hover{transform:translateY(-5px);border-color:#6cf0a9}
-.game img{width:100%;height:145px;object-fit:cover;background:#253442}
-.info{padding:14px}
-.info h3{margin:0 0 8px}
-.info p{color:#aab9c8;font-size:13px;min-height:32px}
-.meta{color:#6cf0a9;font-size:12px}
-.actions{display:flex;gap:8px;align-items:center}
-button{border:0;border-radius:7px;padding:10px 13px;background:#6cf0a9;color:#102219;font-weight:bold;cursor:pointer}
+.panel{background:#172331;border:1px solid #2a3d4e;border-radius:14px;padding:24px;margin-bottom:30px}
+.profile{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.avatar{width:100px;height:100px;border-radius:50%;background:#263a4b;display:grid;place-items:center;font-size:48px;border:3px solid #65e6a1}
+.profile-info{flex:1}
+.profile-info h2{margin:0 0 8px}
+.muted{color:#aebdca}
+input{background:#0c1722;border:1px solid #3b5364;padding:12px;border-radius:7px;color:white;margin:6px 0;max-width:100%}
+button{background:#65e6a1;color:#102219;border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:pointer;margin:5px 3px 5px 0}
 button:hover{filter:brightness(.9)}
-.favorite{background:#26394a;color:white}
-.section{margin-top:55px}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.tool{background:#172331;padding:22px;border-radius:12px}
-.tool input{padding:11px;width:100%;margin-top:12px;border-radius:7px;background:#0d1721;border:1px solid #354a59;color:white}
-footer{text-align:center;background:#141e2b;padding:30px;color:#9eabb9;margin-top:50px}
-.modal{display:none;position:fixed;inset:0;background:#000c;z-index:5;align-items:center;justify-content:center;padding:20px}
-.modal-content{background:#192737;padding:25px;border-radius:14px;max-width:500px;width:100%;max-height:85vh;overflow:auto}
-.modal-content img{width:100%;border-radius:9px}
-.close{float:right;background:#34475a;color:white}
-.empty{color:#aab9c8;grid-column:1/-1}
+.avatars{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.avatars button{font-size:23px;background:#26394a}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;margin-top:20px}
+.stat{background:#223244;padding:18px;border-radius:10px;text-align:center}
+.stat strong{display:block;font-size:25px;color:#65e6a1;margin-top:8px}
+.progress{height:12px;background:#344353;border-radius:10px;overflow:hidden;margin-top:12px}
+.progress div{height:100%;background:#65e6a1;width:0}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:13px}
+.badge-card{background:#223244;border-radius:10px;padding:18px;text-align:center}
+.badge-card span{font-size:30px}
+.badge-card p{color:#aebdca;font-size:13px}
+.locked{opacity:.4}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.game{background:#223244;border-radius:10px;padding:15px}
+.game h3{margin:5px 0}
+footer{text-align:center;background:#172331;color:#9eacbb;padding:25px}
+#message{color:#65e6a1}
 </style>
 </head>
 <body>
 <header>
 <div class="logo">GAMEVERSE <span>GG</span></div>
 <nav>
+<a href="#profile">Профиль</a>
+<a href="#achievements">Достижения</a>
 <a href="#games">Игры</a>
-<a href="#tools">Инструменты</a>
-<a href="#about">О нас</a>
 </nav>
 </header>
 
 <section class="hero">
 <h1>ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</h1>
-<p>Открывай новые игры, изучай игровые миры и создавай свою коллекцию.</p>
-<input class="search" id="search" placeholder="🔍 Найти игру..." oninput="render()">
+<p>Создавай свой профиль, собирай достижения и развивайся вместе с GAMEVERSE GG!</p>
 </section>
 
 <main>
-<h2 id="games">🔥 Каталог популярных игр</h2>
-<div class="toolbar">
-<select id="genre" onchange="render()">
-<option value="">Все жанры</option>
-<option>Шутер</option>
-<option>Экшен</option>
-<option>Приключения</option>
-<option>Стратегия</option>
-<option>Ролевая игра</option>
-<option>Гонки</option>
-</select>
-<select id="sort" onchange="render()">
-<option value="popular">По популярности</option>
-<option value="az">По названию А-Я</option>
-<option value="za">По названию Я-А</option>
-</select>
-<button onclick="showFavorites()">⭐ Избранное</button>
-<button onclick="showAll()">Все игры</button>
+<section class="panel" id="profile">
+<h2>👤 Личный кабинет</h2>
+<div class="profile">
+<div class="avatar" id="avatar">🎮</div>
+<div class="profile-info">
+<h2 id="displayName">Игрок</h2>
+<p class="muted">Участник GAMEVERSE GG</p>
+<p id="message"></p>
 </div>
-<div class="games" id="gameList"></div>
+</div>
 
-<section class="section" id="tools">
-<h2>🛠️ Игровые инструменты</h2>
-<div class="tools">
-<div class="tool">
-<h3>🎲 Генератор игровых ников</h3>
-<p>Создай уникальный ник для игры.</p>
-<button onclick="generateNick()">Создать ник</button>
-<p id="nickname"></p>
+<h3>Изменить игровой ник</h3>
+<input id="nameInput" maxlength="20" placeholder="Введи новый ник">
+<button onclick="saveName()">Сохранить ник</button>
+
+<h3>Выбрать аватар</h3>
+<div class="avatars">
+<button onclick="chooseAvatar('🎮')">🎮</button>
+<button onclick="chooseAvatar('👑')">👑</button>
+<button onclick="chooseAvatar('🐺')">🐺</button>
+<button onclick="chooseAvatar('🔥')">🔥</button>
+<button onclick="chooseAvatar('👽')">👽</button>
+<button onclick="chooseAvatar('⚡')">⚡</button>
+<button onclick="chooseAvatar('💀')">💀</button>
+<button onclick="chooseAvatar('🐉')">🐉</button>
 </div>
-<div class="tool">
-<h3>🎯 Выбор случайной игры</h3>
-<p>Не знаешь, во что поиграть?</p>
-<button onclick="randomGame()">Выбрать игру</button>
-<p id="random"></p>
+
+<div class="stats">
+<div class="stat">Уровень<strong id="level">1</strong></div>
+<div class="stat">Монеты<strong id="coins">0</strong></div>
+<div class="stat">Очки опыта<strong id="xp">0</strong></div>
 </div>
-</div>
+
+<h3>Прогресс до следующего уровня</h3>
+<div class="progress"><div id="progress"></div></div>
+<p class="muted" id="progressText">0 / 100 опыта</p>
+<button onclick="playReward()">🎁 Получить ежедневную награду</button>
+<button onclick="addXP()">⭐ Получить 10 опыта</button>
 </section>
 
-<section class="section" id="about">
-<h2>🌍 О GAMEVERSE GG</h2>
-<p style="color:#b5c0cc;line-height:1.8">GAMEVERSE GG — игровая вселенная для любителей компьютерных игр. Исследуй каталог, собирай любимые игры и открывай новые приключения!</p>
+<section class="panel" id="achievements">
+<h2>🏆 Достижения</h2>
+<div class="badges" id="badges"></div>
+</section>
+
+<section class="panel" id="games">
+<h2>🎮 Мои любимые игры</h2>
+<p class="muted">Добавляй любимые игры в свою коллекцию.</p>
+<div class="games" id="gameList"></div>
 </section>
 </main>
-
-<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
-<div class="modal-content">
-<button class="close" onclick="closeModal()">Закрыть ✕</button>
-<div id="modalInfo"></div>
-</div>
-</div>
 
 <footer>© 2026 GAMEVERSE GG — Твоя игровая вселенная 🎮</footer>
 
 <script>
+const defaults={
+name:"Игрок",avatar:"🎮",xp:0,coins:0,
+favorites:[],lastReward:""
+};
+let data;
+try{
+data={...defaults,...JSON.parse(localStorage.getItem("gv-profile")||"{}")};
+}catch(e){data={...defaults};}
+
+function save(){
+localStorage.setItem("gv-profile",JSON.stringify(data));
+update();
+}
+function update(){
+document.getElementById("displayName").textContent=data.name;
+document.getElementById("avatar").textContent=data.avatar;
+document.getElementById("level").textContent=Math.floor(data.xp/100)+1;
+document.getElementById("coins").textContent=data.coins;
+document.getElementById("xp").textContent=data.xp;
+let current=data.xp%100;
+document.getElementById("progress").style.width=current+"%";
+document.getElementById("progressText").textContent=current+" / 100 опыта";
+renderBadges();
+renderGames();
+}
+function saveName(){
+let name=document.getElementById("nameInput").value.trim();
+if(!name){alert("Введи игровой ник!");return;}
+data.name=name;
+document.getElementById("nameInput").value="";
+document.getElementById("message").textContent="Ник успешно сохранён!";
+save();
+}
+function chooseAvatar(a){
+data.avatar=a;
+save();
+}
+function addXP(){
+data.xp+=10;
+data.coins+=2;
+document.getElementById("message").textContent="Получено 10 опыта и 2 монеты!";
+save();
+}
+function playReward(){
+let today=new Date().toLocaleDateString();
+if(data.lastReward===today){
+alert("Ты уже получил награду сегодня. Возвращайся завтра!");
+return;
+}
+data.lastReward=today;
+data.coins+=20;
+data.xp+=25;
+document.getElementById("message").textContent="Получена ежедневная награда!";
+save();
+}
+const achievements=[
+["🎮","Первый шаг","Создать игровой профиль",true],
+["⭐","Новичок","Получить 100 опыта",data.xp>=100],
+["💰","Коллекционер","Собрать 100 монет",data.coins>=100],
+["🏆","Опытный игрок","Достичь 5 уровня",data.xp>=400]
+];
+function renderBadges(){
+document.getElementById("badges").innerHTML=achievements.map(a=>
+`<div class="badge-card ${a[3]?"":"locked"}"><span>${a[0]}</span><h3>${a[1]}</h3><p>${a[2]}</p>${a[3]?"Получено":"Пока закрыто"}</div>`
+).join("");
+}
 const games=[
-["GTA V","Экшен","Огромный открытый мир, автомобили и приключения.",271590],
-["Counter-Strike 2","Шутер","Командный тактический шутер.",730],
-["Cyberpunk 2077","Ролевая игра","Футуристический мир Найт-Сити.",1091500],
-["Red Dead Redemption 2","Приключения","Приключение на Диком Западе.",1174180],
-["Dota 2","Стратегия","Командная стратегия с героями.",570],
-["Baldur's Gate 3","Ролевая игра","Фэнтезийное приключение.",1086940],
-["The Witcher 3","Ролевая игра","Большое приключение Геральта.",292030],
-["PUBG: Battlegrounds","Шутер","Сражения за выживание.",578080],
-["Rust","Приключения","Выживание в открытом мире.",252490],
-["Elden Ring","Экшен","Исследование огромного фэнтезийного мира.",1245620],
-["Left 4 Dead 2","Шутер","Кооперативная борьба с заражёнными.",550],
-["Forza Horizon 5","Гонки","Гонки по красивым дорогам Мексики.",1551360],
-["Resident Evil 4","Экшен","Захватывающий хоррор-экшен.",2050650],
-["Metro Exodus","Шутер","Путешествие по постапокалиптическому миру.",412020],
-["Fallout 4","Ролевая игра","Исследуй мир после катастрофы.",377160],
-["Team Fortress 2","Шутер","Командные сражения с разными классами.",440],
-["Warframe","Экшен","Научно-фантастические приключения.",230410],
-["Terraria","Приключения","Исследуй, строй и сражайся.",105600],
-["Portal 2","Приключения","Головоломки с порталами.",620],
-["Euro Truck Simulator 2","Гонки","Путешествия по дорогам Европы.",227300]
-].map((g,i)=>({id:g[3],name:g[0],genre:g[1],desc:g[2],rank:i+1}));
-
-let favorites=JSON.parse(localStorage.getItem("gv-favorites")||"[]");
-let favoriteMode=false;
-
-function image(id){
-return "https://cdn.cloudflare.steamstatic.com/steam/apps/"+id+"/header.jpg";
+["Counter-Strike 2","🎯"],["GTA V","🚗"],
+["PUBG","🔫"],["Minecraft","⛏️"],
+["Dota 2","⚔️"],["Rust","🏕️"]
+];
+function renderGames(){
+document.getElementById("gameList").innerHTML=games.map(g=>
+`<div class="game"><h3>${g[1]} ${g[0]}</h3><button onclick="toggleGame('${g[0]}')">${data.favorites.includes(g[0])?"★ В избранном":"☆ Добавить"}</button></div>`
+).join("");
 }
-function render(){
-let q=document.getElementById("search").value.toLowerCase();
-let genre=document.getElementById("genre").value;
-let sort=document.getElementById("sort").value;
-let list=games.filter(g=>
-g.name.toLowerCase().includes(q)&&(!genre||g.genre===genre)&&(!favoriteMode||favorites.includes(g.id))
-);
-if(sort==="az")list.sort((a,b)=>a.name.localeCompare(b.name));
-if(sort==="za")list.sort((a,b)=>b.name.localeCompare(a.name));
-let html=list.map(g=>`
-<div class="game">
-<img src="${image(g.id)}" alt="${g.name}" loading="lazy" onerror="this.style.display='none'">
-<div class="info">
-<div class="meta">#${g.rank} · ${g.genre}</div>
-<h3>${g.name}</h3>
-<p>${g.desc}</p>
-<div class="actions">
-<button onclick="details(${g.id})">Подробнее</button>
-<button class="favorite" onclick="toggleFavorite(${g.id})">${favorites.includes(g.id)?"★":"☆"}</button>
-</div>
-</div>
-</div>`).join("");
-document.getElementById("gameList").innerHTML=html||'<p class="empty">Игры не найдены.</p>';
+function toggleGame(name){
+if(data.favorites.includes(name)){
+data.favorites=data.favorites.filter(x=>x!==name);
+}else{
+data.favorites.push(name);
 }
-function toggleFavorite(id){
-favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
-localStorage.setItem("gv-favorites",JSON.stringify(favorites));
-render();
+save();
 }
-function showFavorites(){favoriteMode=true;render();document.getElementById("games").scrollIntoView();}
-function showAll(){favoriteMode=false;document.getElementById("search").value="";document.getElementById("genre").value="";render();}
-function details(id){
-let g=games.find(x=>x.id===id);
-document.getElementById("modalInfo").innerHTML=`
-<img src="${image(g.id)}" alt="${g.name}">
-<h2>${g.name}</h2><p class="meta">${g.genre} · Место в каталоге: ${g.rank}</p>
-<p style="line-height:1.7;margin:15px 0">${g.desc}</p>
-<p>Идентификатор игры в Steam: ${g.id}</p>
-<a style="color:#6cf0a9" target="_blank" rel="noopener" href="https://store.steampowered.com/app/${g.id}/">Открыть страницу игры в Steam ↗</a>`;
-document.getElementById("modal").style.display="flex";
-}
-function closeModal(){document.getElementById("modal").style.display="none";}
-function generateNick(){
-let a=["Shadow","Dark","Ghost","Cyber","Fire","Legend","Wolf","Storm","Neo","Frost"];
-let b=["Player","Hunter","Dragon","Master","Ninja","King","X","Pro","Sniper","Hero"];
-document.getElementById("nickname").innerText=a[Math.floor(Math.random()*a.length)]+b[Math.floor(Math.random()*b.length)]+Math.floor(Math.random()*999);
-}
-function randomGame(){
-let g=games[Math.floor(Math.random()*games.length)];
-document.getElementById("random").innerText="Попробуй: "+g.name+"!";
-}
-render();
+update();
 </script>
 </body>
 </html>
