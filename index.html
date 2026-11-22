@@ -3,205 +3,271 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GAMEVERSE GG 3.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMEVERSE GG — Arcade</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b111a;color:white;font-family:Arial,sans-serif}
-header{background:#172331;padding:20px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.logo{font-size:25px;font-weight:900;color:#65e6a1}
-.logo span{color:white}
-nav{display:flex;gap:18px;flex-wrap:wrap}
-nav a{color:#ddd;text-decoration:none}
-nav a:hover{color:#65e6a1}
-.hero{padding:50px 7%;background:linear-gradient(110deg,#14352e,#18223b,#302044)}
-.hero h1{font-size:38px}
-.hero p{color:#c4d0db;line-height:1.6}
-main{padding:35px 6%}
-.panel{background:#172331;border:1px solid #2a3d4e;border-radius:14px;padding:24px;margin-bottom:30px}
-.profile{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.avatar{width:100px;height:100px;border-radius:50%;background:#263a4b;display:grid;place-items:center;font-size:48px;border:3px solid #65e6a1}
-.profile-info{flex:1}
-.profile-info h2{margin:0 0 8px}
-.muted{color:#aebdca}
-input{background:#0c1722;border:1px solid #3b5364;padding:12px;border-radius:7px;color:white;margin:6px 0;max-width:100%}
-button{background:#65e6a1;color:#102219;border:0;border-radius:7px;padding:11px 15px;font-weight:bold;cursor:pointer;margin:5px 3px 5px 0}
-button:hover{filter:brightness(.9)}
-.avatars{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.avatars button{font-size:23px;background:#26394a}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;margin-top:20px}
-.stat{background:#223244;padding:18px;border-radius:10px;text-align:center}
-.stat strong{display:block;font-size:25px;color:#65e6a1;margin-top:8px}
-.progress{height:12px;background:#344353;border-radius:10px;overflow:hidden;margin-top:12px}
-.progress div{height:100%;background:#65e6a1;width:0}
-.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:13px}
-.badge-card{background:#223244;border-radius:10px;padding:18px;text-align:center}
-.badge-card span{font-size:30px}
-.badge-card p{color:#aebdca;font-size:13px}
-.locked{opacity:.4}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
-.game{background:#223244;border-radius:10px;padding:15px}
-.game h3{margin:5px 0}
-footer{text-align:center;background:#172331;color:#9eacbb;padding:25px}
-#message{color:#65e6a1}
+body{margin:0;background:#090d14;color:#f4f6fa;font-family:Arial,sans-serif}
+header{padding:25px 7%;background:#111a27;border-bottom:2px solid #20d889}
+header h1{margin:0;color:#20d889;font-size:30px}
+header p{color:#aab6c5}
+nav{display:flex;gap:12px;flex-wrap:wrap;padding:15px 7%;background:#0d1420}
+button{background:#20d889;color:#07130e;border:0;border-radius:8px;padding:11px 17px;font-weight:bold;cursor:pointer}
+button:hover{filter:brightness(1.12)}
+nav button{background:#1b2939;color:white}
+main{padding:25px 7%;max-width:1200px;margin:auto}
+.panel{background:#121c2a;border:1px solid #253449;border-radius:14px;padding:20px;margin-bottom:20px}
+h2{color:#20d889}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.game-card{background:#1a293b;padding:20px;border-radius:12px}
+.game-card h3{margin-top:0}
+input{background:#09121e;color:white;border:1px solid #34465e;padding:12px;border-radius:8px;margin:5px;max-width:100%}
+#snake{background:#050a10;border:2px solid #20d889;border-radius:8px;max-width:100%}
+.hidden{display:none}
+.small{color:#aab6c5}
+#quizAnswers button{display:block;margin:9px 0;width:100%;text-align:left}
+footer{text-align:center;color:#8290a2;padding:30px}
 </style>
 </head>
 <body>
 <header>
-<div class="logo">GAMEVERSE <span>GG</span></div>
-<nav>
-<a href="#profile">Профиль</a>
-<a href="#achievements">Достижения</a>
-<a href="#games">Игры</a>
-</nav>
+<h1>🎮 GAMEVERSE GG</h1>
+<p>YOUR GAMING UNIVERSE — ARCADE 4.0</p>
 </header>
 
-<section class="hero">
-<h1>ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</h1>
-<p>Создавай свой профиль, собирай достижения и развивайся вместе с GAMEVERSE GG!</p>
-</section>
+<nav>
+<button onclick="showPage('home')">Главная</button>
+<button onclick="showPage('arcade')">Мини-игры</button>
+<button onclick="showPage('profile')">Мой профиль</button>
+</nav>
 
 <main>
-<section class="panel" id="profile">
-<h2>👤 Личный кабинет</h2>
-<div class="profile">
-<div class="avatar" id="avatar">🎮</div>
-<div class="profile-info">
-<h2 id="displayName">Игрок</h2>
-<p class="muted">Участник GAMEVERSE GG</p>
-<p id="message"></p>
+<section id="home">
+<div class="panel">
+<h2>Добро пожаловать в GAMEVERSE GG!</h2>
+<p>Играй, устанавливай рекорды и получай виртуальные награды.</p>
+<button onclick="showPage('arcade')">Играть сейчас</button>
 </div>
+<div class="game-grid">
+<div class="game-card"><h3>🐍 Змейка</h3><p>Собирай очки и не сталкивайся со стенами.</p></div>
+<div class="game-card"><h3>🧠 Игровая викторина</h3><p>Проверь свои знания об играх.</p></div>
+<div class="game-card"><h3>🔢 Угадай число</h3><p>Найди загаданное число от 1 до 100.</p></div>
 </div>
-
-<h3>Изменить игровой ник</h3>
-<input id="nameInput" maxlength="20" placeholder="Введи новый ник">
-<button onclick="saveName()">Сохранить ник</button>
-
-<h3>Выбрать аватар</h3>
-<div class="avatars">
-<button onclick="chooseAvatar('🎮')">🎮</button>
-<button onclick="chooseAvatar('👑')">👑</button>
-<button onclick="chooseAvatar('🐺')">🐺</button>
-<button onclick="chooseAvatar('🔥')">🔥</button>
-<button onclick="chooseAvatar('👽')">👽</button>
-<button onclick="chooseAvatar('⚡')">⚡</button>
-<button onclick="chooseAvatar('💀')">💀</button>
-<button onclick="chooseAvatar('🐉')">🐉</button>
-</div>
-
-<div class="stats">
-<div class="stat">Уровень<strong id="level">1</strong></div>
-<div class="stat">Монеты<strong id="coins">0</strong></div>
-<div class="stat">Очки опыта<strong id="xp">0</strong></div>
-</div>
-
-<h3>Прогресс до следующего уровня</h3>
-<div class="progress"><div id="progress"></div></div>
-<p class="muted" id="progressText">0 / 100 опыта</p>
-<button onclick="playReward()">🎁 Получить ежедневную награду</button>
-<button onclick="addXP()">⭐ Получить 10 опыта</button>
 </section>
 
-<section class="panel" id="achievements">
-<h2>🏆 Достижения</h2>
-<div class="badges" id="badges"></div>
+<section id="arcade" class="hidden">
+<h2>🕹️ ИГРОВАЯ АРКАДА</h2>
+<div class="game-grid">
+<div class="game-card">
+<h3>🐍 Змейка</h3>
+<p>Очки: <b id="snakeScore">0</b></p>
+<canvas id="snake" width="300" height="300"></canvas>
+<p class="small">Управление: стрелки на клавиатуре.</p>
+<button onclick="startSnake()">Начать / заново</button>
+<div style="margin-top:12px">
+<button onclick="setDirection(0,-1)">⬆️</button><br>
+<button onclick="setDirection(-1,0)">⬅️</button>
+<button onclick="setDirection(0,1)">⬇️</button>
+<button onclick="setDirection(1,0)">➡️</button>
+</div>
+<p id="snakeMessage" class="small">Нажми «Начать».</p>
+</div>
+
+<div class="game-card">
+<h3>🧠 Игровая викторина</h3>
+<p id="quizQuestion">Нажми кнопку, чтобы начать.</p>
+<div id="quizAnswers"></div>
+<p id="quizResult"></p>
+<button onclick="startQuiz()">Начать викторину</button>
+</div>
+
+<div class="game-card">
+<h3>🔢 Угадай число</h3>
+<p>Я загадал число от 1 до 100.</p>
+<input id="guessInput" type="number" min="1" max="100" placeholder="Твоё число">
+<button onclick="checkGuess()">Проверить</button>
+<p id="guessResult">Попробуй угадать!</p>
+<button onclick="newGuess()">Новая игра</button>
+</div>
+</div>
 </section>
 
-<section class="panel" id="games">
-<h2>🎮 Мои любимые игры</h2>
-<p class="muted">Добавляй любимые игры в свою коллекцию.</p>
-<div class="games" id="gameList"></div>
+<section id="profile" class="hidden">
+<div class="panel">
+<h2>👤 МОЙ ПРОФИЛЬ</h2>
+<p>Никнейм: <input id="nickname" maxlength="20" placeholder="Введи никнейм"></p>
+<button onclick="saveNickname()">Сохранить ник</button>
+<h3 id="profileName">Игрок</h3>
+<p>Уровень: <b id="level">1</b></p>
+<p>Опыт: <b id="xp">0</b> XP</p>
+<p>Монеты: <b id="coins">0</b> 🪙</p>
+<p class="small">Монеты и опыт — игровые баллы, они не имеют денежной стоимости.</p>
+</div>
+<div class="panel">
+<h2>🏆 МОИ РЕКОРДЫ</h2>
+<p>Змейка: <b id="snakeBest">0</b></p>
+<p>Викторина: <b id="quizBest">0</b></p>
+<p>Угадай число: <b id="guessBest">0</b></p>
+</div>
 </section>
 </main>
-
-<footer>© 2026 GAMEVERSE GG — Твоя игровая вселенная 🎮</footer>
+<footer>GAMEVERSE GG © 2026 — PLAY. LEVEL UP. REPEAT.</footer>
 
 <script>
-const defaults={
-name:"Игрок",avatar:"🎮",xp:0,coins:0,
-favorites:[],lastReward:""
-};
-let data;
-try{
-data={...defaults,...JSON.parse(localStorage.getItem("gv-profile")||"{}")};
-}catch(e){data={...defaults};}
+const $=id=>document.getElementById(id);
+function showPage(page){
+['home','arcade','profile'].forEach(p=>$(p).classList.toggle('hidden',p!==page));
+if(page==='profile')renderProfile();
+}
+let profile=JSON.parse(localStorage.getItem('gv-profile')||'{"name":"Игрок","xp":0,"coins":0}');
+let records=JSON.parse(localStorage.getItem('gv-records')||'{"snake":0,"quiz":0,"guess":0}');
+function saveProfile(){localStorage.setItem('gv-profile',JSON.stringify(profile));renderProfile()}
+function renderProfile(){
+$('profileName').textContent=profile.name;
+$('nickname').value=profile.name;
+$('level').textContent=Math.floor(profile.xp/100)+1;
+$('xp').textContent=profile.xp;
+$('coins').textContent=profile.coins;
+$('snakeBest').textContent=records.snake;
+$('quizBest').textContent=records.quiz;
+$('guessBest').textContent=records.guess;
+}
+function saveNickname(){
+profile.name=$('nickname').value.trim()||'Игрок';
+saveProfile();
+}
+function reward(xp,coins){
+profile.xp+=xp;profile.coins+=coins;saveProfile();
+}
+function saveRecord(game,score){
+if(score>records[game]){
+records[game]=score;
+localStorage.setItem('gv-records',JSON.stringify(records));
+}
+}
 
-function save(){
-localStorage.setItem("gv-profile",JSON.stringify(data));
-update();
+/* ЗМЕЙКА */
+const canvas=$('snake'),ctx=canvas.getContext('2d');
+const cell=15,tiles=20;
+let snake,food,dir,nextDir,score,snakeTimer,running=false;
+function placeFood(){
+food={x:Math.floor(Math.random()*tiles),y:Math.floor(Math.random()*tiles)};
 }
-function update(){
-document.getElementById("displayName").textContent=data.name;
-document.getElementById("avatar").textContent=data.avatar;
-document.getElementById("level").textContent=Math.floor(data.xp/100)+1;
-document.getElementById("coins").textContent=data.coins;
-document.getElementById("xp").textContent=data.xp;
-let current=data.xp%100;
-document.getElementById("progress").style.width=current+"%";
-document.getElementById("progressText").textContent=current+" / 100 опыта";
-renderBadges();
-renderGames();
+function startSnake(){
+clearInterval(snakeTimer);
+snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];
+dir={x:1,y:0};nextDir={x:1,y:0};score=0;running=true;
+$('snakeScore').textContent=score;
+$('snakeMessage').textContent='Игра началась!';
+placeFood();drawSnake();
+snakeTimer=setInterval(moveSnake,120);
 }
-function saveName(){
-let name=document.getElementById("nameInput").value.trim();
-if(!name){alert("Введи игровой ник!");return;}
-data.name=name;
-document.getElementById("nameInput").value="";
-document.getElementById("message").textContent="Ник успешно сохранён!";
-save();
+function setDirection(x,y){
+if(!running)return;
+if(x===-dir.x&&y===-dir.y)return;
+nextDir={x,y};
 }
-function chooseAvatar(a){
-data.avatar=a;
-save();
+document.addEventListener('keydown',e=>{
+const keys={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};
+if(keys[e.key]){e.preventDefault();setDirection(...keys[e.key])}
+});
+function drawSnake(){
+ctx.fillStyle='#050a10';ctx.fillRect(0,0,300,300);
+ctx.fillStyle='#ff5268';ctx.fillRect(food.x*cell,food.y*cell,cell-1,cell-1);
+snake.forEach((s,i)=>{
+ctx.fillStyle=i===0?'#20d889':'#159b67';
+ctx.fillRect(s.x*cell,s.y*cell,cell-1,cell-1);
+});
 }
-function addXP(){
-data.xp+=10;
-data.coins+=2;
-document.getElementById("message").textContent="Получено 10 опыта и 2 монеты!";
-save();
+function moveSnake(){
+dir=nextDir;
+let head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+let ate=head.x===food.x&&head.y===food.y;
+if(head.x<0||head.y<0||head.x>=tiles||head.y>=tiles||
+snake.slice(0,ate?snake.length:snake.length-1).some(s=>s.x===head.x&&s.y===head.y)){
+endSnake();return;
 }
-function playReward(){
-let today=new Date().toLocaleDateString();
-if(data.lastReward===today){
-alert("Ты уже получил награду сегодня. Возвращайся завтра!");
+snake.unshift(head);
+if(ate){score++;$('snakeScore').textContent=score;placeFood()}
+else snake.pop();
+drawSnake();
+}
+function endSnake(){
+clearInterval(snakeTimer);running=false;
+saveRecord('snake',score);
+$('snakeMessage').textContent='Игра окончена! Результат: '+score;
+if(score>0)reward(score*2,score);
+}
+
+/* ВИКТОРИНА */
+const questions=[
+{q:'Какая компания создала Minecraft?',a:['Mojang','Valve','Rockstar'],c:0},
+{q:'В какой игре есть карта Dust 2?',a:['PUBG','CS2','Fortnite'],c:1},
+{q:'Кто создал GTA?',a:['Ubisoft','Rockstar Games','EA'],c:1},
+{q:'Как называется герой игры God of War?',a:['Кратос','Геральт','Марио'],c:0},
+{q:'Какая игра связана с королевской битвой?',a:['Tetris','PUBG','Portal'],c:1}
+];
+let currentQuestion=0,quizScore=0,quizActive=false;
+function startQuiz(){
+currentQuestion=0;quizScore=0;quizActive=true;
+showQuestion();
+}
+function showQuestion(){
+let q=questions[currentQuestion];
+$('quizQuestion').textContent=(currentQuestion+1)+'. '+q.q;
+$('quizAnswers').innerHTML='';
+q.a.forEach((answer,i)=>{
+let b=document.createElement('button');
+b.textContent=answer;
+b.onclick=()=>answerQuiz(i);
+$('quizAnswers').appendChild(b);
+});
+$('quizResult').textContent='';
+}
+function answerQuiz(i){
+if(!quizActive)return;
+if(i===questions[currentQuestion].c)quizScore++;
+currentQuestion++;
+if(currentQuestion<questions.length){showQuestion()}
+else{
+quizActive=false;
+$('quizQuestion').textContent='Викторина завершена!';
+$('quizAnswers').innerHTML='';
+$('quizResult').textContent='Правильных ответов: '+quizScore+' из '+questions.length;
+saveRecord('quiz',quizScore);
+reward(quizScore*10,quizScore*5);
+}
+}
+
+/* УГАДАЙ ЧИСЛО */
+let secret=0,attempts=0,guessFinished=false;
+function newGuess(){
+secret=Math.floor(Math.random()*100)+1;
+attempts=0;guessFinished=false;
+$('guessInput').value='';
+$('guessResult').textContent='Новое число загадано!';
+}
+function checkGuess(){
+if(guessFinished)return;
+let n=Number($('guessInput').value);
+if(!Number.isInteger(n)||n<1||n>100){
+$('guessResult').textContent='Введи целое число от 1 до 100.';
 return;
 }
-data.lastReward=today;
-data.coins+=20;
-data.xp+=25;
-document.getElementById("message").textContent="Получена ежедневная награда!";
-save();
-}
-const achievements=[
-["🎮","Первый шаг","Создать игровой профиль",true],
-["⭐","Новичок","Получить 100 опыта",data.xp>=100],
-["💰","Коллекционер","Собрать 100 монет",data.coins>=100],
-["🏆","Опытный игрок","Достичь 5 уровня",data.xp>=400]
-];
-function renderBadges(){
-document.getElementById("badges").innerHTML=achievements.map(a=>
-`<div class="badge-card ${a[3]?"":"locked"}"><span>${a[0]}</span><h3>${a[1]}</h3><p>${a[2]}</p>${a[3]?"Получено":"Пока закрыто"}</div>`
-).join("");
-}
-const games=[
-["Counter-Strike 2","🎯"],["GTA V","🚗"],
-["PUBG","🔫"],["Minecraft","⛏️"],
-["Dota 2","⚔️"],["Rust","🏕️"]
-];
-function renderGames(){
-document.getElementById("gameList").innerHTML=games.map(g=>
-`<div class="game"><h3>${g[1]} ${g[0]}</h3><button onclick="toggleGame('${g[0]}')">${data.favorites.includes(g[0])?"★ В избранном":"☆ Добавить"}</button></div>`
-).join("");
-}
-function toggleGame(name){
-if(data.favorites.includes(name)){
-data.favorites=data.favorites.filter(x=>x!==name);
+attempts++;
+if(n===secret){
+guessFinished=true;
+$('guessResult').textContent='Правильно! Попыток: '+attempts;
+let points=Math.max(1,11-attempts);
+saveRecord('guess',Math.max(records.guess,points));
+reward(points*5,points*3);
 }else{
-data.favorites.push(name);
+$('guessResult').textContent=n<secret?'Загаданное число больше.':'Загаданное число меньше.';
 }
-save();
 }
-update();
+newGuess();
+renderProfile();
+drawSnake();
 </script>
 </body>
 </html>
