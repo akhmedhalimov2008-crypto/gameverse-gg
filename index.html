@@ -3,678 +3,633 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090d0a">
-<title>GAMEVERSE GG 7.0 PRO</title>
-
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMEVERSE GG</title>
 
 <style>
-:root{--bg:#090d0a;--panel:#111913;--panel2:#19241b;--green:#9cff45;--text:#f4f7f2;--muted:#9aa89c;--border:#29372c}
+:root {
+  --bg:#0b0e12;
+  --panel:#121820;
+  --panel2:#19222d;
+  --green:#a3e635;
+  --text:#f3f5f7;
+  --muted:#8995a3;
+  --border:#27313c;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-button,input,select{font:inherit}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  font-size:14px;
+}
+button,input{font:inherit}
 button{cursor:pointer}
-header{position:sticky;top:0;z-index:20;background:#090d0af2;border-bottom:1px solid var(--border);padding:15px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;backdrop-filter:blur(15px)}
-.logo{font-size:23px;font-weight:900;letter-spacing:1px}.logo span{color:var(--green)}
-.header-right{display:flex;align-items:center;gap:10px}
-nav{display:flex;gap:6px;flex-wrap:wrap;padding:12px 5%;border-bottom:1px solid var(--border)}
-button{background:var(--panel2);color:var(--text);border:1px solid var(--border);padding:10px 14px;border-radius:9px}
-button:hover{border-color:var(--green);color:var(--green)}
-nav button{background:transparent;border:0;color:var(--muted)}
-nav button.active{background:#20301e;color:var(--green)}
-.primary{background:var(--green);color:#10150d;border-color:var(--green);font-weight:800}
-.primary:hover{background:#c0ff8b;color:#10150d}
-main{max-width:1450px;margin:auto;padding:25px 5% 70px}
-.page{display:none}.page.active{display:block;animation:fade .25s}
-@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-.hero{min-height:340px;border:1px solid var(--border);border-radius:20px;padding:42px;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 80% 15%,#426d2d,#17241a 38%,#0a100c 75%);position:relative;overflow:hidden}
-.hero:after{content:"GG";position:absolute;right:5%;font-size:clamp(100px,20vw,240px);font-weight:900;color:#ffffff09}
-.hero h1{font-size:clamp(36px,6vw,68px);line-height:1.02;margin:0 0 15px;z-index:1}
-.hero h1 span{color:var(--green)}
-.hero p{max-width:570px;color:#c2cec1;line-height:1.7;z-index:1}
-.hero-actions{display:flex;gap:10px;flex-wrap:wrap;z-index:1}
-h2{font-size:27px;margin:30px 0 17px}h3{margin:8px 0}
+header{
+  height:62px;
+  background:#10151c;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.logo{
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:-.7px;
+}
+.logo span{color:var(--green)}
+nav{display:flex;gap:7px;align-items:center}
+nav button{
+  color:#aeb8c4;
+  background:transparent;
+  border:0;
+  padding:9px 11px;
+  border-radius:7px;
+  font-size:13px;
+}
+nav button.active,nav button:hover{
+  color:var(--green);
+  background:#202a33;
+}
+.login-btn{
+  background:var(--green);
+  color:#111;
+  border:0;
+  border-radius:7px;
+  padding:9px 13px;
+  font-weight:700;
+  font-size:12px;
+}
+.user-mini{
+  display:none;
+  align-items:center;
+  gap:8px;
+  color:var(--text);
+  font-size:12px;
+}
+.user-mini img{
+  width:28px;height:28px;
+  border-radius:50%;
+  object-fit:cover;
+}
+main{
+  width:min(1100px,92%);
+  margin:24px auto 60px;
+}
+.page{display:none}
+.page.active{display:block}
+.hero{
+  background:linear-gradient(110deg,#1c3025,#15202a 65%,#202b36);
+  border:1px solid #304333;
+  border-radius:12px;
+  padding:28px;
+  margin-bottom:20px;
+}
+.hero small{
+  color:var(--green);
+  font-weight:bold;
+  letter-spacing:1px;
+}
+.hero h1{
+  font-size:28px;
+  margin:10px 0;
+}
+.hero p{
+  color:#b4c0ca;
+  margin:0 0 17px;
+  line-height:1.5;
+}
+.primary{
+  background:var(--green);
+  border:0;
+  color:#111;
+  border-radius:7px;
+  padding:10px 15px;
+  font-weight:bold;
+}
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:20px 0 13px;
+}
+.section-title h2{font-size:18px;margin:0}
 .muted{color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:13px;overflow:hidden;transition:.2s}
-.card:hover{transform:translateY(-4px);border-color:var(--green)}
-.cover{height:135px;background:linear-gradient(135deg,#263d2a,#111a13);display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:45px}
-.cover img{width:100%;height:100%;object-fit:cover}
-.card-body{padding:12px}.card-body p{font-size:12px;color:var(--muted)}
-.card-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.card-actions button{padding:7px 9px;font-size:12px}
-.search{width:100%;padding:14px;background:var(--panel);border:1px solid var(--border);border-radius:10px;color:white;margin:10px 0 15px;outline:none}
+.search{
+  width:100%;
+  background:var(--panel);
+  border:1px solid var(--border);
+  color:white;
+  padding:12px;
+  border-radius:8px;
+  outline:none;
+  margin-bottom:14px;
+}
 .search:focus{border-color:var(--green)}
-.filters,.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 20px}
-.filters button.selected,.tabs button.active{background:var(--green);color:#111}
-.panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;margin:15px 0}
-.profile-layout{display:grid;grid-template-columns:260px 1fr;gap:18px}
-.avatar{width:110px;height:110px;border-radius:50%;background:#263d2a;border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:48px;overflow:hidden}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.field{display:block;margin:14px 0;color:var(--muted)}
-.field input,.field select{display:block;width:100%;padding:12px;margin-top:7px;background:#090f0b;border:1px solid var(--border);border-radius:8px;color:white}
-.skin-art{height:135px;display:flex;align-items:center;justify-content:center;font-size:55px;background:linear-gradient(135deg,#34452c,#111a13)}
-.music-track{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border-bottom:1px solid var(--border)}
-.notice{font-size:12px;line-height:1.6;color:var(--muted)}
-footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid var(--border)}
-@media(max-width:700px){header{padding:12px 3%}.logo{font-size:18px}nav{padding:9px 3%;gap:2px}nav button{font-size:12px;padding:9px}main{padding:17px 3%}.hero{padding:25px;min-height:290px}.profile-layout{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cover{height:105px}.card-body{padding:9px}}
+.games{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(155px,1fr));
+  gap:12px;
+}
+.game{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:9px;
+  overflow:hidden;
+  transition:.2s;
+}
+.game:hover{
+  transform:translateY(-3px);
+  border-color:#718d3c;
+}
+.game img{
+  width:100%;
+  height:105px;
+  object-fit:cover;
+  display:block;
+  background:#202a33;
+}
+.game-info{padding:10px}
+.game h3{
+  font-size:13px;
+  margin:0 0 9px;
+  min-height:30px;
+}
+.game-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.game-tag{
+  color:var(--green);
+  font-size:11px;
+}
+.fav{
+  border:0;
+  background:#25303b;
+  color:#b9c5d0;
+  border-radius:6px;
+  padding:5px 8px;
+}
+.fav.selected{color:#ff6b82}
+.panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:20px;
+}
+.profile-top{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:18px;
+}
+.profile-top img{
+  width:65px;height:65px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#27313c;
+}
+.profile-top h2{margin:0 0 5px;font-size:18px}
+.profile-top p{margin:0;color:var(--muted);font-size:12px}
+.google-btn{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  padding:12px;
+  background:white;
+  color:#202124;
+  border:0;
+  border-radius:7px;
+  font-weight:bold;
+}
+.google-icon{
+  font-size:17px;
+  font-weight:900;
+  color:#4285f4;
+}
+.status{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+.status.error{color:#ff7d88}
+.status.success{color:var(--green)}
+footer{
+  text-align:center;
+  color:#64717e;
+  padding:25px 10px;
+  border-top:1px solid var(--border);
+  font-size:12px;
+}
+.empty{
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
+  background:var(--panel);
+  border-radius:9px;
+}
+@media(max-width:650px){
+  header{height:auto;min-height:58px;padding:10px 4%;flex-wrap:wrap;gap:8px}
+  .logo{font-size:17px}
+  nav{order:3;width:100%;overflow-x:auto}
+  nav button{white-space:nowrap;padding:8px}
+  main{margin-top:15px}
+  .hero{padding:20px}
+  .hero h1{font-size:23px}
+  .games{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .game img{height:95px}
+}
 </style>
 </head>
+
 <body>
 
 <header>
- <div class="logo">GAMEVERSE <span>GG</span></div>
- <div class="header-right">
-  <span id="headerUser" class="muted">Гость</span>
-  <button class="primary" onclick="googleLogin()">Войти</button>
- </div>
+  <div class="logo">GAMEVERSE <span>GG</span></div>
+
+  <nav>
+    <button class="active" data-page="home">Главная</button>
+    <button data-page="games">Игры</button>
+    <button data-page="favorites">Избранное</button>
+    <button data-page="profile">Профиль</button>
+  </nav>
+
+  <button class="login-btn" id="headerLogin">Войти</button>
+
+  <div class="user-mini" id="userMini">
+    <img id="miniAvatar" src="" alt="">
+    <span id="miniName"></span>
+  </div>
 </header>
 
-<nav>
- <button class="active" onclick="showPage('home',this)">Главная</button>
- <button onclick="showPage('games',this)">Игры</button>
- <button onclick="showPage('cs2',this)">CS2 SKINS</button>
- <button onclick="showPage('music',this)">Музыка</button>
- <button onclick="showPage('favorites',this)">Избранное</button>
- <button onclick="showPage('profile',this)">Профиль</button>
-</nav>
-
 <main>
-<section id="home" class="page active">
- <div class="hero">
-  <h1>YOUR WORLD.<br><span>YOUR GAMES.</span></h1>
-  <p>GAMEVERSE GG — твоя игровая вселенная. Открывай игры, изучай CS2 предметы, создавай профиль и собирай любимые игры в одном месте.</p>
-  <div class="hero-actions">
-   <button class="primary" onclick="showPage('games')">Открыть каталог</button>
-   <button onclick="showPage('cs2')">CS2 SKINS</button>
+
+<section class="page active" id="home">
+  <div class="hero">
+    <small>WELCOME TO GAMEVERSE</small>
+    <h1>Твой игровой мир</h1>
+    <p>Открывай новые игры, создавай свою коллекцию и сохраняй любимые проекты.</p>
+    <button class="primary" onclick="showPage('games')">Открыть каталог</button>
   </div>
- </div>
- <h2>🔥 Популярные игры</h2>
- <div class="grid" id="popularGames"></div>
- <h2>Возможности платформы</h2>
- <div class="grid">
-  <div class="panel"><h3>🎮 Игры</h3><p class="muted">Каталог, поиск и жанры.</p></div>
-  <div class="panel"><h3>🔫 CS2 SKINS</h3><p class="muted">Коллекция предметов CS2.</p></div>
-  <div class="panel"><h3>👤 Профиль</h3><p class="muted">Свой аватар и имя.</p></div>
-  <div class="panel"><h3>🎵 Музыка</h3><p class="muted">Собственный плейлист.</p></div>
- </div>
-</section>
 
-<section id="games" class="page">
- <h2>🎮 Каталог игр</h2>
- <input id="gameSearch" class="search" placeholder="🔎 Поиск игры..." oninput="renderGames()">
- <div id="genreFilters" class="filters"></div>
- <p id="gameCount" class="muted"></p>
- <div class="grid" id="gameGrid"></div>
- <button id="loadMore" onclick="loadMoreGames()">Показать ещё</button>
- <p class="notice">Каталог включает известные игры и может дополнительно загружать названия из открытого списка Steam, если источник доступен.</p>
-</section>
-
-<section id="cs2" class="page">
- <h2>🔫 CS2 SKINS</h2>
- <p class="muted">Каталог категорий предметов Counter-Strike 2.</p>
- <div class="tabs" id="skinTabs">
-  <button class="active" onclick="renderSkins('skins',this)">Скины оружия</button>
-  <button onclick="renderSkins('agents',this)">Агенты</button>
-  <button onclick="renderSkins('knives',this)">Ножи</button>
-  <button onclick="renderSkins('gloves',this)">Перчатки</button>
-  <button onclick="renderSkins('charms',this)">Брелоки</button>
-  <button onclick="renderSkins('stickers',this)">Наклейки</button>
- </div>
- <div class="grid" id="skinGrid"></div>
- <p class="notice">Иллюстративная коллекция. Это не торговая площадка и не официальный каталог Valve.</p>
-</section>
-
-<section id="music" class="page">
- <h2>🎵 Музыкальный раздел</h2>
- <div class="panel">
-  <h3>Добавить музыку с компьютера</h3>
-  <input id="musicFiles" type="file" accept="audio/*" multiple>
-  <p class="notice">Музыка воспроизводится в твоём браузере и не загружается на сервер.</p>
- </div>
- <div class="panel">
-  <h3 id="nowPlaying">Выбери трек</h3>
-  <audio id="audioPlayer" controls style="width:100%"></audio>
-  <div class="card-actions">
-   <button onclick="previousTrack()">⏮ Назад</button>
-   <button class="primary" onclick="toggleMusic()">▶ / ⏸</button>
-   <button onclick="nextTrack()">⏭ Далее</button>
+  <div class="section-title">
+    <h2>Популярные игры</h2>
+    <span class="muted">GAMEVERSE GG</span>
   </div>
- </div>
- <div class="panel"><h3>Мой плейлист</h3><div id="playlist" class="muted">Пока нет треков.</div></div>
+  <div class="games" id="homeGames"></div>
 </section>
 
-<section id="favorites" class="page">
- <h2>⭐ Избранное</h2>
- <div class="grid" id="favoriteGrid"></div>
+<section class="page" id="games">
+  <div class="section-title">
+    <h2>Каталог игр</h2>
+    <span class="muted" id="gameCount"></span>
+  </div>
+  <input class="search" id="searchInput" placeholder="Поиск игры...">
+  <div class="games" id="allGames"></div>
 </section>
 
-<section id="profile" class="page">
- <h2>👤 Мой профиль</h2>
- <div class="profile-layout">
+<section class="page" id="favorites">
+  <div class="section-title">
+    <h2>Избранное</h2>
+  </div>
+  <div class="games" id="favoriteGames"></div>
+</section>
+
+<section class="page" id="profile">
+  <div class="section-title">
+    <h2>Мой профиль</h2>
+  </div>
+
   <div class="panel">
-   <div class="avatar" id="profileAvatar">🎮</div>
-   <h3 id="profileName">Игрок</h3>
-   <p id="profileEmail" class="muted">Ты вошёл как гость</p>
-   <button class="primary" onclick="googleLogin()">Войти через Google</button>
-   <button onclick="logout()">Выйти</button>
+    <div class="profile-top">
+      <img id="profileAvatar"
+      src="https://www.gravatar.com/avatar/?d=mp&s=100" alt="Аватар">
+      <div>
+        <h2 id="profileName">Гость</h2>
+        <p id="profileEmail">Войди через Google, чтобы открыть профиль</p>
+      </div>
+    </div>
+
+    <button class="google-btn" id="googleLogin">
+      <span class="google-icon">G</span>
+      Войти через Google
+    </button>
+
+    <button class="primary" id="logoutBtn"
+    style="display:none;margin-top:12px;width:100%">
+      Выйти из аккаунта
+    </button>
+
+    <div class="status" id="authStatus">
+      Авторизуйся, чтобы использовать свой профиль.
+    </div>
   </div>
-  <div class="panel">
-   <h3>Настройки профиля</h3>
-   <label class="field">Имя игрока<input id="nameInput" maxlength="24" placeholder="Введи имя"></label>
-   <label class="field">Аватар
-    <select id="avatarSelect">
-     <option value="🎮">🎮 Игрок</option><option value="👑">👑 Король</option>
-     <option value="🐺">🐺 Волк</option><option value="👽">👽 Пришелец</option>
-     <option value="🔥">🔥 Огонь</option><option value="⚡">⚡ Молния</option>
-     <option value="🥷">🥷 Ниндзя</option>
-    </select>
-   </label>
-   <label class="field">Загрузить фото<input id="avatarFile" type="file" accept="image/*"></label>
-   <button class="primary" onclick="saveProfile()">Сохранить профиль</button>
-   <p class="notice">Загруженное фото сохраняется локально в этом браузере. Имя и стандартный аватар могут сохраняться в Firebase.</p>
-  </div>
- </div>
 </section>
+
 </main>
-<footer>GAMEVERSE GG © 2026 — YOUR WORLD. YOUR GAMES.</footer>
+
+<footer>
+  GAMEVERSE GG © 2026 · Играй. Открывай. Наслаждайся.
+</footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 
 <script>
-/* FIREBASE */
+// =====================================
+// FIREBASE CONFIGURATION
+// =====================================
+
 const firebaseConfig = {
- apiKey:AIzaSyD1Anwa8zHP7yutYiSCjFDYW_llqXebYj4 ,
- authDomain:"gameverse-gg.firebaseapp.com",
- projectId:"gameverse-gg",
- storageBucket:"gameverse-gg.firebasestorage.app",
- messagingSenderId:"85779612241",
- appId:"1:85779612241:web:d0f8bc49811d7efe116e70",
- measurementId:"G-9F8E6LT6FB"
+  apiKey: "AIzaSyD1Anwa8zHP7yutYiSCjFDYW_llqXebJY4",
+  authDomain: "gameverse-gg.firebaseapp.com",
+  projectId: "gameverse-gg",
+  storageBucket: "gameverse-gg.firebasestorage.app",
+  messagingSenderId: "85779612241",
+  appId: "1:85779612241:web:d0f8bc49811d7efe116e70",
+  measurementId: "G-9F8E6LT6FB"
 };
 
-let auth=null,db=null,currentUser=null;
-try{
- if(window.firebase){
+let auth = null;
+let firebaseReady = false;
+
+try {
   firebase.initializeApp(firebaseConfig);
-  auth=firebase.auth();
-  db=firebase.firestore();
-  auth.onAuthStateChanged(async user=>{
-   currentUser=user;
-   updateProfileUI();
-   if(user) await loadCloudProfile();
-  });
- }
-}catch(e){console.warn("Firebase:",e)}
+  auth = firebase.auth();
+  firebaseReady = true;
 
-async function googleLogin(){
- if(!auth){alert("Firebase не подключён. Проверь настройки Firebase.");return}
- try{
-  await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
- }catch(e){alert("Не удалось войти: "+e.message)}
-}
-async function logout(){
- if(auth&&currentUser){await auth.signOut()}
-}
-async function loadCloudProfile(){
- if(!db||!currentUser)return;
- try{
-  const snap=await db.collection("users").doc(currentUser.uid).get();
-  if(snap.exists){
-   const d=snap.data();
-   if(d.name){localStorage.setItem("gv_name",d.name)}
-   if(d.avatar){localStorage.setItem("gv_avatar",d.avatar)}
-   if(Array.isArray(d.favorites)){favorites=d.favorites;saveFavoritesLocal()}
-  }
-  updateProfileUI();
- }catch(e){console.warn("Cloud profile:",e)}
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .catch(error => showAuthMessage(error.message, true));
+
+} catch(error) {
+  showAuthMessage("Ошибка подключения Firebase: " + error.message, true);
 }
 
-/* NAVIGATION */
-function showPage(id,btn){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- document.getElementById(id).classList.add("active");
- document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
- if(btn)btn.classList.add("active");
- if(id==="favorites")renderFavorites();
- if(id==="games")renderGames();
+// =====================================
+// GAMES
+// =====================================
+
+const games = [
+  {id:730,name:"Counter-Strike 2",tag:"Шутер"},
+  {id:271590,name:"Grand Theft Auto V",tag:"Экшен"},
+  {id:1091500,name:"Cyberpunk 2077",tag:"RPG"},
+  {id:292030,name:"The Witcher 3",tag:"RPG"},
+  {id:1174180,name:"Red Dead Redemption 2",tag:"Приключения"},
+  {id:1245620,name:"ELDEN RING",tag:"RPG"},
+  {id:1086940,name:"Baldur's Gate 3",tag:"RPG"},
+  {id:413150,name:"Stardew Valley",tag:"Симулятор"},
+  {id:105600,name:"Terraria",tag:"Приключения"},
+  {id:570,name:"Dota 2",tag:"MOBA"},
+  {id:440,name:"Team Fortress 2",tag:"Шутер"},
+  {id:4000,name:"Garry's Mod",tag:"Песочница"},
+  {id:550,name:"Left 4 Dead 2",tag:"Шутер"},
+  {id:252490,name:"Rust",tag:"Выживание"},
+  {id:1172470,name:"Apex Legends",tag:"Шутер"},
+  {id:578080,name:"PUBG: BATTLEGROUNDS",tag:"Шутер"},
+  {id:1085660,name:"Destiny 2",tag:"Экшен"},
+  {id:289070,name:"Civilization VI",tag:"Стратегия"}
+];
+
+let favorites = JSON.parse(localStorage.getItem("gv_favorites") || "[]");
+
+function saveFavorites(){
+  localStorage.setItem("gv_favorites",JSON.stringify(favorites));
 }
 
-/* GAME CATALOG */
-const games=[
-["Counter-Strike 2",730,"Шутер"],["Dota 2",570,"MOBA"],["PUBG: BATTLEGROUNDS",578080,"Королевская битва"],
-["Grand Theft Auto V",271590,"Экшен"],["Rust",252490,"Выживание"],["Apex Legends",1172470,"Шутер"],
-["Team Fortress 2",440,"Шутер"],["Left 4 Dead 2",550,"Экшен"],["Warframe",230410,"Экшен"],
-["The Witcher 3: Wild Hunt",292030,"RPG"],["Cyberpunk 2077",1091500,"RPG"],["Elden Ring",1245620,"RPG"],
-["Red Dead Redemption 2",1174180,"Приключения"],["Hogwarts Legacy",990080,"Приключения"],
-["Euro Truck Simulator 2",227300,"Симулятор"],["Forza Horizon 5",1551360,"Гонки"],
-["Forza Horizon 4",1293830,"Гонки"],["Need for Speed Heat",1222680,"Гонки"],
-["Mortal Kombat 11",976310,"Файтинг"],["Mortal Kombat 1",1971870,"Файтинг"],
-["Resident Evil 4",2050650,"Ужасы"],["Dead by Daylight",381210,"Ужасы"],
-["The Forest",242760,"Выживание"],["Sons Of The Forest",1326470,"Выживание"],
-["ARK: Survival Evolved",346110,"Выживание"],["Terraria",105600,"Приключения"],
-["Minecraft",null,"Песочница"],["Stardew Valley",413150,"Симулятор"],
-["Among Us",945360,"Мультиплеер"],["Fall Guys",1091500,"Мультиплеер"],
-["Grand Theft Auto IV",12210,"Экшен"],["Grand Theft Auto: San Andreas",12120,"Экшен"],
-["Metro Exodus",412020,"Шутер"],["Metro Last Light Redux",287390,"Шутер"],
-["Atomic Heart",668580,"Шутер"],["DOOM Eternal",782330,"Шутер"],
-["Far Cry 5",552520,"Шутер"],["Far Cry 6",2369390,"Шутер"],
-["Tom Clancy's Rainbow Six Siege",359550,"Шутер"],["Call of Duty: Warzone",null,"Шутер"],
-["Battlefield 1",1238840,"Шутер"],["Battlefield V",1238810,"Шутер"],
-["The Last of Us Part I",1888930,"Приключения"],["God of War",1593500,"Приключения"],
-["God of War Ragnarök",2322010,"Приключения"],["Marvel's Spider-Man Remastered",1817070,"Приключения"],
-["Marvel's Spider-Man 2",2651280,"Приключения"],["Horizon Zero Dawn",1151640,"Приключения"],
-["Horizon Forbidden West",2420110,"Приключения"],["Days Gone",1259420,"Приключения"],
-["Dying Light",239140,"Ужасы"],["Dying Light 2",534380,"Ужасы"],
-["Phasmophobia",739630,"Ужасы"],["Lethal Company",1966720,"Ужасы"],
-["Subnautica",264710,"Выживание"],["No Man's Sky",275850,"Выживание"],
-["Sea of Thieves",1172620,"Приключения"],["The Long Dark",305620,"Выживание"],
-["Don't Starve Together",322330,"Выживание"],["Project Zomboid",108600,"Выживание"],
-["Baldur's Gate 3",1086940,"RPG"],["Cyberpunk 2077: Phantom Liberty",1091500,"RPG"],
-["Fallout 4",377160,"RPG"],["Skyrim Special Edition",489830,"RPG"],
-["Hades",1145360,"RPG"],["Hades II",1145350,"RPG"],
-["Black Myth: Wukong",2358720,"RPG"],["Monster Hunter: World",582010,"RPG"],
-["Dark Souls III",374320,"RPG"],["Sekiro: Shadows Die Twice",814380,"RPG"],
-["Lies of P",1627720,"RPG"],["Path of Exile",238960,"RPG"],
-["Path of Exile 2",2694490,"RPG"],["War Thunder",236390,"Симулятор"],
-["World of Tanks",null,"Симулятор"],["Assetto Corsa",244210,"Гонки"],
-["Assetto Corsa Competizione",805550,"Гонки"],["BeamNG.drive",284160,"Симулятор"],
-["F1 24",2488620,"Гонки"],["The Crew 2",646910,"Гонки"],
-["Trackmania",2225070,"Гонки"],["EA SPORTS FC 25",2669320,"Спорт"],
-["Rocket League",252950,"Спорт"],["eFootball",1665460,"Спорт"],
-["NBA 2K25",2878980,"Спорт"],["WWE 2K24",2315690,"Спорт"],
-["Street Fighter 6",1364780,"Файтинг"],["Tekken 8",1778820,"Файтинг"],
-["Guilty Gear Strive",1384160,"Файтинг"],["Brawlhalla",291550,"Файтинг"],
-["Overwatch 2",null,"Шутер"],["THE FINALS",2073850,"Шутер"],
-["Destiny 2",1085660,"Шутер"],["Borderlands 3",397540,"Шутер"],
-["Payday 2",218620,"Шутер"],["Insurgency: Sandstorm",581320,"Шутер"],
-["Ready or Not",1144200,"Шутер"],["Hunt: Showdown 1896",594650,"Шутер"],
-["Garry's Mod",4000,"Песочница"],["People Playground",1118200,"Песочница"],
-["Human: Fall Flat",477160,"Приключения"],["Portal 2",620,"Приключения"],
-["Half-Life 2",220,"Шутер"],["The Stanley Parable",221910,"Приключения"],
-["Little Nightmares",424840,"Ужасы"],["Little Nightmares II",860510,"Ужасы"],
-["Little Nightmares III",null,"Ужасы"],["S.T.A.L.K.E.R. 2",1643320,"Шутер"],
-["Assassin's Creed Valhalla",2208920,"Приключения"],["Assassin's Creed Odyssey",812140,"Приключения"],
-["Assassin's Creed Origins",582160,"Приключения"],["Watch Dogs 2",447040,"Экшен"],
-["Sleeping Dogs",307690,"Экшен"],["Mafia: Definitive Edition",1030840,"Экшен"],
-["Mafia II: Definitive Edition",1030830,"Экшен"],["Hitman 3",1659040,"Экшен"],
-["Bully: Scholarship Edition",12200,"Экшен"],["Just Cause 3",225540,"Экшен"],
-["Just Cause 4",517630,"Экшен"],["Batman: Arkham Knight",208650,"Экшен"],
-["Middle-earth: Shadow of War",356190,"Экшен"],["Tomb Raider",203160,"Приключения"],
-["Rise of the Tomb Raider",391220,"Приключения"],["Shadow of the Tomb Raider",750920,"Приключения"],
-["Detroit: Become Human",1222140,"Приключения"],["Life is Strange",319630,"Приключения"],
-["A Plague Tale: Innocence",752590,"Приключения"],["A Plague Tale: Requiem",1182900,"Приключения"],
-["It Takes Two",1426210,"Приключения"],["A Way Out",1222700,"Приключения"],
-["Unravel Two",1225570,"Приключения"],["Cuphead",268910,"Приключения"],
-["Hollow Knight",367520,"Приключения"],["Ori and the Blind Forest",261570,"Приключения"],
-["Celeste",504230,"Приключения"],["Dead Cells",588650,"Приключения"],
-["Risk of Rain 2",632360,"Экшен"],["Vampire Survivors",1794680,"Экшен"],
-["Slay the Spire",646570,"Стратегия"],["Civilization VI",289070,"Стратегия"],
-["Age of Empires IV",1466860,"Стратегия"],["Company of Heroes 3",1677280,"Стратегия"],
-["Total War: WARHAMMER III",1142710,"Стратегия"],["Hearts of Iron IV",394360,"Стратегия"],
-["Cities: Skylines",255710,"Симулятор"],["Planet Zoo",703080,"Симулятор"],
-["The Sims 4",1222670,"Симулятор"],["House Flipper",613100,"Симулятор"],
-["PowerWash Simulator",1290000,"Симулятор"],["Cooking Simulator",641320,"Симулятор"],
-["Overcooked! 2",728880,"Симулятор"],["Moving Out",996770,"Симулятор"],
-["Unturned",304930,"Выживание"],["DayZ",221100,"Выживание"],
-["7 Days to Die",251570,"Выживание"],["Raft",648800,"Выживание"],
-["Green Hell",815370,"Выживание"],["Valheim",892970,"Выживание"],
-["V Rising",1604030,"Выживание"],["Enshrouded",1203620,"Выживание"],
-["Palworld",1623730,"Выживание"],["Satisfactory",526870,"Симулятор"],
-["Factorio",427520,"Симулятор"],["Dyson Sphere Program",1366540,"Симулятор"],
-["RimWorld",294100,"Симулятор"],["Oxygen Not Included",457140,"Симулятор"],
-["Terraria: Journey's End",105600,"Приключения"],["The Binding of Isaac: Rebirth",250900,"Экшен"],
-["Enter the Gungeon",311690,"Экшен"],["Inscryption",1091500,"Приключения"],
-["Undertale",391540,"Приключения"],["Deltarune",1671210,"Приключения"],
-["The Elder Scrolls Online",306130,"RPG"],["New World",1063730,"RPG"],
-["Throne and Liberty",2429640,"RPG"],["Lost Ark",1599340,"RPG"],
-["Black Desert",582660,"RPG"],["Guild Wars 2",1284210,"RPG"],
-["Final Fantasy XIV",39210,"RPG"],["Phantasy Star Online 2",1056640,"RPG"],
-["Genshin Impact",null,"RPG"],["Honkai: Star Rail",null,"RPG"],
-["Zenless Zone Zero",null,"Экшен"],["Tower of Fantasy",2064650,"RPG"],
-["Crossout",386180,"Экшен"],["World of Warships",552990,"Симулятор"],
-["Enlisted",2051620,"Шутер"],["Paladins",444090,"Шутер"],
-["SMITE 2",386360,"MOBA"],["League of Legends",null,"MOBA"],
-["Teamfight Tactics",null,"Стратегия"],["Heroes of the Storm",null,"MOBA"],
-["Brawlhalla",291550,"Файтинг"],["MultiVersus",1818750,"Файтинг"],
-["The Finals",2073850,"Шутер"],["BattleBit Remastered",671860,"Шутер"],
-["Squad",393380,"Шутер"],["Hell Let Loose",686810,"Шутер"],
-["Arma 3",107410,"Симулятор"],["Day of Infamy",447820,"Шутер"],
-["Sniper Elite 5",1029690,"Шутер"],["Sniper Ghost Warrior Contracts 2",1338770,"Шутер"],
-["Crysis Remastered",1715130,"Шутер"],["Titanfall 2",1237970,"Шутер"],
-["Doom",379720,"Шутер"],["Wolfenstein II",612880,"Шутер"],
-["Prey",480490,"Шутер"],["Dishonored 2",403640,"Экшен"],
-["Deathloop",1252330,"Экшен"],["Control",870780,"Экшен"],
-["Alan Wake 2",null,"Ужасы"],["Outlast",238320,"Ужасы"],
-["Outlast 2",414700,"Ужасы"],["Amnesia: The Dark Descent",57300,"Ужасы"],
-["Amnesia: Rebirth",999220,"Ужасы"],["SOMA",282140,"Ужасы"],
-["Layers of Fear",1946700,"Ужасы"],["The Evil Within",268050,"Ужасы"],
-["The Evil Within 2",601430,"Ужасы"],["Dead Space",1693980,"Ужасы"],
-["Dead Space 2",47780,"Ужасы"],["Dead Space 3",1238060,"Ужасы"],
-["Resident Evil 2",883710,"Ужасы"],["Resident Evil 3",952060,"Ужасы"],
-["Resident Evil Village",1196590,"Ужасы"],["Resident Evil 7",418370,"Ужасы"],
-["Resident Evil 5",21690,"Ужасы"],["Resident Evil 6",221040,"Ужасы"],
-["Silent Hill 2",2124490,"Ужасы"],["The Quarry",1577120,"Ужасы"],
-["Until Dawn",2172010,"Ужасы"],["Detroit: Become Human",1222140,"Приключения"],
-["Farming Simulator 22",1248130,"Симулятор"],["Farming Simulator 25",2300320,"Симулятор"],
-["Microsoft Flight Simulator",1250410,"Симулятор"],["Train Sim World 4",2362300,"Симулятор"],
-["Car Mechanic Simulator 2021",1190000,"Симулятор"],["PC Building Simulator",621060,"Симулятор"],
-["House Flipper 2",1190970,"Симулятор"],["Gas Station Simulator",1149620,"Симулятор"],
-["Internet Cafe Simulator 2",1563180,"Симулятор"],["Thief Simulator",704850,"Симулятор"],
-["The Hunter: Call of the Wild",518790,"Симулятор"],["Fishing Planet",380600,"Симулятор"],
-["Golf It!",571740,"Спорт"],["PGA TOUR 2K23",1588010,"Спорт"],
-["Wreckfest",228380,"Гонки"],["Dirt Rally 2.0",690790,"Гонки"],
-["GRID Legends",1307710,"Гонки"],["MotoGP 24",2581700,"Гонки"],
-["Hot Wheels Unleashed",1271700,"Гонки"],["Burnout Paradise Remastered",1238080,"Гонки"],
-["Sonic Mania",584400,"Приключения"],["Crash Bandicoot N. Sane Trilogy",731490,"Приключения"],
-["Spyro Reignited Trilogy",996580,"Приключения"],["Rayman Legends",242550,"Приключения"],
-["LEGO Marvel Super Heroes 2",647830,"Приключения"],["LEGO Star Wars: The Skywalker Saga",920210,"Приключения"],
-["LEGO Batman 3",313690,"Приключения"],["LEGO City Undercover",578330,"Приключения"],
-["LEGO Jurassic World",352400,"Приключения"],["LEGO Harry Potter",21130,"Приключения"],
-["Star Wars Jedi: Fallen Order",1172380,"Приключения"],["Star Wars Jedi: Survivor",1774580,"Приключения"],
-["Star Wars Battlefront II",1237950,"Шутер"],["Mass Effect Legendary Edition",1328670,"RPG"],
-["Dragon Age: Inquisition",1222690,"RPG"],["Dragon's Dogma 2",2054970,"RPG"],
-["Kingdom Come: Deliverance",379430,"RPG"],["Kingdom Come: Deliverance II",1771300,"RPG"],
-["GreedFall",606880,"RPG"],["The Outer Worlds",578650,"RPG"],
-["Outer Wilds",753640,"Приключения"],["Firewatch",383870,"Приключения"],
-["What Remains of Edith Finch",501300,"Приключения"],["Stray",1332010,"Приключения"],
-["Journey",638230,"Приключения"],["Abzu",384190,"Приключения"],
-["Noita",881100,"Экшен"],["Spelunky 2",418530,"Приключения"],
-["The Talos Principle 2",835960,"Головоломка"],["The Witness",210970,"Головоломка"],
-["Baba Is You",736260,"Головоломка"],["Portal",400,"Головоломка"],
-["Portal Stories: Mel",317400,"Головоломка"],["Human Resource Machine",375820,"Головоломка"],
-["Papers, Please",239030,"Симулятор"],["This War of Mine",282070,"Выживание"],
-["Frostpunk",323190,"Стратегия"],["Frostpunk 2",1601580,"Стратегия"],
-["Surviving Mars",464920,"Симулятор"],["Against the Storm",1336490,"Стратегия"],
-["Northgard",466560,"Стратегия"],["They Are Billions",644930,"Стратегия"],
-["Stronghold Crusader HD",40970,"Стратегия"],["Command & Conquer Remastered",1213210,"Стратегия"],
-["XCOM 2",268500,"Стратегия"],["Into the Breach",590380,"Стратегия"],
-["Darkest Dungeon",262060,"RPG"],["Darkest Dungeon II",1940340,"RPG"],
-["Wasteland 3",719040,"RPG"],["Divinity: Original Sin 2",435150,"RPG"],
-["Disco Elysium",632360,"RPG"],["Pillars of Eternity",291650,"RPG"],
-["Tales of Arise",740130,"RPG"],["Persona 5 Royal",1687950,"RPG"],
-["Persona 3 Reload",2161700,"RPG"],["Yakuza 0",638970,"Экшен"],
-["Like a Dragon: Infinite Wealth",2072450,"RPG"],["Nier: Automata",524220,"RPG"],
-["Nier Replicant",1113560,"RPG"],["Devil May Cry 5",601150,"Экшен"],
-["Bayonetta",460790,"Экшен"],["Metal Gear Rising: Revengeance",235460,"Экшен"],
-["Metal Gear Solid V",287700,"Экшен"],["Hades",1145360,"Экшен"],
-["Hi-Fi RUSH",1817230,"Экшен"],["Sifu",2138710,"Экшен"],
-["Lords of the Fallen",1501750,"RPG"],["Remnant II",1282100,"Экшен"],
-["Armored Core VI",1888160,"Экшен"],["Nioh 2",1325200,"Экшен"],
-["Wo Long: Fallen Dynasty",1448440,"Экшен"],["Rise of the Ronin",null,"Экшен"],
-["Grand Theft Auto VI (PS5)",null,"Ожидается"],
-["EA SPORTS FC 26",3405690,"Спорт"],["Madden NFL 25",2582560,"Спорт"],
-["NHL 25",null,"Спорт"],["UFC 5",null,"Спорт"],
-["Mortal Kombat X",307780,"Файтинг"],["Injustice 2",627270,"Файтинг"],
-["Dragon Ball FighterZ",678950,"Файтинг"],["Naruto Shippuden: Ultimate Ninja Storm 4",349040,"Файтинг"],
-["Guilty Gear Xrd Rev 2",520440,"Файтинг"],["Soulcalibur VI",544750,"Файтинг"],
-["Killer Instinct",577940,"Файтинг"],["Them's Fightin' Herds",574980,"Файтинг"],
-["Gang Beasts",285900,"Мультиплеер"],["Party Animals",1260320,"Мультиплеер"],
-["Human Fall Flat",477160,"Мультиплеер"],["Pummel Party",880940,"Мультиплеер"],
-["Golf With Your Friends",431240,"Спорт"],["Stick Fight: The Game",674940,"Мультиплеер"],
-["Ultimate Chicken Horse",386940,"Мультиплеер"],["Castle Crashers",204360,"Приключения"],
-["Broforce",274190,"Экшен"],["Overcooked",448510,"Симулятор"],
-["Unrailed!",1016920,"Мультиплеер"],["We Were Here",582500,"Приключения"],
-["We Were Here Together",865360,"Приключения"],["We Were Here Forever",1341290,"Приключения"],
-["Don't Starve",219740,"Выживание"],["Core Keeper",1621690,"Выживание"],
-["Terraria",105600,"Выживание"],["Starbound",211820,"Приключения"],
-["Streets of Rogue",512900,"Экшен"],["Enter the Gungeon",311690,"Экшен"],
-["Hotline Miami",219150,"Экшен"],["Katana ZERO",460950,"Экшен"],
-["Mark of the Ninja",214560,"Экшен"],["Shadow Tactics",418240,"Стратегия"],
-["Desperados III",610370,"Стратегия"],["Commandos 2",6830,"Стратегия"],
-["Thief Simulator 2",1332720,"Симулятор"],["The Long Drive",1017180,"Симулятор"],
-["My Summer Car",516750,"Симулятор"],["Mon Bazou",1520370,"Симулятор"],
-["CarX Drift Racing Online",635260,"Гонки"],["Need for Speed Payback",1262580,"Гонки"],
-["Need for Speed Unbound",1846380,"Гонки"],["Need for Speed Rivals",1262600,"Гонки"],
-["The Crew Motorfest",2698940,"Гонки"],["SnowRunner",1465360,"Симулятор"],
-["MudRunner",675010,"Симулятор"],["Spintires",263280,"Симулятор"],
-["American Truck Simulator",270880,"Симулятор"],["Bus Simulator 21",976590,"Симулятор"],
-["Police Simulator: Patrol Officers",997010,"Симулятор"],["Construction Simulator",1273400,"Симулятор"],
-["House Builder",1244630,"Симулятор"],["Gold Mining Simulator",451340,"Симулятор"],
-["Planet Coaster",493340,"Симулятор"],["Jurassic World Evolution 2",1244460,"Симулятор"],
-["Zoo Tycoon",null,"Симулятор"],["Two Point Hospital",535930,"Симулятор"],
-["Two Point Campus",1649080,"Симулятор"],["Prison Architect",233450,"Симулятор"],
-["Game Dev Tycoon",239820,"Симулятор"],["Startup Company",606800,"Симулятор"],
-["Football Manager 2024",2252570,"Спорт"],["Cricket 24",2358260,"Спорт"],
-["Tabletop Simulator",286160,"Настольная"],["The Jackbox Party Pack 7",1211630,"Мультиплеер"],
-["Chess Ultra",518790,"Настольная"],["UNO",470220,"Настольная"],
-["Monopoly Plus",562810,"Настольная"],["Risk of Rain Returns",1337520,"Экшен"],
-["Geometry Dash",322170,"Аркада"],["Super Meat Boy",40800,"Аркада"],
-["A Hat in Time",253230,"Приключения"],["Psychonauts 2",607080,"Приключения"],
-["SpongeBob SquarePants: Battle for Bikini Bottom",969990,"Приключения"],
-["Crash Bandicoot 4",1378990,"Приключения"],["TUNIC",553420,"Приключения"],
-["Death's Door",894020,"Приключения"],["Cult of the Lamb",1313140,"Приключения"],
-["DREDGE",1562430,"Приключения"],["Dave the Diver",1868140,"Приключения"],
-["Sea of Stars",1244090,"RPG"],["Chained Echoes",1229240,"RPG"],
-["Octopath Traveler II",1971650,"RPG"],["Triangle Strategy",1850510,"Стратегия"],
-["Eiyuden Chronicle: Hundred Heroes",1658280,"RPG"],["Granblue Fantasy: Relink",881020,"RPG"],
-["Granblue Fantasy Versus: Rising",2157560,"Файтинг"],["Under Night In-Birth II",2076010,"Файтинг"],
-["The King of Fighters XV",1498570,"Файтинг"],["Samurai Shodown",1070710,"Файтинг"],
-["BlazBlue: Centralfiction",586140,"Файтинг"],["Melty Blood: Type Lumina",1372280,"Файтинг"],
-["The Crew",241560,"Гонки"],["F1 23",2108330,"Гонки"],
-["Dirt 5",1038250,"Гонки"],["WRC 10",1462810,"Гонки"],
-["MotoGP 23",2225070,"Гонки"],["RIDE 5",1650010,"Гонки"],
-["Descenders",681280,"Спорт"],["Session: Skate Sim",861650,"Спорт"],
-["Skater XL",962730,"Спорт"],["Tony Hawk's Pro Skater 1+2",2395210,"Спорт"],
-["Riders Republic",2290180,"Спорт"],["Steep",460920,"Спорт"],
-["The Sims 3",47890,"Симулятор"],["Cities: Skylines II",949230,"Симулятор"],
-["Kerbal Space Program",220200,"Симулятор"],["Kerbal Space Program 2",954850,"Симулятор"],
-["Space Engineers",244850,"Симулятор"],["Empyrion - Galactic Survival",383120,"Выживание"],
-["Astroneer",361420,"Выживание"],["Planet Crafter",1284190,"Выживание"],
-["Breathedge",738520,"Выживание"],["Survival: Fountain of Youth",1967630,"Выживание"],
-["Conan Exiles",440900,"Выживание"],["SCUM",513710,"Выживание"],
-["The Isle",376210,"Выживание"],["Path of Titans",2210990,"Выживание"],
-["The Walking Dead: The Telltale Definitive Series",1449690,"Приключения"],
-["The Wolf Among Us",250320,"Приключения"],["Tales from the Borderlands",330830,"Приключения"],
-["Beyond: Two Souls",960990,"Приключения"],["Heavy Rain",960910,"Приключения"],
-["The Dark Pictures Anthology: Man of Medan",939850,"Ужасы"],
-["The Dark Pictures Anthology: Little Hope",1194630,"Ужасы"],
-["The Dark Pictures Anthology: House of Ashes",1281590,"Ужасы"],
-["The Dark Pictures Anthology: The Devil in Me",1567020,"Ужасы"],
-["Visage",1087100,"Ужасы"],["MADiSON",1670870,"Ужасы"],
-["Mortuary Assistant",1295920,"Ужасы"],["Darkwood",274520,"Ужасы"],
-["Bendy and the Ink Machine",622650,"Ужасы"],["Bendy and the Dark Revival",1063660,"Ужасы"],
-["Hello Neighbor",521890,"Ужасы"],["Hello Neighbor 2",1321680,"Ужасы"],
-["Granny",null,"Ужасы"],["Poppy Playtime",1721470,"Ужасы"],
-["Five Nights at Freddy's",319510,"Ужасы"],["Five Nights at Freddy's: Security Breach",747660,"Ужасы"],
-["FNAF: Help Wanted",732690,"Ужасы"],["FNAF: Help Wanted 2",2143530,"Ужасы"],
-["Bioshock Remastered",409710,"Шутер"],["Bioshock Infinite",8870,"Шутер"],
-["System Shock",482400,"Шутер"],["Atomic Heart",668580,"Шутер"],
-["Rage 2",548570,"Шутер"],["Bulletstorm: Full Clip Edition",501590,"Шутер"],
-["Vanquish",460810,"Шутер"],["Max Payne 3",204100,"Экшен"],
-["L.A. Noire",110800,"Экшен"],["The Saboteur",null,"Экшен"],
-["Prototype",10150,"Экшен"],["Prototype 2",115320,"Экшен"],
-["Saints Row: The Third",55230,"Экшен"],["Saints Row IV",206420,"Экшен"],
-["Red Faction Guerrilla Re-Mars-tered",667720,"Экшен"],
-["Sunset Overdrive",847370,"Экшен"],["Quantum Break",474960,"Экшен"],
-["Alan Wake Remastered",1087100,"Ужасы"],["The Medium",1293160,"Ужасы"],
-["Observer: System Redux",1386900,"Ужасы"],["Blair Witch",1092660,"Ужасы"],
-["Layers of Fear 2",1029890,"Ужасы"],["The Mortuary Assistant",1295920,"Ужасы"],
-["The Callisto Protocol",1544020,"Ужасы"],["Scorn",698670,"Ужасы"],
-["Banishers: Ghosts of New Eden",1493640,"RPG"],["Vampyr",427290,"RPG"],
-["GreedFall: The Dying World",null,"RPG"],["ELEX II",900040,"RPG"],
-["Risen 3",249230,"RPG"],["Gothic 3",39500,"RPG"],
-["Dragon Age: Origins",17450,"RPG"],["Dragon Age II",1238040,"RPG"],
-["Neverwinter",109600,"RPG"],["Torchlight II",200710,"RPG"],
-["Grim Dawn",219990,"RPG"],["Last Epoch",899770,"RPG"],
-["Diablo IV",null,"RPG"],["Diablo II: Resurrected",null,"RPG"],
-["Torchlight III",1030210,"RPG"],["Wolcen: Lords of Mayhem",424370,"RPG"],
-["Titan Quest Anniversary Edition",475150,"RPG"],["Sacred 2 Gold",225640,"RPG"],
-["Mount & Blade II: Bannerlord",261550,"Стратегия"],
-["Mount & Blade: Warband",48700,"Стратегия"],["Crusader Kings III",1158310,"Стратегия"],
-["Europa Universalis IV",236850,"Стратегия"],["Victoria 3",529340,"Стратегия"],
-["Stellaris",281990,"Стратегия"],["Age of Empires II: Definitive Edition",813780,"Стратегия"],
-["Age of Empires III: Definitive Edition",933110,"Стратегия"],
-["Age of Mythology: Retold",1934680,"Стратегия"],["Anno 1800",916440,"Стратегия"],
-["Anno 2205",375910,"Стратегия"],["Banished",242920,"Стратегия"],
-["Manor Lords",1363080,"Стратегия"],["Stronghold: Definitive Edition",2140020,"Стратегия"],
-["They Are Billions",644930,"Стратегия"],["Surviving the Aftermath",684450,"Стратегия"],
-["Endzone - A World Apart",933820,"Стратегия"],["Farthest Frontier",1044720,"Стратегия"],
-["Timberborn",1062090,"Симулятор"],["Against the Storm",1336490,"Стратегия"],
-["Dorfromantik",1455840,"Головоломка"],["Mini Motorways",1127500,"Головоломка"],
-["Mini Metro",287980,"Головоломка"],["Unpacking",1135690,"Головоломка"],
-["A Little to the Left",1629520,"Головоломка"],["PowerWash Simulator",1290000,"Симулятор"],
-["Euro Truck Simulator",227300,"Симулятор"],["Car Mechanic Simulator 2018",645630,"Симулятор"],
-["The Golf Club 2019",695290,"Спорт"],["Rugby 22",1475850,"Спорт"],
-["Tennis World Tour 2",1119730,"Спорт"],["AO Tennis 2",1075200,"Спорт"],
-["Super Mega Baseball 4",1487210,"Спорт"],["Windjammers 2",1114290,"Спорт"],
-["Roller Champions",2211280,"Спорт"],["Descenders Next",null,"Спорт"]
-].map((g,i)=>({id:"g"+i,name:g[0],appid:g[1],genre:g[2]}));
+function gameCard(game){
+  const selected = favorites.includes(game.id);
 
-const gta6={id:"gta6",name:"Grand Theft Auto VI (PS5)",appid:null,genre:"Ожидается",upcoming:true};
-games.unshift(gta6);
-
-let activeGenre="Все",visibleCount=60;
-let favorites=JSON.parse(localStorage.getItem("gv_favorites")||"[]");
-function coverUrl(g){return g.appid?`https://cdn.cloudflare.steamstatic.com/steam/apps/${g.appid}/library_600x900.jpg`:null}
-function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function gameCard(g){
- const url=coverUrl(g);
- return `<article class="card"><div class="cover">${url?`<img loading="lazy" src="${url}" onerror="this.style.display='none'">`:"🎮"}</div><div class="card-body"><b>${safe(g.name)}</b><p>${safe(g.genre)} ${g.upcoming?"• Ожидается":""}</p><div class="card-actions"><button onclick="toggleFavorite('${g.id}')">${favorites.includes(g.id)?"★ В избранном":"☆ В избранное"}</button></div></div></article>`;
+  return `
+    <article class="game">
+      <img
+        src="https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg"
+        alt="${game.name}"
+        loading="lazy"
+        onerror="this.style.display='none'"
+      >
+      <div class="game-info">
+        <h3>${game.name}</h3>
+        <div class="game-bottom">
+          <span class="game-tag">${game.tag}</span>
+          <button class="fav ${selected ? "selected" : ""}"
+            onclick="toggleFavorite(${game.id})"
+            title="Добавить в избранное">
+            ${selected ? "♥" : "♡"}
+          </button>
+        </div>
+      </div>
+    </article>
+  `;
 }
+
 function renderGames(){
- const q=document.getElementById("gameSearch").value.toLowerCase();
- const filtered=games.filter(g=>(activeGenre==="Все"||g.genre===activeGenre)&&g.name.toLowerCase().includes(q));
- document.getElementById("gameCount").textContent=`Найдено игр: ${filtered.length}`;
- document.getElementById("gameGrid").innerHTML=filtered.slice(0,visibleCount).map(gameCard).join("")||"<p>Ничего не найдено.</p>";
- document.getElementById("loadMore").style.display=filtered.length>visibleCount?"inline-block":"none";
+  const query = document.getElementById("searchInput").value.toLowerCase();
+  const filtered = games.filter(g => g.name.toLowerCase().includes(query));
+
+  document.getElementById("allGames").innerHTML =
+    filtered.length ? filtered.map(gameCard).join("") :
+    '<div class="empty">Игры не найдены.</div>';
+
+  document.getElementById("gameCount").textContent =
+    filtered.length + " игр";
 }
-function loadMoreGames(){visibleCount+=60;renderGames()}
-function buildGenres(){
- const genres=["Все",...new Set(games.map(g=>g.genre))];
- document.getElementById("genreFilters").innerHTML=genres.map(x=>`<button class="${x===activeGenre?"selected":""}" onclick="setGenre('${safe(x)}',this)">${safe(x)}</button>`).join("");
+
+function renderHome(){
+  document.getElementById("homeGames").innerHTML =
+    games.slice(0,6).map(gameCard).join("");
 }
-function setGenre(g,btn){activeGenre=g;visibleCount=60;document.querySelectorAll("#genreFilters button").forEach(x=>x.classList.remove("selected"));btn.classList.add("selected");renderGames()}
-function toggleFavorite(id){
- favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
- saveFavoritesLocal();renderGames();renderFavorites();saveCloud();
-}
-function saveFavoritesLocal(){localStorage.setItem("gv_favorites",JSON.stringify(favorites))}
+
 function renderFavorites(){
- const list=games.filter(g=>favorites.includes(g.id));
- document.getElementById("favoriteGrid").innerHTML=list.map(gameCard).join("")||"<p class='muted'>Пока нет избранных игр. Добавь их в каталоге.</p>";
+  const list = games.filter(g => favorites.includes(g.id));
+
+  document.getElementById("favoriteGames").innerHTML =
+    list.length ? list.map(gameCard).join("") :
+    '<div class="empty">Пока здесь нет избранных игр.</div>';
 }
 
-/* HOME */
-function renderHome(){document.getElementById("popularGames").innerHTML=games.slice(0,8).map(gameCard).join("")}
-
-/* CS2 CATALOG */
-const skinData={
- skins:[["AK-47 | Redline","🔫"],["AWP | Dragon Lore","🐉"],["M4A4 | Howl","🐺"],["AK-47 | Neon Rider","🌈"],["AWP | Asiimov","🚀"],["M4A1-S | Printstream","⚪"],["Glock-18 | Fade","🌅"],["Desert Eagle | Blaze","🔥"],["USP-S | Kill Confirmed","💀"],["M4A4 | 龍王","🐲"],["AWP | Hyper Beast","🦁"],["AK-47 | Fire Serpent","🐍"]],
- agents:[["Special Agent Ava","👩"],["Sir Bloody Miami Darryl","🕶️"],["Lt. Commander Ricksaw","🪖"],["The Elite Mr. Muhlik","🎖️"],["Number K","🥷"],["Cmdr. Mae Jamison","🚀"]],
- knives:[["Karambit","🔪"],["Butterfly Knife","🦋"],["M9 Bayonet","⚔️"],["Bayonet","🗡️"],["Skeleton Knife","💀"],["Kukri Knife","🔪"],["Talon Knife","🐾"],["Classic Knife","🗡️"]],
- gloves:[["Sport Gloves | Vice","🧤"],["Sport Gloves | Pandora's Box","💜"],["Specialist Gloves | Crimson Kimono","🔴"],["Driver Gloves | King Snake","🐍"],["Moto Gloves | Spearmint","🌿"],["Hand Wraps | Slaughter","🩸"]],
- charms:[["Lil' Monster","👾"],["Baby Karat T","💎"],["Hot Howl","🐺"],["Glamour Shot","📸"],["Diner Dog","🌭"],["Pocket AWP","🎯"]],
- stickers:[["Crown (Foil)","👑"],["Dragon Lore","🐉"],["Titan (Holo)","💠"],["Howling Dawn","🌅"],["Katowice 2014","🏆"],["Skulltorgeist","💀"]]
-};
-function renderSkins(type,btn){
- if(btn){document.querySelectorAll("#skinTabs button").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}
- document.getElementById("skinGrid").innerHTML=skinData[type].map(s=>`<div class="card"><div class="skin-art">${s[1]}</div><div class="card-body"><b>${safe(s[0])}</b><p>Counter-Strike 2</p></div></div>`).join("");
-}
-
-/* PROFILE */
-let localAvatar=localStorage.getItem("gv_photo")||"";
-function updateProfileUI(){
- const name=localStorage.getItem("gv_name")||(currentUser?.displayName||"Игрок");
- const avatar=localStorage.getItem("gv_avatar")||"🎮";
- document.getElementById("profileName").textContent=name;
- document.getElementById("nameInput").value=name;
- document.getElementById("avatarSelect").value=avatar;
- document.getElementById("profileEmail").textContent=currentUser?.email||"Ты вошёл как гость";
- document.getElementById("headerUser").textContent=currentUser?name:"Гость";
- const el=document.getElementById("profileAvatar");
- el.innerHTML=localAvatar?`<img src="${localAvatar}" alt="Аватар">`:avatar;
-}
-document.getElementById("avatarFile").addEventListener("change",e=>{
- const file=e.target.files[0];if(!file)return;
- if(!file.type.startsWith("image/")){alert("Выбери изображение.");return}
- const reader=new FileReader();
- reader.onload=()=>{
-  const img=new Image();
-  img.onload=()=>{
-   const canvas=document.createElement("canvas"),size=320;
-   canvas.width=size;canvas.height=size;
-   const ctx=canvas.getContext("2d");
-   const scale=Math.max(size/img.width,size/img.height);
-   const w=img.width*scale,h=img.height*scale;
-   ctx.drawImage(img,(size-w)/2,(size-h)/2,w,h);
-   localAvatar=canvas.toDataURL("image/jpeg",.72);
-   try{localStorage.setItem("gv_photo",localAvatar)}catch(err){alert("Фото слишком большое. Выбери другое изображение.");localAvatar=""}
-   updateProfileUI();
-  };img.src=reader.result;
- };reader.readAsDataURL(file);
-});
-async function saveProfile(){
- const name=document.getElementById("nameInput").value.trim().slice(0,24)||"Игрок";
- const avatar=document.getElementById("avatarSelect").value;
- localStorage.setItem("gv_name",name);
- localStorage.setItem("gv_avatar",avatar);
- updateProfileUI();
- await saveCloud();
- alert("Профиль сохранён!");
-}
-async function saveCloud(){
- if(!db||!currentUser)return;
- try{
-  await db.collection("users").doc(currentUser.uid).set({
-   name:localStorage.getItem("gv_name")||currentUser.displayName||"Игрок",
-   avatar:localStorage.getItem("gv_avatar")||"🎮",
-   favorites:favorites
-  },{merge:true});
- }catch(e){console.warn("Не удалось сохранить профиль:",e)}
-}
-
-/* MUSIC */
-let tracks=[],trackIndex=0;
-const player=document.getElementById("audioPlayer");
-document.getElementById("musicFiles").addEventListener("change",e=>{
- for(const file of e.target.files){
-  if(file.type.startsWith("audio/"))tracks.push({name:file.name,url:URL.createObjectURL(file)});
- }
- renderPlaylist();
- if(tracks.length&&player.paused)playTrack(0);
- e.target.value="";
-});
-function renderPlaylist(){
- document.getElementById("playlist").innerHTML=tracks.map((t,i)=>`<div class="music-track"><span>${safe(t.name)}</span><button onclick="playTrack(${i})">▶ Слушать</button></div>`).join("")||"Пока нет треков.";
-}
-function playTrack(i){
- if(!tracks.length)return;
- trackIndex=(i+tracks.length)%tracks.length;
- player.src=tracks[trackIndex].url;
- document.getElementById("nowPlaying").textContent=tracks[trackIndex].name;
- player.play().catch(()=>{});
-}
-function nextTrack(){if(tracks.length)playTrack(trackIndex+1)}
-function previousTrack(){if(tracks.length)playTrack(trackIndex-1)}
-function toggleMusic(){if(!tracks.length){alert("Сначала добавь музыку с компьютера.");return}if(player.paused)player.play();else player.pause()}
-player.addEventListener("ended",nextTrack);
-
-/* OPTIONAL STEAM LIST */
-async function loadSteamGames(){
- try{
-  const response=await fetch("https://api.steampowered.com/ISteamApps/GetAppList/v2/");
-  if(!response.ok)throw new Error("Steam list unavailable");
-  const data=await response.json();
-  const existing=new Set(games.map(g=>g.name.toLowerCase()));
-  for(const item of data.applist.apps){
-   if(games.length>=500)break;
-   if(!item.name||item.name.length<2||existing.has(item.name.toLowerCase()))continue;
-   games.push({id:"steam"+item.appid,name:item.name,appid:item.appid,genre:"Steam"});
-   existing.add(item.name.toLowerCase());
+function toggleFavorite(id){
+  if(favorites.includes(id)){
+    favorites = favorites.filter(x => x !== id);
+  }else{
+    favorites.push(id);
   }
-  buildGenres();renderGames();renderHome();
- }catch(e){console.log("Не удалось загрузить список Steam. Используется встроенный каталог.",e)}
+
+  saveFavorites();
+  renderAll();
 }
 
-/* START */
-buildGenres();
-renderHome();
-renderGames();
-renderSkins("skins");
-updateProfileUI();
-loadSteamGames();
+function renderAll(){
+  renderHome();
+  renderGames();
+  renderFavorites();
+}
+
+// =====================================
+// NAVIGATION
+// =====================================
+
+function showPage(page){
+  document.querySelectorAll(".page").forEach(el =>
+    el.classList.remove("active")
+  );
+
+  document.getElementById(page).classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(btn =>
+    btn.classList.toggle("active",btn.dataset.page === page)
+  );
+
+  if(page === "favorites") renderFavorites();
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.querySelectorAll("nav button").forEach(btn => {
+  btn.addEventListener("click",() => showPage(btn.dataset.page));
+});
+
+document.getElementById("searchInput").addEventListener("input",renderGames);
+
+// =====================================
+// GOOGLE SIGN IN
+// =====================================
+
+function showAuthMessage(message,isError=false){
+  const box = document.getElementById("authStatus");
+  if(!box) return;
+
+  box.textContent = message;
+  box.className = "status " + (isError ? "error" : "success");
+}
+
+function explainFirebaseError(error){
+  const messages = {
+    "auth/api-key-not-valid":
+      "Firebase не принимает API-ключ. Проверь ключ в настройках проекта Google Cloud.",
+    "auth/unauthorized-domain":
+      "Домен сайта не добавлен в Firebase Authentication → Authorized domains.",
+    "auth/operation-not-allowed":
+      "В Firebase отключён вход через Google.",
+    "auth/popup-blocked":
+      "Браузер заблокировал окно входа. Разреши всплывающие окна.",
+    "auth/popup-closed-by-user":
+      "Окно входа было закрыто.",
+    "auth/network-request-failed":
+      "Проверь интернет-соединение."
+  };
+
+  return messages[error.code] ||
+    "Ошибка входа: " + (error.message || error.code || "неизвестная ошибка");
+}
+
+async function googleSignIn(){
+  if(!firebaseReady || !auth){
+    showAuthMessage("Firebase не подключён. Проверь конфигурацию.",true);
+    return;
+  }
+
+  const buttons = [
+    document.getElementById("googleLogin"),
+    document.getElementById("headerLogin")
+  ];
+
+  buttons.forEach(b => {
+    b.disabled = true;
+    b.style.opacity = ".6";
+  });
+
+  showAuthMessage("Подключаем Google...");
+
+  try{
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({prompt:"select_account"});
+
+    await auth.signInWithPopup(provider);
+
+  }catch(error){
+    console.error("Google login error:",error);
+    showAuthMessage(explainFirebaseError(error),true);
+  }finally{
+    buttons.forEach(b => {
+      b.disabled = false;
+      b.style.opacity = "1";
+    });
+  }
+}
+
+document.getElementById("googleLogin")
+  .addEventListener("click",googleSignIn);
+
+document.getElementById("headerLogin")
+  .addEventListener("click",() => showPage("profile"));
+
+document.getElementById("logoutBtn").addEventListener("click",async()=>{
+  try{
+    await auth.signOut();
+    showAuthMessage("Ты вышел из аккаунта.");
+  }catch(error){
+    showAuthMessage(error.message,true);
+  }
+});
+
+// =====================================
+// USER PROFILE
+// =====================================
+
+if(firebaseReady){
+  auth.onAuthStateChanged(user => {
+    const loginButton = document.getElementById("headerLogin");
+    const userMini = document.getElementById("userMini");
+    const logoutButton = document.getElementById("logoutBtn");
+    const googleButton = document.getElementById("googleLogin");
+
+    if(user){
+      const name = user.displayName || "Игрок";
+      const email = user.email || "";
+      const avatar = user.photoURL ||
+        "https://www.gravatar.com/avatar/?d=mp&s=100";
+
+      document.getElementById("profileName").textContent = name;
+      document.getElementById("profileEmail").textContent = email;
+      document.getElementById("profileAvatar").src = avatar;
+      document.getElementById("miniAvatar").src = avatar;
+      document.getElementById("miniName").textContent = name;
+
+      loginButton.style.display = "none";
+      userMini.style.display = "flex";
+      logoutButton.style.display = "block";
+      googleButton.style.display = "none";
+
+      showAuthMessage("Ты успешно вошёл в GAMEVERSE GG.");
+    }else{
+      document.getElementById("profileName").textContent = "Гость";
+      document.getElementById("profileEmail").textContent =
+        "Войди через Google, чтобы открыть профиль";
+      document.getElementById("profileAvatar").src =
+        "https://www.gravatar.com/avatar/?d=mp&s=100";
+
+      loginButton.style.display = "block";
+      userMini.style.display = "none";
+      logoutButton.style.display = "none";
+      googleButton.style.display = "flex";
+    }
+  });
+}
+
+renderAll();
 </script>
+
 </body>
 </html>
