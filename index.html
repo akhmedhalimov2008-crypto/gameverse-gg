@@ -1,1 +1,107 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMEVERSE GG — Игровая вселенная</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#10151d;color:white;font-family:Arial,sans-serif}
+header{background:#171f2b;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.logo{font-size:27px;font-weight:bold;color:#65e6a1}
+.logo span{color:white}
+nav a{color:#ddd;text-decoration:none;margin:0 10px}
+nav a:hover{color:#65e6a1}
+.hero{padding:75px 8%;background:linear-gradient(100deg,#142a30,#171b32,#25203b)}
+.hero h1{font-size:45px;margin-bottom:15px}
+.hero p{color:#c3cbd5;font-size:17px;line-height:1.6}
+.search{margin-top:25px;padding:15px;width:min(420px,100%);border:1px solid #40505d;border-radius:8px;background:#101820;color:white}
+main{padding:40px 7%}
+h2{margin-bottom:22px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:20px}
+.game{background:#1b2633;border-radius:12px;overflow:hidden;transition:.2s}
+.game:hover{transform:translateY(-5px);background:#263747}
+.game img{width:100%;height:145px;object-fit:cover}
+.game h3{padding:13px 13px 5px}
+.game p{padding:0 13px 16px;color:#aebbc8;font-size:13px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px}
+.tool{background:#1b2633;padding:22px;border-radius:12px}
+button{background:#65e6a1;color:#102018;border:0;padding:11px 18px;border-radius:7px;font-weight:bold;cursor:pointer;margin-top:12px}
+input{outline:none}
+footer{text-align:center;padding:30px;background:#171f2b;color:#9ba8b6;margin-top:40px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">GAMEVERSE <span>GG</span></div>
+<nav>
+<a href="#games">Игры</a>
+<a href="#tools">Инструменты</a>
+<a href="#about">О сайте</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</h1>
+<p>Открывай новые игры, создавай крутые ники и исследуй мир гейминга!</p>
+<input class="search" id="search" placeholder="Поиск игр..." oninput="findGames()">
+</section>
+
+<main>
+<h2 id="games">🔥 Популярные игры</h2>
+<div class="games" id="gameList">
+<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"><h3>GTA V</h3><p>Открытый мир и приключения</p></div>
+<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"><h3>Counter-Strike 2</h3><p>Тактический командный шутер</p></div>
+<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg"><h3>Cyberpunk 2077</h3><p>Фантастический открытый мир</p></div>
+<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg"><h3>Red Dead Redemption 2</h3><p>Большое приключение на Диком Западе</p></div>
+<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg"><h3>Dota 2</h3><p>Командная стратегия</p></div>
+<div class="game"><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"><h3>Baldur's Gate 3</h3><p>Фэнтезийная ролевая игра</p></div>
+</div>
+
+<section id="tools" style="margin-top:55px">
+<h2>🛠️ Игровые инструменты</h2>
+<div class="tools">
+<div class="tool">
+<h3>🎲 Генератор ника</h3>
+<p>Создай уникальное игровое имя.</p>
+<button onclick="generate()">Создать ник</button>
+<p id="nickname" style="margin-top:15px;color:#65e6a1"></p>
+</div>
+<div class="tool">
+<h3>🎯 Случайная игра</h3>
+<p>Не знаешь, во что поиграть?</p>
+<button onclick="randomGame()">Выбрать игру</button>
+<p id="random" style="margin-top:15px;color:#65e6a1"></p>
+</div>
+</div>
+</section>
+
+<section id="about" style="margin-top:55px">
+<h2>🌍 О GAMEVERSE GG</h2>
+<p style="color:#b5c0cc;line-height:1.7">GAMEVERSE GG — место для любителей компьютерных игр. Здесь ты можешь открывать новые игры и пользоваться игровыми инструментами.</p>
+</section>
+</main>
+
+<footer>© 2026 GAMEVERSE GG — Твоя игровая вселенная 🎮</footer>
+
+<script>
+function findGames(){
+let q=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('.game').forEach(g=>{
+g.style.display=g.innerText.toLowerCase().includes(q)?'block':'none';
+});
+}
+function generate(){
+let a=['Shadow','Dark','Ghost','Cyber','Fire','Legend','Wolf','Storm'];
+let b=['Player','Killer','Hunter','Dragon','Master','Ninja','King','X'];
+document.getElementById('nickname').innerText=a[Math.floor(Math.random()*a.length)]+b[Math.floor(Math.random()*b.length)]+Math.floor(Math.random()*99);
+}
+function randomGame(){
+let games=['GTA V','Counter-Strike 2','Cyberpunk 2077','Red Dead Redemption 2','Dota 2','Baldur’s Gate 3'];
+document.getElementById('random').innerText=games[Math.floor(Math.random()*games.length)];
+}
+</script>
+</body>
+</html>
+
